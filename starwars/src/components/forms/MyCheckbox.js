@@ -1,5 +1,5 @@
 import { useField } from "formik";
-
+import { Fragment } from "react";
 const MyCheckbox = ({ children, ...props }) => {
   // React treats radios and checkbox inputs differently other input types, select, and textarea.
   // Formik does this too! When you specify `type` to useField(), it will
@@ -7,7 +7,7 @@ const MyCheckbox = ({ children, ...props }) => {
   // in `field` alongside `name`, `value`, `onChange`, and `onBlur`
   const [field, meta] = useField({ ...props, type: "checkbox" });
   return (
-    <div>
+    <Fragment>
       <label className="checkbox-input">
         <input type="checkbox" {...field} {...props} />
         {children}
@@ -15,7 +15,7 @@ const MyCheckbox = ({ children, ...props }) => {
       {meta.touched && meta.error ? (
         <div className="error">{meta.error}</div>
       ) : null}
-    </div>
+    </Fragment>
   );
 };
 

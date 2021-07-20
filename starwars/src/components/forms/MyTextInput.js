@@ -1,4 +1,5 @@
 import { useField } from "formik";
+import { Fragment } from "react";
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -6,13 +7,13 @@ const MyTextInput = ({ label, ...props }) => {
   // message if the field is invalid and it has been touched (i.e. visited)
   const [field, meta] = useField(props);
   return (
-    <>
+    <Fragment>
       <label htmlFor={props.id || props.name}>{label}</label>
       <input className="text-input" {...field} {...props} />
       {meta.touched && meta.error ? (
         <div className="error">{meta.error}</div>
       ) : null}
-    </>
+    </Fragment>
   );
 };
 

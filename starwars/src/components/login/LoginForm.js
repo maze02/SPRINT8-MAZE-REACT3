@@ -1,23 +1,82 @@
-import { useContext, useRef } from "react";
-import { AppContext } from "../context/auth/test-context";
+import { useContext, useRef, useState } from "react";
+//import { AppContext } from "../context/auth/test-context";
+import { AuthContext } from "../context/auth/auth-context";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import MyTextInput from "../forms/MyTextInput";
+import { fixControlledValue } from "antd/lib/input/Input";
 
 const Login = () => {
+  const [loginFailed, setLoginFailed] = useState(false);
   let nameRef = useRef(null);
-  const [state, setState] = useContext(AppContext);
-
+  let loginPasswordRef = useRef(null);
+  //const [state, setState] = useContext(AppContext);
+  const ctx = useContext(AuthContext);
+  const validateLogin = () => {};
   return (
     <div>
-      <h1>Hey this is the test Login Form</h1>
+      <h1>Login </h1>
       <p>We're going to test if the state is being set to the global context</p>
-      <label htmlFor="loginName">Type your name</label>
-      <input
-        id="loginName"
-        type="text"
-        ref={nameRef}
-        onChange={() => {
-          setState({ name: nameRef.current.value });
-        }}
-      />
+      <div className="form-user">
+        <div className="container-form shadow-dark">
+          <Formik
+            initialValues={{
+              email: "",
+              password: "",
+            }}
+            validationSchema={Yup.object({
+              email: Yup.string()
+                .email("Invalid email address")
+                .required("Required"),
+              password: Yup.string().required("Password is required"),
+            })}
+            onSubmit={(values, { setSubmitting, resetForm }) => {
+              setTimeout(() => {
+                //alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
+              }, 400);
+              let userLogger = values;
+              console.log("userLogger email= " + userLogger.email);
+              ctx.setUserLoginTry((prevState) => {
+                return userLogger;
+              });
+              console.log(
+                "printing from llogin page : ctx.userLoginTry email:  " +
+                  ctx.userLoginTry.email
+              );
+              //ctx.handleLogin();
+              //setLoginFailed(false);
+              //resetForm({ values: "" });
+            }}
+          >
+            <Form>
+              <div className="field-form">
+                <MyTextInput
+                  label="Email Address"
+                  name="email"
+                  type="email"
+                  placeholder="jonah@formik.com"
+                />
+              </div>
+              <div className="field-form">
+                <MyTextInput
+                  label="Password"
+                  name="password"
+                  type="password"
+                  placeholder="Your password"
+                />
+              </div>
+
+              <div className="field-form">
+                <button className="btn btn-primary btn-block" type="submit">
+                  Submit
+                </button>
+              </div>
+              {ctx.failedLoginMsg.status && <p>{ctx.failedLoginMsg.msg}</p>}
+            </Form>
+          </Formik>
+        </div>
+      </div>
     </div>
   );
 };
@@ -93,4 +152,28 @@ const NormalLoginForm = () => {
 };
 
 ReactDOM.render(<NormalLoginForm />, mountNode);
+*/
+
+/*
+index.js:1 Warning: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.
+    at AuthContextMyProvider (http://localhost:3000/static/js/main.chunk.js:374:81)
+    at App
+    at Router (http://localhost:3000/static/js/vendors~main.chunk.js:46675:30)
+    at BrowserRouter (http://localhost:3000/static/js/vendors~main.chunk.js:46295:35)
+
+
+
+    onSubmit={(values, { setSubmitting, resetForm }) => {
+              setTimeout(() => {
+                //alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
+              }, 400);
+              let userLogger = values;
+              console.log(userLogger);
+              ctx.setUserLoginTry(values);
+              if (ctx.isLoggedIn.status) {
+                resetForm({ values: "" });
+              }
+            }}
+          >
 */

@@ -1,6 +1,9 @@
+import { useContext } from "react";
+import { AuthContext } from "../context/auth/auth-context";
 import { NavLink } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 const MainNavigation = () => {
+  const ctx = useContext(AuthContext);
   return (
     <header className={classes.header}>
       <div className={classes.logo}>Starwars Logo</div>
@@ -17,16 +20,6 @@ const MainNavigation = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/registration" activeClassName={classes.active}>
-              Register
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/login" activeClassName={classes.active}>
-              Login
-            </NavLink>
-          </li>
-          <li>
             <NavLink to="/starships" activeClassName={classes.active}>
               Starships
             </NavLink>
@@ -36,6 +29,25 @@ const MainNavigation = () => {
               Actors
             </NavLink>
           </li>
+          {!ctx.isLoggedIn.status && (
+            <li>
+              <NavLink to="/registration" activeClassName={classes.active}>
+                Register
+              </NavLink>
+            </li>
+          )}
+          {!ctx.isLoggedIn.status && (
+            <li>
+              <NavLink to="/login" activeClassName={classes.active}>
+                Login
+              </NavLink>
+            </li>
+          )}
+          {ctx.isLoggedIn.status && (
+            <li>
+              <button onClick={ctx.onLogout}>Logout</button>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
@@ -43,3 +55,18 @@ const MainNavigation = () => {
 };
 
 export default MainNavigation;
+
+/*
+  {!ctx.isLoggedIn.status && (
+            <li>
+              <NavLink to="/login" activeClassName={classes.active}>
+                Login
+              </NavLink>
+            </li>
+          )}
+          {ctx.isLoggedIn.status && (
+            <li>
+              <button onClick={ctx.onLogout}>Logout</button>
+            </li>
+          )}
+*/

@@ -1,4 +1,4 @@
-import AuthContext from "../context/auth/auth-context";
+import { AuthContext } from "../context/auth/auth-context";
 import { useContext } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -7,12 +7,11 @@ import MyCheckbox from "../forms/MyCheckbox";
 import MyTextInput from "../forms/MyTextInput";
 
 const Registration = () => {
-  const { setUserList, userList, isLoggedIn } = useContext(AuthContext);
+  const { setUserList, userList, isLoggedIn, setSuccessReg, successReg } =
+    useContext(AuthContext);
   return (
     <div>
-      <h1>Welcome to StarWars Encyclopedia!</h1>
-      <p>Sign up to view intriguing facts on Starwars movies.</p>
-      <h2>Formik Test</h2>
+      <h1>Sign up to view intriguing facts on Starwars movies.</h1>
       <div className="form-user">
         <div className="container-form shadow-dark">
           <Formik
@@ -48,12 +47,9 @@ const Registration = () => {
                 //alert(JSON.stringify(values, null, 2));
                 setSubmitting(false);
               }, 400);
-              let newUser = JSON.stringify(values);
+              let newUser = values;
               console.log(newUser);
               setUserList([...userList, newUser]);
-              console.log("hey whatsup");
-              console.log("this is the userlist " + userList);
-              //localStorage.setItem("users", JSON.stringify(values));
             }}
           >
             <Form>
@@ -107,6 +103,7 @@ const Registration = () => {
               </div>
             </Form>
           </Formik>
+          {successReg && <p>You are now signed up and can login!</p>}
         </div>
       </div>
     </div>
@@ -114,4 +111,3 @@ const Registration = () => {
 };
 
 export default Registration;
-//import { set } from "lodash";
