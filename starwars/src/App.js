@@ -17,9 +17,9 @@ import Registration from "./components/registration/Registration";
 import Login from "./components/login/LoginForm";
 import Welcome from "./components/pages/Welcome";
 import Home from "./components/pages/Home";
-import AllStarships from "./components/pages/AllStarships";
+import AllStarshipsPage from "./components/pages/AllStarshipsPage";
 import Actors from "./components/pages/AllActors";
-import StarshipDetail from "./components/pages/StarshipDetail";
+import StarshipDetailPage from "./components/pages/StarshipDetailPage";
 import ActorDetail from "./components/pages/ActorDetail";
 
 function App() {
@@ -42,15 +42,15 @@ function App() {
                 <Registration />
               </Route>
               <Route path="/starships">
-                <AllStarships />
+                <AllStarshipsPage />
               </Route>
-              <Route path="/starship-detail">
-                <StarshipDetail />
+              <Route path="/starship-detail/:starshipId">
+                <StarshipDetailPage />
               </Route>
               <Route path="/actors">
                 <Actors />
               </Route>
-              <Route path="/actors-detail">
+              <Route path="/actors-detail/:actorsId">
                 <ActorDetail />
               </Route>
             </Switch>

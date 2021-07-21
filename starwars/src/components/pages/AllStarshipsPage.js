@@ -2,12 +2,20 @@ import { useContext } from "react";
 import StarshipBrief from "../starships/StarshipBrief";
 import { StarshipsContext } from "../context/StarshipsContext";
 
-const AllStarships = () => {
+const AllStarshipsPage = () => {
   const ctx = useContext(StarshipsContext);
   const starshipsArr = ctx.starships;
   console.log(starshipsArr);
   const starshipList = starshipsArr.map((element) => {
-    return <StarshipBrief name={element.name} model={element.model} />;
+    return (
+      <StarshipBrief
+        key={element.id}
+        id={element.id}
+        name={element.name}
+        model={element.model}
+        handleClickShip={ctx.handleClickShip}
+      />
+    );
   });
 
   return (
@@ -18,7 +26,7 @@ const AllStarships = () => {
   );
 };
 
-export default AllStarships;
+export default AllStarshipsPage;
 
 //MAria's most stupid errors!!!!:
 /*
