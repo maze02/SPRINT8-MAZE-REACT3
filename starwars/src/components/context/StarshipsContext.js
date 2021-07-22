@@ -8,7 +8,6 @@ const StarshipsProvider = (props) => {
   const [singleShip, setSingleShip] = useState();
 
   //CALLING API
-
   const addIdToArr = (arr) => {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].id === undefined) {
@@ -47,7 +46,9 @@ const StarshipsProvider = (props) => {
     <StarshipsContext.Provider
       value={{
         starships: starships,
+        setStarships: setStarships,
         handleClickShip: handleClickShip,
+        addIdToArr: addIdToArr,
       }}
     >
       {props.children}
