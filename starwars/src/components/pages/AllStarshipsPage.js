@@ -2,7 +2,7 @@
 import { useContext, useState, useRef, useCallback } from "react";
 
 import { StarshipsContext } from "../context/StarshipsContext";
-import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveContext";
+import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 import StarshipList from "../starships/StarshipList";
 
 //import useInfiniteScroll from "react-infinite-scroll-hook";

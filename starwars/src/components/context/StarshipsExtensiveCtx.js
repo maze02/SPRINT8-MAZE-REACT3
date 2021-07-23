@@ -1,13 +1,14 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { StarshipsContext } from "../context/StarshipsContext";
+import { StarshipsContext } from "./StarshipsContext";
 
 const StarshipExtensiveProvider = (props) => {
   const [singleShip, setSingleShip] = useState();
   const [pilotUrls, setPilotUrls] = useState([]);
   const [pilotInfo, setPilotInfo] = useState([]);
   const [filmUrls, setFilmUrls] = useState([]);
+  const [filmInfo, setFilmInfo] = useState([]);
   const ctx = useContext(StarshipsContext);
   const history = useHistory();
 
@@ -34,27 +35,49 @@ const StarshipExtensiveProvider = (props) => {
 
   //Call each of Pilot Apis and add info into an arr for child to map through
   useEffect(() => {
+    let pilotInfoNew = [];
     if (pilotUrls.length > 0) {
       for (let i = 0; i < pilotUrls.length; i++) {
         //let pilotObj = "";
         const getPilot = async () => {
           const pilotObj = await axios.get(pilotUrls[i]);
           console.log("printing" + i + " " + pilotObj.data.name);
-          setPilotInfo([...pilotInfo, pilotObj.data]);
+          pilotInfoNew.push(pilotObj.data);
         };
         getPilot();
 
         console.log("Pilot" + i);
       }
-      //console.log("pilotInfo.length" + pilotInfo.length);
     }
+    console.log("pilotInfoNew length:" + pilotInfoNew.length);
+    setPilotInfo(pilotInfoNew);
   }, [pilotUrls]);
+
+  useEffect(() => {
+    let filmInfoNew = [];
+    if (filmUrls.length > 0) {
+      for (let i = 0; i < filmUrls.length; i++) {
+        //let pilotObj = "";
+        const getFilm = async () => {
+          const filmObj = await axios.get(filmUrls[i]);
+          console.log("printing" + i + " " + filmObj.data.title);
+          filmInfoNew.push(filmObj.data);
+        };
+        getFilm();
+
+        console.log("Film" + i);
+      }
+    }
+    setFilmInfo(filmInfoNew);
+  }, [filmUrls]);
 
   return (
     <StarshipExtensiveCtx.Provider
       value={{
         singleShip: singleShip,
         handleClickShip: handleClickShip,
+        pilotInfo: pilotInfo,
+        filmInfo: filmInfo,
       }}
     >
       {props.children}

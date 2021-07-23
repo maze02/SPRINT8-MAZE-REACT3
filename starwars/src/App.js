@@ -8,7 +8,7 @@ import AuthContextMyProvider from "./components/context/auth/auth-context.js";
 import AppContextMyProvider from "./components/context/auth/test-context";
 import StarshipsProvider from "./components/context/StarshipsContext";
 
-import StarshipExtensiveProvider from "./components/context/StarshipsExtensiveContext.js";
+import StarshipExtensiveProvider from "./components/context/StarshipsExtensiveCtx.js";
 //import Home from "./components/";
 //import ShowState from "./components/login/Showstate";
 

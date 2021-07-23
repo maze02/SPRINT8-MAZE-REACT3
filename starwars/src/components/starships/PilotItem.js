@@ -1,11 +1,14 @@
 const PilotItem = ({ pilotName, height, planet }) => {
   return (
-    <div>
-      <h4>Penguin Pogi {pilotName}</h4>
-      <p>10m tall {height}</p>
-      <p>Planet Nori {planet}</p>
-    </div>
+    <ul>
+      <li>{pilotName}</li>
+      <li>{height}</li>
+    </ul>
   );
 };
 
 export default PilotItem;
+//<li>{planet}</li>
+/* planet is a URL
+would have to do an other API call
+*/

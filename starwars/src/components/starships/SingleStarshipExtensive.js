@@ -1,6 +1,6 @@
 import { useContext } from "react";
 //import { useParams } from "react-router-dom";
-import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveContext";
+import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 
 const SingleStarshipExtensive = () => {
   const ctx = useContext(StarshipExtensiveCtx);
