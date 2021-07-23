@@ -5,30 +5,40 @@ import axios from "axios";
 const StarshipsProvider = (props) => {
   const history = useHistory();
   const [starships, setStarships] = useState(true);
-  const [singleShip, setSingleShip] = useState();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  /*
+
   const addIdToArr = (arr) => {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].id === undefined) {
-        arr[i].id = arr[i].results.url.substring(32, arr[i].results.url - 1);
+        arr[i].id = arr[i].url.substring(32, arr[i].url.length - 1);
       }
     }
     return arr;
   };
-  */
+
   //CALLING API
   //FIRST CALL UPON LOAD
   useEffect(() => {
-    //let initialStarships = localStorage.getItem("starshipsArr");
+    let initialStarships = localStorage.getItem("starshipsArr");
     const getStarships = async () => {
       const shipsPerPage = 10;
       const url = `https://swapi.dev/api/starships/?page=${1}`;
       const result = await axios.get(url);
+      console.log("result.data.results =" + result.data.results);
+      console.log("result.data.results[0].url =" + result.data.results[0].url);
+      console.log(
+        "result.data.results[0].url.substringphrase =" +
+          result.data.results[0].url.substring(
+            32,
+            result.data.results[0].url.length - 1
+          )
+      );
       //console.log("printing from starship ctx, starships:" + result);
-      //const resultWithId = addIdToArr(result.data.results);
-      setStarships(result.data.results);
+      const resultWithId = addIdToArr(result.data.results);
+
+      setStarships(resultWithId);
       //localStorage.setItem("starshipsArr", JSON.stringify(result));
       const calculateTotalPages = Math.ceil(result.data.count / shipsPerPage);
       console.log("total: " + result.data.count);
@@ -37,15 +47,15 @@ const StarshipsProvider = (props) => {
     getStarships();
   }, []);
 
-  //Handle second call
+  //HANDLE SECOND CALL TO API
   useEffect(() => {
     const getStarships = async () => {
       const shipsPerPage = 10;
       const url = `https://swapi.dev/api/starships/?page=${currentPage}`;
       const result = await axios.get(url);
       //console.log("printing from starship ctx, starships:" + result);
-      //const resultWithId = addIdToArr(result.data.results);
-      setStarships(result.data.results);
+      const resultWithId = addIdToArr(result.data.results);
+      setStarships(resultWithId);
       //localStorage.setItem("starshipsArr", JSON.stringify(resultWithId));
       const calculateTotalPages = Math.ceil(result.data.count / shipsPerPage);
       setTotalPages(calculateTotalPages);
@@ -70,26 +80,19 @@ const StarshipsProvider = (props) => {
     console.log("oi new curr page =" + newCurrentPage);
     console.log("currentpage=" + currentPage);
   };
-  //HANDLING CLICK OF INDIVIDUAL SHIP
-  const handleClickShip = (e) => {
-    console.log(e.target.id);
-    setSingleShip(e.target.id);
-    //history.replace("/home");
-    history.push(`/starship-detail/:${e.target.id}`);
-  };
 
   return (
     <StarshipsContext.Provider
       value={{
         starships: starships,
         setStarships: setStarships,
-        handleClickShip: handleClickShip,
         currentPage: currentPage,
         setCurrentPage: setCurrentPage,
         totalPages: totalPages,
         setTotalPages: setTotalPages,
         previousPage: previousPage,
         nextPage: nextPage,
+        history: history,
       }}
     >
       {props.children}

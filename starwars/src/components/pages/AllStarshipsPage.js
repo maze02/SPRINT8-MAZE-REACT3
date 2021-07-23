@@ -2,12 +2,14 @@
 import { useContext, useState, useRef, useCallback } from "react";
 
 import { StarshipsContext } from "../context/StarshipsContext";
+import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveContext";
 import StarshipList from "../starships/StarshipList";
 
 //import useInfiniteScroll from "react-infinite-scroll-hook";
 
 const AllStarshipsPage = () => {
   const ctx = useContext(StarshipsContext);
+  const shipCtx = useContext(StarshipExtensiveCtx);
   const starshipsArr = ctx.starships;
   //const lastStarshipRef = useRef();
 
@@ -16,7 +18,7 @@ const AllStarshipsPage = () => {
       <h1>Here's a list of starships</h1>
       <StarshipList
         starshipsArr={starshipsArr}
-        handleClickShip={ctx.handleClickShip}
+        handleClickShip={shipCtx.handleClickShip}
       />
       <div>
         <h1>hello</h1>

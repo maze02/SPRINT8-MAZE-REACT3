@@ -7,6 +7,8 @@ import { Fragment } from "react";
 import AuthContextMyProvider from "./components/context/auth/auth-context.js";
 import AppContextMyProvider from "./components/context/auth/test-context";
 import StarshipsProvider from "./components/context/StarshipsContext";
+
+import StarshipExtensiveProvider from "./components/context/StarshipsExtensiveContext.js";
 //import Home from "./components/";
 //import ShowState from "./components/login/Showstate";
 
@@ -27,34 +29,36 @@ function App() {
     <Fragment>
       <AuthContextMyProvider>
         <StarshipsProvider>
-          <Layout>
-            <Switch>
-              <Route path="/" exact>
-                <Welcome />
-              </Route>
-              <Route path="/home">
-                <Home />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/registration">
-                <Registration />
-              </Route>
-              <Route path="/starships">
-                <AllStarshipsPage />
-              </Route>
-              <Route path="/starship-detail/:starshipId">
-                <StarshipDetailPage />
-              </Route>
-              <Route path="/actors">
-                <Actors />
-              </Route>
-              <Route path="/actors-detail/:actorsId">
-                <ActorDetail />
-              </Route>
-            </Switch>
-          </Layout>
+          <StarshipExtensiveProvider>
+            <Layout>
+              <Switch>
+                <Route path="/" exact>
+                  <Welcome />
+                </Route>
+                <Route path="/home">
+                  <Home />
+                </Route>
+                <Route path="/login">
+                  <Login />
+                </Route>
+                <Route path="/registration">
+                  <Registration />
+                </Route>
+                <Route path="/starships">
+                  <AllStarshipsPage />
+                </Route>
+                <Route path="/starship-detail/:starshipId">
+                  <StarshipDetailPage />
+                </Route>
+                <Route path="/actors">
+                  <Actors />
+                </Route>
+                <Route path="/actors-detail/:actorsId">
+                  <ActorDetail />
+                </Route>
+              </Switch>
+            </Layout>
+          </StarshipExtensiveProvider>
         </StarshipsProvider>
       </AuthContextMyProvider>
     </Fragment>
