@@ -9,11 +9,15 @@ const StarshipExtensiveProvider = (props) => {
   const [pilotInfo, setPilotInfo] = useState([]);
   const [filmUrls, setFilmUrls] = useState([]);
   const [filmInfo, setFilmInfo] = useState([]);
+  const [loadShip, setloadShip] = useState(false);
+  const [loadPilots, setloadPilots] = useState(true); //because we'll always start with loading data when first rendering this component.
+  const [loadFilms, setloadFilms] = useState(true);
   const ctx = useContext(StarshipsContext);
   const history = useHistory();
 
   //HANDLING CLICK OF INDIVIDUAL SHIP
-  const handleClickShip = (e) => {
+
+  const handleClickShip = async (e) => {
     console.log("id of ship I licked on " + e.target.id);
     setSingleShip(e.target.id);
     console.log("id in state" + singleShip);
@@ -22,36 +26,52 @@ const StarshipExtensiveProvider = (props) => {
       const url = `https://swapi.dev/api/starships/${e.target.id}/`;
       const singleShipObj = await axios.get(url);
       await setSingleShip(singleShipObj.data);
-      console.log("singleShipObj.name" + singleShipObj.name);
+      await console.log("2. singleShipObj.name" + singleShipObj.name);
       await setPilotUrls(singleShipObj.data.pilots);
       await setFilmUrls(singleShipObj.data.films);
-      console.log("length of pilots arr =" + pilotUrls.length);
-      console.log("length of films arr =" + filmUrls.length);
+      await console.log("length of pilots arr =" + pilotUrls.length);
+      await console.log("length of films arr =" + filmUrls.length);
+      await setloadShip(false);
+      await setloadPilots(true);
+      await setloadFilms(true);
     };
-    getSingleShip();
-
-    history.push(`/starship-detail/:${e.target.id}`);
+    await console.log("1. singleStarshipInfo loading");
+    await setloadShip(true);
+    await getSingleShip();
+    await console.log(
+      "3. singleStarship info loading COMPLETE and url length of pilots is " +
+        pilotUrls.length
+    );
+    await pilotLoader();
+    await history.push(`/starship-detail/:${e.target.id}`);
   };
 
   //Call each of Pilot Apis and add info into an arr for child to map through
-  useEffect(() => {
-    let pilotInfoNew = [];
-    if (pilotUrls.length > 0) {
-      for (let i = 0; i < pilotUrls.length; i++) {
-        //let pilotObj = "";
-        const getPilot = async () => {
-          const pilotObj = await axios.get(pilotUrls[i]);
-          console.log("printing" + i + " " + pilotObj.data.name);
-          pilotInfoNew.push(pilotObj.data);
-        };
-        getPilot();
-
-        console.log("Pilot" + i);
+  const pilotLoader = () => {
+    console.log("3.5 Inside Pilot Loader");
+    if (loadShip) {
+      console.log("Ships loading so skipping out of pilot useEffect");
+    }
+    if (!loadShip) {
+      console.log("4. Hey ship no longer loading right?");
+      console.log("5.pilotUrls.length=" + pilotUrls.length);
+      let pilotInfoNew = [];
+      if (pilotUrls.length > 0) {
+        for (let i = 0; i < pilotUrls.length; i++) {
+          const getPilot = async () => {
+            const pilotObj = await axios.get(pilotUrls[i]);
+            console.log("printing" + i + " " + pilotObj.data.name);
+            pilotInfoNew.push(pilotObj.data);
+          };
+          getPilot();
+          //console.log("Pilot" + i);
+        }
+        setPilotInfo(pilotInfoNew);
+        setloadPilots(false);
+        console.log("now the pilots are loaded");
       }
     }
-    console.log("pilotInfoNew length:" + pilotInfoNew.length);
-    setPilotInfo(pilotInfoNew);
-  }, [pilotUrls]);
+  };
 
   useEffect(() => {
     let filmInfoNew = [];
@@ -69,6 +89,8 @@ const StarshipExtensiveProvider = (props) => {
       }
     }
     setFilmInfo(filmInfoNew);
+    setloadFilms(false);
+    console.log("now the films are loaded");
   }, [filmUrls]);
 
   return (
@@ -78,6 +100,8 @@ const StarshipExtensiveProvider = (props) => {
         handleClickShip: handleClickShip,
         pilotInfo: pilotInfo,
         filmInfo: filmInfo,
+        loadPilots: loadPilots,
+        loadFilms: loadFilms,
       }}
     >
       {props.children}
@@ -87,6 +111,31 @@ const StarshipExtensiveProvider = (props) => {
 
 export default StarshipExtensiveProvider;
 export const StarshipExtensiveCtx = createContext();
+
+/*
+const getPilotList = async () => {
+      let pilotInfoNew = [];
+      if (pilotUrls.length > 0) {
+        for (let i = 0; i < pilotUrls.length; i++) {
+          //let pilotObj = "";
+          const getPilot = async () => {
+            const pilotObj = await axios.get(pilotUrls[i]);
+            console.log("printing pilot" + i + " " + pilotObj.data.name);
+            pilotInfoNew.push(pilotObj.data);
+          };
+          getPilot();
+
+          console.log("Pilot" + i);
+        }
+      }
+      //let pilotInfoArr = fillPilotInfoNew();
+      console.log("pilotInfoNew length:" + pilotInfoNew.length);
+      await setPilotInfo(pilotInfoNew);
+    };
+
+    getPilotList();
+
+*/
 
 /*
     if (pilotUrls.length > 0) {
@@ -100,3 +149,47 @@ export const StarshipExtensiveCtx = createContext();
       console.log("pilotInfo.length" + pilotInfo.length);
     }
 */
+/*
+ useEffect(() => {
+    console.log("Hey something activated pilotUrls");
+    let pilotInfoNew = [];
+    if (pilotUrls.length > 0) {
+      for (let i = 0; i < pilotUrls.length; i++) {
+        const getPilot = async () => {
+          const pilotObj = await axios.get(pilotUrls[i]);
+          console.log("printing" + i + " " + pilotObj.data.name);
+          pilotInfoNew.push(pilotObj.data);
+        };
+        getPilot();
+
+        console.log("Pilot" + i);
+      }
+    }
+
+    setPilotInfo(pilotInfoNew);
+    setloadPilots(false);
+  }, [pilotUrls, loadShip]);
+
+
+
+
+  const uploadPilots = () => {
+    console.log("Hey something activated pilotUrls");
+    let pilotInfoNew = [];
+    if (pilotUrls.length > 0) {
+      for (let i = 0; i < pilotUrls.length; i++) {
+        const getPilot = async () => {
+          const pilotObj = await axios.get(pilotUrls[i]);
+          console.log("printing" + i + " " + pilotObj.data.name);
+          pilotInfoNew.push(pilotObj.data);
+        };
+        getPilot();
+
+        console.log("Pilot" + i);
+      }
+    }
+
+    setPilotInfo(pilotInfoNew);
+    setloadPilots(false);
+  };
+  */

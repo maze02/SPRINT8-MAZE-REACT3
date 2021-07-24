@@ -2,9 +2,7 @@ import { useContext } from "react";
 import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 import FilmItem from "./FilmItem";
 
-const FilmList = () => {
-  const ctxE = useContext(StarshipExtensiveCtx);
-  const filmListArr = ctxE.filmInfo;
+const FilmList = ({ filmListArr, loadFilms }) => {
   if (filmListArr.length === 0) {
     return <p>No record of this starship appearing in a film</p>;
   } else {
