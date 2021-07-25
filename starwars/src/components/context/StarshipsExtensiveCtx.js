@@ -1,5 +1,11 @@
 //https://blog.logrocket.com/guide-to-react-usereducer-hook/
-import { createContext, useContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useReducer,
+} from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { StarshipsContext } from "./StarshipsContext";
@@ -11,68 +17,72 @@ const StarshipExtensiveProvider = (props) => {
   const [filmUrls, setFilmUrls] = useState([]);
   const [filmInfo, setFilmInfo] = useState([]);
   const [loadShip, setloadShip] = useState(false);
-  const [loadPilots, setloadPilots] = useState(true); //because we'll always start with loading data when first rendering this component.
-  const [loadFilms, setloadFilms] = useState(true);
+  const [loadPilots, setloadPilots] = useState(false);
+  const [loadFilms, setloadFilms] = useState(false);
   const ctx = useContext(StarshipsContext);
   const history = useHistory();
 
   //HANDLING CLICK OF INDIVIDUAL SHIP
 
-  const handleClickShip = async (e) => {
+  const getSingleShip = async () => {
+    const url = `https://swapi.dev/api/starships/${e.target.id}/`;
+    const singleShipObj = await axios.get(url);
+    setSingleShip(singleShipObj.data);
+    console.log("2. singleShipObj.name" + singleShipObj.name);
+    setPilotUrls(singleShipObj.data.pilots);
+    setFilmUrls(singleShipObj.data.films);
+    console.log("length of pilots arr =" + pilotUrls.length);
+    console.log("length of films arr =" + filmUrls.length);
+    setloadShip(false);
+    setloadPilots(true);
+    setloadFilms(true);
+  };
+
+  const handleClickShip = (e) => {
     console.log("id of ship I licked on " + e.target.id);
     setSingleShip(e.target.id);
     console.log("id in state" + singleShip);
+    console.log("1. singleStarshipInfo loading");
+    setloadShip(true);
+    history.push(`/starship-detail/:${e.target.id}`);
+  };
 
-    const getSingleShip = async () => {
-      const url = `https://swapi.dev/api/starships/${e.target.id}/`;
-      const singleShipObj = await axios.get(url);
-      await setSingleShip(singleShipObj.data);
-      await console.log("2. singleShipObj.name" + singleShipObj.name);
-      await setPilotUrls(singleShipObj.data.pilots);
-      await setFilmUrls(singleShipObj.data.films);
-      await console.log("length of pilots arr =" + pilotUrls.length);
-      await console.log("length of films arr =" + filmUrls.length);
-      await setloadShip(false);
-      await setloadPilots(true);
-      await setloadFilms(true);
-    };
-    await console.log("1. singleStarshipInfo loading");
-    await setloadShip(true);
-    await getSingleShip();
-    await console.log(
+  useEffect(() => {
+    getSingleShip();
+    console.log(
       "3. singleStarship info loading COMPLETE and url length of pilots is " +
         pilotUrls.length
     );
-    await pilotLoader();
-    await history.push(`/starship-detail/:${e.target.id}`);
-  };
+  }, [loadShip]);
 
   //Call each of Pilot Apis and add info into an arr for child to map through
-  const pilotLoader = () => {
-    console.log("3.5 Inside Pilot Loader");
-    if (loadShip) {
-      console.log("Ships loading so skipping out of pilot useEffect");
-    }
-    if (!loadShip) {
-      console.log("4. Hey ship no longer loading right?");
-      console.log("5.pilotUrls.length=" + pilotUrls.length);
-      let pilotInfoNew = [];
-      if (pilotUrls.length > 0) {
-        for (let i = 0; i < pilotUrls.length; i++) {
-          const getPilot = async () => {
-            const pilotObj = await axios.get(pilotUrls[i]);
-            console.log("printing" + i + " " + pilotObj.data.name);
-            pilotInfoNew.push(pilotObj.data);
-          };
-          getPilot();
-          //console.log("Pilot" + i);
-        }
-        setPilotInfo(pilotInfoNew);
-        setloadPilots(false);
-        console.log("now the pilots are loaded");
+  useEffect(() => {
+    const pilotLoader = () => {
+      console.log("3.5 Inside Pilot Loader");
+      if (loadShip) {
+        console.log("Ships loading so skipping out of pilot useEffect");
       }
-    }
-  };
+      if (!loadShip) {
+        console.log("4. Hey ship no longer loading right?");
+        console.log("5.pilotUrls.length=" + pilotUrls.length);
+        let pilotInfoNew = [];
+        if (pilotUrls.length > 0) {
+          for (let i = 0; i < pilotUrls.length; i++) {
+            const getPilot = async () => {
+              const pilotObj = await axios.get(pilotUrls[i]);
+              console.log("printing" + i + " " + pilotObj.data.name);
+              pilotInfoNew.push(pilotObj.data);
+            };
+            getPilot();
+            //console.log("Pilot" + i);
+          }
+          setPilotInfo(pilotInfoNew);
+          setloadPilots(false);
+          console.log("now the pilots are loaded");
+        }
+      }
+    };
+  }, [loadPilots]);
 
   useEffect(() => {
     if (!loadShip) {
@@ -86,7 +96,6 @@ const StarshipExtensiveProvider = (props) => {
             filmInfoNew.push(filmObj.data);
           };
           getFilm();
-
           console.log("Film" + i);
         }
       }
@@ -99,7 +108,7 @@ const StarshipExtensiveProvider = (props) => {
           filmInfo.length
       );
     }
-  }, [filmUrls, history]);
+  }, [loadFilms]);
 
   return (
     <StarshipExtensiveCtx.Provider

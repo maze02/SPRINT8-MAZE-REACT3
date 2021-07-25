@@ -12,14 +12,20 @@ const StarshipDetail = () => {
       <h1>Here's the detail of one starship</h1>
       <SingleStarshipExtensive />
       <h2>Pilots</h2>
-      {ctxE.loadPilots && <h3>loading pilots...</h3>}
-      {!ctxE.loadPilots && (
-        <PilotList pilotListArr={ctxE.pilotInfo} loadPilots={ctxE.loadPilots} />
-      )}
+      {ctxE.loadPilots && ctxE.loadShip && <h3>loading pilots...</h3>}
+      {!ctxE.loadPilots &&
+        !ctxE.loadShip(
+          <PilotList
+            pilotListArr={ctxE.pilotInfo}
+            loadPilots={ctxE.loadPilots}
+          />
+        )}
 
       <h2>Films</h2>
-      {ctxE.loadFilms && <h3>loading films...:{ctxE.loadFilms}</h3>}
-      {!ctxE.loadFilms && (
+      {ctxE.loadFilms && ctxE.loadShip && (
+        <h3>loading films...:{ctxE.loadFilms}</h3>
+      )}
+      {!ctxE.loadFilms && !ctxE.loadShip && (
         <FilmList filmListArr={ctxE.filmInfo} loadFilms={ctxE.loadFilms} />
       )}
     </div>
