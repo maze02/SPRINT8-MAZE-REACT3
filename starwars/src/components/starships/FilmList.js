@@ -6,8 +6,8 @@ const FilmList = ({ filmListArr, loadFilms }) => {
   if (loadFilms) {
     return <p>Films loading ...</p>;
   } else {
-    let filmListLocal = localStorage.getItem("films");
-    filmListArr = JSON.parse(filmListLocal);
+    //let filmListLocal = localStorage.getItem("films");
+    //filmListArr = JSON.parse(filmListLocal);
     if (filmListArr.length === 0) {
       return <p>No record of this starship appearing in a film</p>;
     } else {

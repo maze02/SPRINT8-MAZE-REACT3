@@ -4,8 +4,8 @@ const PilotList = ({ pilotListArr, loadPilots }) => {
   if (loadPilots) {
     return <p>Pilots loading...</p>;
   } else {
-    let pilotListLocal = localStorage.getItem("pilots");
-    pilotListArr = JSON.parse(pilotListLocal);
+    //let pilotListLocal = localStorage.getItem("pilots");
+    //pilotListArr = JSON.parse(pilotListLocal);
     if (pilotListArr.length === 0) {
       return <p>No record of pilots flying this starship</p>;
     } else {
