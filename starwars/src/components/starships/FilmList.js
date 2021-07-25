@@ -3,15 +3,25 @@ import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 import FilmItem from "./FilmItem";
 
 const FilmList = ({ filmListArr, loadFilms }) => {
-  if (filmListArr.length === 0) {
-    return <p>No record of this starship appearing in a film</p>;
+  if (loadFilms) {
+    return <p>Films loading ...</p>;
   } else {
-    let filmListContent = filmListArr.map((e) => {
-      return (
-        <FilmItem key={e.title} title={e.title} release_date={e.release_date} />
-      );
-    });
-    return <div>{[...filmListContent]}</div>;
+    let filmListLocal = localStorage.getItem("films");
+    filmListArr = JSON.parse(filmListLocal);
+    if (filmListArr.length === 0) {
+      return <p>No record of this starship appearing in a film</p>;
+    } else {
+      let filmListContent = filmListArr.map((e) => {
+        return (
+          <FilmItem
+            key={e.title}
+            title={e.title}
+            release_date={e.release_date}
+          />
+        );
+      });
+      return <div>{[...filmListContent]}</div>;
+    }
   }
 };
 

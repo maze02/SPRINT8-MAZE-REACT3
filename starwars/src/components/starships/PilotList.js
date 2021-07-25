@@ -1,33 +1,27 @@
 import PilotItem from "./PilotItem";
 
 const PilotList = ({ pilotListArr, loadPilots }) => {
-  //const ctxE = useContext(StarshipExtensiveCtx);
-  //const pilotListArr = ctxE.pilotInfo;
-  let pilotListContent = <p>Yep still loading in PilotList</p>;
   if (loadPilots) {
-    console.log("mate, pilotList is still loading");
+    return <p>Pilots loading...</p>;
   } else {
-    pilotListContent = pilotListArr.map((e) => {
-      return (
-        <PilotItem
-          key={e.name}
-          pilotName={e.name}
-          height={`${Number(e.height) / 100}m`}
-          planet={e.homeworld}
-        />
-      );
-    });
-    console.log(
-      "6. From pilotList Component is the list of pilots: " +
-        [...pilotListContent].toString()
-    );
+    let pilotListLocal = localStorage.getItem("pilots");
+    pilotListArr = JSON.parse(pilotListLocal);
+    if (pilotListArr.length === 0) {
+      return <p>No record of pilots flying this starship</p>;
+    } else {
+      let pilotListContent = pilotListArr.map((e) => {
+        return (
+          <PilotItem
+            key={e.id}
+            pilotName={e.name}
+            height={`${Number(e.height) / 100}m`}
+            planet={e.homeworld}
+          />
+        );
+      });
+      return <div>{[...pilotListContent]}</div>;
+    }
   }
-  return (
-    <div>
-      <p>This is the Pilot List component that won't render</p>
-      {[...pilotListContent]}
-    </div>
-  );
 };
 
 export default PilotList;

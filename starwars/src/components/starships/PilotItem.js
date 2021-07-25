@@ -1,4 +1,4 @@
-const PilotItem = ({ pilotName, height, planet }) => {
+const PilotItem = ({ pilotName, height, planet, key }) => {
   return (
     <ul>
       <li>{pilotName}</li>

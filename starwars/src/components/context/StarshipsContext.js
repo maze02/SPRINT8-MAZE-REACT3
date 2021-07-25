@@ -13,6 +13,7 @@ const StarshipsProvider = (props) => {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].id === undefined) {
         arr[i].id = arr[i].url.substring(32, arr[i].url.length - 1);
+        arr[i].apiPage = currentPage;
       }
     }
     return arr;
@@ -22,29 +23,39 @@ const StarshipsProvider = (props) => {
   //FIRST CALL UPON LOAD
   useEffect(() => {
     let initialStarships = localStorage.getItem("starshipsArr");
-    const getStarships = async () => {
-      const shipsPerPage = 10;
-      const url = `https://swapi.dev/api/starships/?page=${1}`;
-      const result = await axios.get(url);
-      console.log("result.data.results =" + result.data.results);
-      console.log("result.data.results[0].url =" + result.data.results[0].url);
-      console.log(
-        "result.data.results[0].url.substringphrase =" +
-          result.data.results[0].url.substring(
-            32,
-            result.data.results[0].url.length - 1
-          )
-      );
-      //console.log("printing from starship ctx, starships:" + result);
-      const resultWithId = addIdToArr(result.data.results);
+    if (initialStarships) {
+      let arr = JSON.parse(initialStarships);
+      if ((arr[0].apiPage = 1)) {
+        setStarships(arr);
+      }
+      return;
+    } else {
+      const getStarships = async () => {
+        const shipsPerPage = 10;
+        const url = `https://swapi.dev/api/starships/?page=${1}`;
+        const result = await axios.get(url);
+        console.log("result.data.results =" + result.data.results);
+        console.log(
+          "result.data.results[0].url =" + result.data.results[0].url
+        );
+        console.log(
+          "result.data.results[0].url.substringphrase =" +
+            result.data.results[0].url.substring(
+              32,
+              result.data.results[0].url.length - 1
+            )
+        );
+        //console.log("printing from starship ctx, starships:" + result);
+        const resultWithId = addIdToArr(result.data.results);
 
-      setStarships(resultWithId);
-      //localStorage.setItem("starshipsArr", JSON.stringify(result));
-      const calculateTotalPages = Math.ceil(result.data.count / shipsPerPage);
-      console.log("total: " + result.data.count);
-      setTotalPages(calculateTotalPages);
-    };
-    getStarships();
+        setStarships(resultWithId);
+        localStorage.setItem("starshipsArr", JSON.stringify(resultWithId));
+        const calculateTotalPages = Math.ceil(result.data.count / shipsPerPage);
+        console.log("total: " + result.data.count);
+        setTotalPages(calculateTotalPages);
+      };
+      getStarships();
+    }
   }, []);
 
   //HANDLE SECOND CALL TO API
@@ -56,7 +67,7 @@ const StarshipsProvider = (props) => {
       //console.log("printing from starship ctx, starships:" + result);
       const resultWithId = addIdToArr(result.data.results);
       setStarships(resultWithId);
-      //localStorage.setItem("starshipsArr", JSON.stringify(resultWithId));
+      localStorage.setItem("starshipsArr", JSON.stringify(resultWithId));
       const calculateTotalPages = Math.ceil(result.data.count / shipsPerPage);
       setTotalPages(calculateTotalPages);
     };
