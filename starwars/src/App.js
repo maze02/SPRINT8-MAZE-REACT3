@@ -1,16 +1,19 @@
 import { Route, Switch } from "react-router";
 import { Fragment } from "react";
 
+/*tutorial
+import styled from "styled-components";
+const StyledDiv = styled.div`
+  width: 90%;
+  max-width: 40rem;
+  border: 1px solid #ccc;
+  padding: 1rem;
+`;
+*/
 //CONTEXT IMPORTS
-//import Welcome from "./components/pages/Welcome";
-//import MainHeader from "./components/layout/MainHeader";
 import AuthContextMyProvider from "./components/context/auth/auth-context.js";
-import AppContextMyProvider from "./components/context/auth/test-context";
 import StarshipsProvider from "./components/context/StarshipsContext";
-
 import StarshipExtensiveProvider from "./components/context/StarshipsExtensiveCtx.js";
-//import Home from "./components/";
-//import ShowState from "./components/login/Showstate";
 
 //PAGE & COMPONENTS IMPORTS
 import Layout from "./components/layout/Layout";

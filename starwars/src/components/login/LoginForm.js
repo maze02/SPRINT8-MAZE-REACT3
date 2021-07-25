@@ -1,10 +1,8 @@
 import { useContext, useRef, useState } from "react";
-//import { AppContext } from "../context/auth/test-context";
 import { AuthContext } from "../context/auth/auth-context";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../forms/MyTextInput";
-import { fixControlledValue } from "antd/lib/input/Input";
 
 const Login = () => {
   const [loginFailed, setLoginFailed] = useState(false);

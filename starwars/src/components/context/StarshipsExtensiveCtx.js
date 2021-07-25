@@ -1,3 +1,4 @@
+//https://blog.logrocket.com/guide-to-react-usereducer-hook/
 import { createContext, useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -74,24 +75,31 @@ const StarshipExtensiveProvider = (props) => {
   };
 
   useEffect(() => {
-    let filmInfoNew = [];
-    if (filmUrls.length > 0) {
-      for (let i = 0; i < filmUrls.length; i++) {
-        //let pilotObj = "";
-        const getFilm = async () => {
-          const filmObj = await axios.get(filmUrls[i]);
-          console.log("printing" + i + " " + filmObj.data.title);
-          filmInfoNew.push(filmObj.data);
-        };
-        getFilm();
+    if (!loadShip) {
+      let filmInfoNew = [];
+      if (filmUrls.length > 0) {
+        for (let i = 0; i < filmUrls.length; i++) {
+          //let pilotObj = "";
+          const getFilm = async () => {
+            const filmObj = await axios.get(filmUrls[i]);
+            console.log("printing" + i + " " + filmObj.data.title);
+            filmInfoNew.push(filmObj.data);
+          };
+          getFilm();
 
-        console.log("Film" + i);
+          console.log("Film" + i);
+        }
       }
+      setFilmInfo(filmInfoNew);
+      setloadFilms(false);
+      console.log(
+        "now the films are loaded and loadFilms is" +
+          loadFilms +
+          "and film Info length is " +
+          filmInfo.length
+      );
     }
-    setFilmInfo(filmInfoNew);
-    setloadFilms(false);
-    console.log("now the films are loaded");
-  }, [filmUrls]);
+  }, [filmUrls, history]);
 
   return (
     <StarshipExtensiveCtx.Provider

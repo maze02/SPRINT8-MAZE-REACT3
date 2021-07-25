@@ -1,11 +1,12 @@
 import SingleStarshipExtensive from "../starships/SingleStarshipExtensive";
 import PilotList from "../starships/PilotList";
 import FilmList from "../starships/FilmList";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 
 const StarshipDetail = () => {
   const ctxE = useContext(StarshipExtensiveCtx);
+
   return (
     <div>
       <h1>Here's the detail of one starship</h1>
@@ -17,7 +18,7 @@ const StarshipDetail = () => {
       )}
 
       <h2>Films</h2>
-      {ctxE.loadFilms && <h3>loading films...</h3>}
+      {ctxE.loadFilms && <h3>loading films...:{ctxE.loadFilms}</h3>}
       {!ctxE.loadFilms && (
         <FilmList filmListArr={ctxE.filmInfo} loadFilms={ctxE.loadFilms} />
       )}
