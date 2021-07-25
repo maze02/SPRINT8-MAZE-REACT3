@@ -4,22 +4,26 @@ const PilotList = ({ pilotListArr, loadPilots }) => {
   if (loadPilots) {
     return <p>Pilots loading...</p>;
   } else {
-    //let pilotListLocal = localStorage.getItem("pilots");
-    //pilotListArr = JSON.parse(pilotListLocal);
-    if (pilotListArr.length === 0) {
-      return <p>No record of pilots flying this starship</p>;
-    } else {
-      let pilotListContent = pilotListArr.map((e) => {
-        return (
-          <PilotItem
-            key={e.id}
-            pilotName={e.name}
-            height={`${Number(e.height) / 100}m`}
-            planet={e.homeworld}
-          />
-        );
-      });
-      return <div>{[...pilotListContent]}</div>;
+    if (!loadPilots) {
+      let pilotsListLocal = localStorage.getItem("pilots");
+      if (pilotsListLocal) {
+        pilotListArr = JSON.parse(pilotsListLocal);
+      }
+      if (pilotListArr.length === 0) {
+        return <p>No record of pilots flying this starship</p>;
+      } else {
+        let pilotListContent = pilotListArr.map((e) => {
+          return (
+            <PilotItem
+              key={e.id}
+              pilotName={e.name}
+              height={`${Number(e.height) / 100}m`}
+              planet={e.homeworld}
+            />
+          );
+        });
+        return <div>{[...pilotListContent]}</div>;
+      }
     }
   }
 };

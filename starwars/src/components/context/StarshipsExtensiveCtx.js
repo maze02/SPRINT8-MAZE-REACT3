@@ -22,19 +22,21 @@ const StarshipExtensiveProvider = (props) => {
   const ctx = useContext(StarshipsContext);
   const history = useHistory();
 
-  //HANDLING CLICK OF INDIVIDUAL SHIP
+  //const dataPilotReducer = (state, action) => {};
 
+  //HANDLING CLICK OF INDIVIDUAL SHIP
   const getSingleShip = async () => {
     const url = `https://swapi.dev/api/starships/${singleShip}/`;
     //const url = `https://swapi.dev/api/starships/${e.target.id}/`;
     const singleShipObj = await axios.get(url);
     await setSingleShip(singleShipObj.data);
-    await console.log("2. singleShipObj.name" + singleShipObj.data.name);
+    await console.log("2. singleShipObj.name : " + singleShipObj.data.name);
     await setPilotUrls(singleShipObj.data.pilots);
     await setFilmUrls(singleShipObj.data.films);
     await console.log("length of pilots arr =" + pilotUrls.length);
     await console.log("length of films arr =" + filmUrls.length);
     await setloadShip(false);
+    console.log("LOAD SHIP SET FALSE");
     //await setloadPilots(true);
     //await setloadFilms(true);
     await console.log(
@@ -49,10 +51,12 @@ const StarshipExtensiveProvider = (props) => {
     console.log("id in state" + singleShip);
     console.log("1. singleStarshipInfo loading");
     setloadShip(true);
+    console.log("LOAD SHIP SET TRUE");
     history.push(`/starship-detail/:${e.target.id}`);
   };
 
   useEffect(() => {
+    console.log("LOAD SHIP USE EFFECT ACTIVATED");
     console.log("context is a type:" + typeof { ctx });
     getSingleShip();
   }, [loadShip]);
@@ -60,7 +64,9 @@ const StarshipExtensiveProvider = (props) => {
   //Call each of Pilot Apis and add info into an arr for child to map through
   useEffect(() => {
     if (!loadShip) {
+      console.log("PILOT USE EFFECT ACTIVATED");
       setloadPilots(true);
+      console.log("LOAD PILOTS SET TRUE");
       let pilotInfoNew = [];
       if (pilotUrls.length > 0) {
         for (let i = 0; i < pilotUrls.length; i++) {
@@ -74,6 +80,7 @@ const StarshipExtensiveProvider = (props) => {
         setPilotInfo(pilotInfoNew);
         localStorage.setItem("pilots", JSON.stringify(pilotInfo));
         setloadPilots(false);
+        console.log("LOADPILOTS SET FALSE");
         console.log(
           "now the pilots are loaded and loadPilots is" +
             loadPilots +
@@ -83,10 +90,28 @@ const StarshipExtensiveProvider = (props) => {
       }
     }
   }, [loadShip, pilotUrls]);
+  /*
+  const filmFetchReducer = (state, action) => {
+    switch (action.type){
+      case "FETCH_INIT":
+        return {...state,
+        filmLoad: true};
+      case "FETCH_SUCCESS":
+         return {...state,
+        filmLoad: false};
+      default:
+        throw new Error();
+    }
+  }
 
+
+*/
   useEffect(() => {
     if (!loadShip) {
+      console.log("FILM USE EFFECT ACTIVATED");
       setloadFilms(true);
+      console.log("LOAD FILMS SET TRUE");
+      //dispatch({type: "FETCH_INIT"})
       let filmInfoNew = [];
       if (filmUrls.length > 0) {
         for (let i = 0; i < filmUrls.length; i++) {
@@ -98,8 +123,10 @@ const StarshipExtensiveProvider = (props) => {
           getFilm();
         }
         setFilmInfo(filmInfoNew);
+        //dispatch({type: "FETCH_SUCCESS, payload: filmInfoNew"})
         localStorage.setItem("films", JSON.stringify(filmInfo));
         setloadFilms(false);
+        console.log("LOAD FILMS SET FALSE");
         console.log(
           "now the films are loaded and loadFilms is" +
             loadFilms +
