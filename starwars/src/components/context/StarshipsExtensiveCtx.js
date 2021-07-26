@@ -26,23 +26,33 @@ const StarshipExtensiveProvider = (props) => {
 
   //HANDLING CLICK OF INDIVIDUAL SHIP
   const getSingleShip = async () => {
-    const url = `https://swapi.dev/api/starships/${singleShip}/`;
-    //const url = `https://swapi.dev/api/starships/${e.target.id}/`;
-    const singleShipObj = await axios.get(url);
-    await setSingleShip(singleShipObj.data);
-    await console.log("2. singleShipObj.name : " + singleShipObj.data.name);
-    await setPilotUrls(singleShipObj.data.pilots);
-    await setFilmUrls(singleShipObj.data.films);
-    await console.log("length of pilots arr =" + pilotUrls.length);
-    await console.log("length of films arr =" + filmUrls.length);
-    await setloadShip(false);
-    console.log("LOAD SHIP SET FALSE");
-    //await setloadPilots(true);
-    //await setloadFilms(true);
-    await console.log(
-      "3. singleStarship info loading COMPLETE and url length of pilots is " +
-        pilotUrls.length
-    );
+    if (singleShip) {
+      //let err;
+      const url = `https://swapi.dev/api/starships/${singleShip}/`;
+      //const url = `https://swapi.dev/api/starships/${e.target.id}/`;
+      const singleShipObj = await axios.get(url);
+      //console.log("error message: " + err.message);
+      const fsetShip = await setSingleShip(singleShipObj.data);
+      const fprint = await console.log(
+        "2. singleShipObj.name : " + singleShipObj.data.name
+      );
+      const fsetPilotUrls = await setPilotUrls(singleShipObj.data.pilots);
+      const fsetFilmUrls = await setFilmUrls(singleShipObj.data.films);
+      const fprint2 = await console.log(
+        "length of pilots arr =" + pilotUrls.length
+      );
+      const fprint3 = await console.log(
+        "length of films arr =" + filmUrls.length
+      );
+      const floadship = await setloadShip(false);
+      console.log("LOAD SHIP SET FALSE");
+      //await setloadPilots(true);
+      //await setloadFilms(true);
+      const print4 = await console.log(
+        "3. singleStarship info loading COMPLETE and url length of pilots is " +
+          pilotUrls.length
+      );
+    }
   };
 
   const handleClickShip = (e) => {
