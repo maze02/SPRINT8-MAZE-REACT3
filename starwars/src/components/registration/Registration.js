@@ -11,7 +11,8 @@ const Registration = () => {
     useContext(AuthContext);
   return (
     <div>
-      <h1>Sign up to view intriguing facts on Starwars movies.</h1>
+      <h1>Sign Up</h1>
+      <h2>Sign up to view intriguing facts on Starwars movies.</h2>
       <div className="form-user">
         <div className="container-form shadow-dark">
           <Formik
@@ -94,16 +95,20 @@ const Registration = () => {
                 />
               </div>
               <MyCheckbox name="acceptedTerms">
-                I accept the terms and conditions
+                <span className="checkbox-text">
+                  I accept the terms and conditions
+                </span>
               </MyCheckbox>
-              <div className="field-form">
+              <div className="field-form-btn">
                 <button className="btn btn-primary btn-block" type="submit">
                   Submit
                 </button>
               </div>
             </Form>
           </Formik>
-          {successReg && <p>You are now signed up and can login!</p>}
+          {successReg && (
+            <p className="text-black">You are now signed up and can login!</p>
+          )}
         </div>
       </div>
     </div>

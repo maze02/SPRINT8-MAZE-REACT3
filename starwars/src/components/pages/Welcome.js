@@ -8,7 +8,9 @@ const Welcome = () => {
   return (
     <div>
       <h1>Welcome to StarWars Encyclopedia!</h1>
-      <p>Sign up to view intriguing facts on Starwars movies.</p>
+      <p className="textcenter">
+        Sign up to view intriguing facts on Starwars movies.
+      </p>
     </div>
   );
 };

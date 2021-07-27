@@ -14,21 +14,28 @@ const AllStarshipsPage = () => {
   //const lastStarshipRef = useRef();
 
   return (
-    <div>
+    <div className="container-wrapper">
       <h1>Here's a list of starships</h1>
       <StarshipList
         starshipsArr={starshipsArr}
         handleClickShip={shipCtx.handleClickShip}
       />
       <div>
-        <h1>hello</h1>
         {ctx.currentPage === 1 ? null : (
-          <button type="button" onClick={ctx.previousPage}>
+          <button
+            className="btn btn-secondary btn-page btn-gap"
+            type="button"
+            onClick={ctx.previousPage}
+          >
             &#9204; Previous
           </button>
         )}
         {ctx.currentPage === ctx.totalPages ? null : (
-          <button type="button" onClick={ctx.nextPage}>
+          <button
+            type="button"
+            className="btn btn-secondary btn-page"
+            onClick={ctx.nextPage}
+          >
             Next &#9205;
           </button>
         )}

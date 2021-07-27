@@ -13,8 +13,7 @@ const Login = () => {
   const validateLogin = () => {};
   return (
     <div>
-      <h1>Login </h1>
-      <p>We're going to test if the state is being set to the global context</p>
+      <h1>Login</h1>
       <div className="form-user">
         <div className="container-form shadow-dark">
           <Formik
@@ -65,12 +64,14 @@ const Login = () => {
                 />
               </div>
 
-              <div className="field-form">
+              <div className="field-form-btn">
                 <button className="btn btn-primary btn-block" type="submit">
                   Submit
                 </button>
               </div>
-              {ctx.failedLoginMsg.status && <p>{ctx.failedLoginMsg.msg}</p>}
+              {ctx.failedLoginMsg.status && (
+                <p className="text-error">{ctx.failedLoginMsg.msg}</p>
+              )}
             </Form>
           </Formik>
         </div>

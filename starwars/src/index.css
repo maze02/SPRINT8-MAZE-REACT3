@@ -1,11 +1,13 @@
 :root {
   --white: #ffffff;
   --grey1: #edf2f6;
+  --grey12: grey;
   --grey2: #2f3848;
   --grey3: #1a202d;
   --black: #000000;
-  --headingFont: "Raleway", sans-serif;
-  --textFont: "Roboto", sans-serif;
+  --gold: #daa520;
+  --headingFont: "Barlow", sans-serif;
+  --textFont: "Barlow", sans-serif;
 }
 *,
 *:before,
@@ -19,19 +21,20 @@ html {
 }
 body {
   min-height: 100%;
-  background-color: var(--grey1);
+  background-color: black;
   font-size: 16px;
   font-size: 1.6rem;
   font-family: var(--textFont);
+  color: white;
 }
 
 h1,
 h2 {
   font-family: var(--headingFont);
-  font-weight: 900;
+  font-weight: 300;
   margin: 0 0 4rem 0;
   text-align: center;
-  color: var(--grey2);
+  color: white;
 }
 h1 span {
   font-weight: 400;
@@ -41,17 +44,43 @@ h1 {
 }
 h2 {
   font-size: 2.4rem;
+  font-weight: 200;
+}
+h3,
+h4 {
+  font-size: 2.1rem;
+  font-weight: 400;
+  margin-bottom: -1.6rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+  font-weight: 100;
 }
 ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
+p {
+  font-weight: 200;
+}
 a {
   text-decoration: none;
   color: var(--grey2);
 }
 
+.textcenter {
+  text-align: center;
+}
+
+.text-black {
+  color: black;
+}
+.text-error {
+  color: red;
+}
 /** BUTTONS **/
 .btn {
   margin-top: 2rem;
@@ -81,7 +110,8 @@ a {
   width: 100%;
 }
 .btn-submit:hover {
-  background-color: var(--grey2);
+  background-color: #817b69;
+  color: white;
 }
 .btn-blank {
   margin: 0;
@@ -90,6 +120,28 @@ a {
   background-color: transparent;
 }
 
+.btn-gap {
+  margin-right: 1rem;
+}
+
+.btn-page {
+  width: 15rem;
+  margin-bottom: 5rem;
+}
+
+.btn-page:hover {
+  background-color: #817b69;
+  color: white;
+}
+.btn-logout {
+  margin-right: 2rem;
+}
+
+.btn-logout:hover {
+  background-color: #817b69;
+  color: white;
+}
+/*FORM*/
 .shadow-dark {
   -webkit-box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
   -moz-box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
@@ -102,7 +154,7 @@ a {
 
 .container-input label {
   margin-bottom: 1rem;
-  color: var(--white);
+  color: black;
 }
 .input-text {
   padding: 1rem;
@@ -113,7 +165,7 @@ a {
 }
 
 .form-user {
-  margin-top: 100px;
+  margin-top: 2rem;
   height: 50vh;
   min-height: 80px;
   display: flex;
@@ -126,7 +178,7 @@ a {
   max-width: 500px;
   width: 95%;
   background-color: var(--white);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 
 .form-user {
@@ -134,12 +186,24 @@ a {
   margin-bottom: 2rem;
   align-items: center;
 }
+
+.field-form {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  margin-bottom: 1rem;
+}
+
+.field-form-btn {
+  display: flex;
+}
 .field-form:last-of-type {
   margin: 0;
 }
 .field-form label {
   flex: 0 0 100px;
+  align-self: center;
   font-family: var(--textFont);
+  color: #000000;
 }
 .field-form input[type="password"],
 .field-form input[type="email"],
@@ -147,6 +211,13 @@ a {
   border: 1px solid #e1e1e1;
   padding: 1rem;
   flex: 1;
+  background-color: hsla(218, 21%, 80%);
+}
+
+.field-form input:focus {
+  outline: none;
+  border-color: hsla(218, 21%, 60%);
+  background: hsla(218, 21%, 70%);
 }
 
 .link-account {
@@ -157,5 +228,18 @@ a {
 
 .error {
   color: red;
-  margin-bottom: 2rem;
+  margin: 1rem 0rem 2rem 0rem;
+  align-self: flex-end;
+}
+
+/* CONTENT LAYOUT*/
+.container-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.checkbox-text {
+  color: #000000;
+  margin-left: 1rem;
 }
