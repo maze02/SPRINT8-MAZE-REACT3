@@ -45,14 +45,15 @@ const StarshipExtensiveProvider = (props) => {
     );
   };
 
-  const handleClickShip = (e) => {
-    console.log("id of ship I licked on " + e.target.id);
-    setSingleShip(e.target.id);
+  const handleClickShip = (x) => {
+    //using communicating child to parent, from card to starshipbrief
+    console.log("id of ship I clicked on " + x);
+    setSingleShip(x);
     console.log("id in state" + singleShip);
     console.log("1. singleStarshipInfo loading");
     setloadShip(true);
     console.log("LOAD SHIP SET TRUE");
-    history.push(`/starship-detail/:${e.target.id}`);
+    history.push(`/starship-detail/${x}`);
   };
 
   useEffect(() => {

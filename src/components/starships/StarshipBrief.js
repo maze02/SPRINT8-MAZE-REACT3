@@ -1,8 +1,8 @@
 import CardItem from "../UI/CardItem";
 const StarshipBrief = ({ id, name, model, handleClickShip }) => {
   return (
-    <CardItem id={id} onClick={handleClickShip}>
-      <div id={id} onClick={handleClickShip}>
+    <CardItem id={id} handleClickShip={handleClickShip}>
+      <div>
         <h4>{name.toUpperCase()}</h4>
         <h5>{model}</h5>
       </div>
