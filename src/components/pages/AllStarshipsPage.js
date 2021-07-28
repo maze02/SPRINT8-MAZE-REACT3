@@ -1,5 +1,5 @@
 //https://www.youtube.com/watch?v=GVDiw3lAyp0
-import { useContext, useState, useRef, useCallback } from "react";
+import { useContext } from "react";
 
 import { StarshipsContext } from "../context/StarshipsContext";
 import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
@@ -11,15 +11,17 @@ const AllStarshipsPage = () => {
   const ctx = useContext(StarshipsContext);
   const shipCtx = useContext(StarshipExtensiveCtx);
   const starshipsArr = ctx.starships;
-  //const lastStarshipRef = useRef();
 
   return (
     <div className="container-wrapper">
       <h1>Here's a list of starships</h1>
-      <StarshipList
-        starshipsArr={starshipsArr}
-        handleClickShip={shipCtx.handleClickShip}
-      />
+      {ctx.pageLoad && <p>Loading starships...</p>}
+      {!ctx.pageLoad && starshipsArr.length !== 0 && (
+        <StarshipList
+          starshipsArr={starshipsArr}
+          handleClickShip={shipCtx.handleClickShip}
+        />
+      )}
       <div>
         {ctx.currentPage === 1 ? null : (
           <button

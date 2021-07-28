@@ -59,7 +59,13 @@ const StarshipExtensiveProvider = (props) => {
   useEffect(() => {
     console.log("LOAD SHIP USE EFFECT ACTIVATED");
     console.log("context is a type:" + typeof { ctx });
-    getSingleShip();
+    if (loadShip) {
+      getSingleShip();
+    } else {
+      console.log(
+        "can't call api on a ship when we don't know what ship it is yet mate"
+      );
+    }
   }, [loadShip]);
 
   //Call each of Pilot Apis and add info into an arr for child to map through

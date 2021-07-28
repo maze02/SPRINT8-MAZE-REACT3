@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { Fragment, useContext } from "react";
 //import { useParams } from "react-router-dom";
 import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 
@@ -16,19 +16,24 @@ const SingleStarshipExtensive = () => {
   return (
     <div>
       <h2>Here there'll be an image</h2>
-      <h1>{ctx.singleShip.name}</h1>
-      <ul>
-        <li>Model:{ctx.singleShip.model}</li>
-        <li>Cost in credits:{ctx.singleShip.cost_in_credits}</li>
-        <li>Manufacturer:{ctx.singleShip.manufacturer}</li>
-        <li>Length:{ctx.singleShip["length"]}</li>
-        <li>Speed:{ctx.singleShip.max_atmosphering_speed}</li>
-        <li>Hyperdrive Rating:{ctx.singleShip.hyperdrive_rating}</li>
-        <li>MGLT:{ctx.singleShip.MGLT}</li>
-        <li>Cargo Capacity:{ctx.singleShip.cargo_capacity}</li>
-        <li>Crew:{ctx.singleShip.crew}</li>
-        <li>Passengers:{ctx.singleShip.passengers}</li>
-      </ul>
+      {ctx.loadShip && <p>Starship Loading....</p>}
+      {!ctx.loadShip && (
+        <Fragment>
+          <h1>{ctx.singleShip.name}</h1>
+          <ul>
+            <li>Model:{ctx.singleShip.model}</li>
+            <li>Cost in credits:{ctx.singleShip.cost_in_credits}</li>
+            <li>Manufacturer:{ctx.singleShip.manufacturer}</li>
+            <li>Length:{ctx.singleShip["length"]}</li>
+            <li>Speed:{ctx.singleShip.max_atmosphering_speed}</li>
+            <li>Hyperdrive Rating:{ctx.singleShip.hyperdrive_rating}</li>
+            <li>MGLT:{ctx.singleShip.MGLT}</li>
+            <li>Cargo Capacity:{ctx.singleShip.cargo_capacity}</li>
+            <li>Crew:{ctx.singleShip.crew}</li>
+            <li>Passengers:{ctx.singleShip.passengers}</li>
+          </ul>
+        </Fragment>
+      )}
     </div>
   );
 };

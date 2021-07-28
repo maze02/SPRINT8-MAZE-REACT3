@@ -4,10 +4,11 @@ import axios from "axios";
 
 const StarshipsProvider = (props) => {
   const history = useHistory();
-  const [starships, setStarships] = useState(true);
+  const [starships, setStarships] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [pageLoad, setPageLoad] = useState(false);
 
   const addIdToArr = (arr) => {
     for (let i = 0; i < arr.length; i++) {
@@ -23,36 +24,32 @@ const StarshipsProvider = (props) => {
   //FIRST CALL UPON LOAD
   useEffect(() => {
     let initialStarships = localStorage.getItem("starshipsArr");
-    if (initialStarships) {
-      let arr = JSON.parse(initialStarships);
-      if ((arr[0].apiPage = 1)) {
+    if (!initialStarships) {
+      initialStarships = [];
+    }
+    if (initialStarships && initialStarships.length) {
+      let arr = [...JSON.parse(initialStarships)];
+      console.log(arr);
+      if (arr[0].apiPage === 1) {
         setStarships(arr);
       }
       return;
     } else {
       const getStarships = async () => {
+        setPageLoad(true);
         const shipsPerPage = 10;
-        const url = `https://swapi.dev/api/starships/?page=${1}`;
+        const url = `https://swapi.dev/api/starships/?page=1`;
         const result = await axios.get(url);
-        console.log("result.data.results =" + result.data.results);
-        console.log(
-          "result.data.results[0].url =" + result.data.results[0].url
-        );
-        console.log(
-          "result.data.results[0].url.substringphrase =" +
-            result.data.results[0].url.substring(
-              32,
-              result.data.results[0].url.length - 1
-            )
-        );
-        //console.log("printing from starship ctx, starships:" + result);
-        const resultWithId = addIdToArr(result.data.results);
 
+        //console.log("printing from starship ctx, starships:" + result);
+        const resultWithId = await addIdToArr(result.data.results);
         setStarships(resultWithId);
         localStorage.setItem("starshipsArr", JSON.stringify(resultWithId));
+
         const calculateTotalPages = Math.ceil(result.data.count / shipsPerPage);
         console.log("total: " + result.data.count);
         setTotalPages(calculateTotalPages);
+        setPageLoad(false);
       };
       getStarships();
     }
@@ -61,6 +58,7 @@ const StarshipsProvider = (props) => {
   //HANDLE SECOND CALL TO API
   useEffect(() => {
     const getStarships = async () => {
+      setPageLoad(true);
       const shipsPerPage = 10;
       const url = `https://swapi.dev/api/starships/?page=${currentPage}`;
       const result = await axios.get(url);
@@ -70,9 +68,12 @@ const StarshipsProvider = (props) => {
       localStorage.setItem("starshipsArr", JSON.stringify(resultWithId));
       const calculateTotalPages = Math.ceil(result.data.count / shipsPerPage);
       setTotalPages(calculateTotalPages);
+      setPageLoad(false);
     };
+
     getStarships();
   }, [currentPage]);
+
   //HANDLE PREVIOUS PAGE
   const previousPage = () => {
     const newCurrentPage = currentPage - 1;
@@ -96,6 +97,7 @@ const StarshipsProvider = (props) => {
     <StarshipsContext.Provider
       value={{
         starships: starships,
+        pageLoad: pageLoad,
         setStarships: setStarships,
         currentPage: currentPage,
         setCurrentPage: setCurrentPage,
@@ -121,4 +123,19 @@ FORGETTING TO ADD A '.' between context and provider-> FOR GOODNESS SAKE!!!!
 //forgetting to extra the results as an array from the api results caused function error
 
 https://www.pluralsight.com/guides/typeerror-handling-in-react.js-for-map-function
+*/
+
+/*
+console.log("result.data.results =" + result.data.results);
+        console.log(
+          "result.data.results[0].url =" + result.data.results[0].url
+        );
+        console.log(
+          "result.data.results[0].url.substringphrase =" +
+            result.data.results[0].url.substring(
+              32,
+              result.data.results[0].url.length - 1
+            )
+        );
+
 */

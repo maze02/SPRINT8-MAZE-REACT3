@@ -10,7 +10,8 @@ const AllActorsPage = () => {
   return (
     <div className="container-wrapper">
       <h1>Here's a list of actors</h1>
-      <ActorsList actorsArr={actorsArr} />
+      {!actorsArr && <p>Loading actors</p>}
+      {actorsArr.length !== 0 && <ActorsList actorsArr={actorsArr} />}
       <div>
         {ctx.currentAPage === 1 ? null : (
           <button
