@@ -95,35 +95,40 @@ const StarshipExtensiveProvider = (props) => {
       initialShip = JSON.parse(initialShip);
       setSingleShip(initialShip);
     }
-  }, []);
+  }, [])
   */
+
+  const fetchPilots = async () => {
+    setloadPilots(true);
+    console.log("LOAD PILOTS SET TRUE");
+    let pilotInfoNew = [];
+    if (pilotUrls.length > 0) {
+      for (let i = 0; i < pilotUrls.length; i++) {
+        let pilotObj = await axios.get(pilotUrls[i]);
+        console.log("printing" + i + " " + pilotObj.data.name);
+        pilotInfoNew.push(pilotObj.data);
+      }
+    }
+    await localStorage.setItem("pilots", JSON.stringify(pilotInfo));
+    await setPilotInfo(pilotInfoNew);
+    await setloadPilots(false);
+    await console.log("LOADPILOTS SET FALSE");
+    await console.log(
+      "now the pilots are loaded and loadPilots is" +
+        loadPilots +
+        "and pilot Info length is " +
+        pilotInfo.length
+    );
+  };
   //Call each of Pilot Apis and add info into an arr for child to map through
   useEffect(() => {
     if (singleShip && pilotUrls.length !== 0) {
       console.log("PILOT USE EFFECT ACTIVATED");
-      setloadPilots(true);
-      console.log("LOAD PILOTS SET TRUE");
-      let pilotInfoNew = [];
-      if (pilotUrls.length > 0) {
-        for (let i = 0; i < pilotUrls.length; i++) {
-          const getPilot = async () => {
-            const pilotObj = await axios.get(pilotUrls[i]);
-            console.log("printing" + i + " " + pilotObj.data.name);
-            pilotInfoNew.push(pilotObj.data);
-          };
-          getPilot();
-        }
-        localStorage.setItem("pilots", JSON.stringify(pilotInfo));
-        setPilotInfo(pilotInfoNew);
-        setloadPilots(false);
-        console.log("LOADPILOTS SET FALSE");
-        console.log(
-          "now the pilots are loaded and loadPilots is" +
-            loadPilots +
-            "and pilot Info length is " +
-            pilotInfo.length
-        );
-      }
+      fetchPilots();
+    } else {
+      console.log(
+        "can't fetch pilots when there is no url of pilots to fetch from my friend"
+      );
     }
   }, [singleShip, pilotUrls]);
   /*
@@ -139,39 +144,36 @@ const StarshipExtensiveProvider = (props) => {
         throw new Error();
     }
   }
-*/
+*/ const fetchFilms = async () => {
+    setloadFilms(true);
+    console.log("LOAD FILMS SET TRUE");
+    let filmInfoNew = [];
+    if (filmUrls.length > 0) {
+      for (let i = 0; i < filmUrls.length; i++) {
+        let filmObj = await axios.get(filmUrls[i]);
+        console.log("printing" + i + " " + filmObj.data.name);
+        filmInfoNew.push(filmObj.data);
+      }
+    }
+    await localStorage.setItem("films", JSON.stringify(filmInfo));
+    await setFilmInfo(filmInfoNew);
+    await setloadFilms(false);
+    await console.log("LOADFILMS SET FALSE");
+    await console.log(
+      "now the films are loaded and loadFilms is" +
+        loadFilms +
+        "and pilot Info length is " +
+        filmInfo.length
+    );
+  };
+
   useEffect(() => {
-    // let filmUrlsArr = localStorage.getItem("FilmUrls");
     if (singleShip && filmUrls.length !== 0) {
       console.log("FILM USE EFFECT ACTIVATED");
-      setloadFilms(true);
-      console.log("LOAD FILMS SET TRUE");
-      //dispatch({type: "FETCH_INIT"})
-      //let filmUrlStr = localStorage.getItem("FilmUrls");
-      //let filmUrlArr = JSON.stringify(filmUrlStr);
-
-      let filmInfoNew = [];
-      for (let i = 0; i < filmUrls.length; i++) {
-        const getFilm = async () => {
-          const filmObj = await axios.get(filmUrls[i]);
-          console.log("printing" + i + " " + filmObj.data.title);
-          filmInfoNew.push(filmObj.data);
-        };
-        getFilm();
-      }
-      localStorage.setItem("films", JSON.stringify(filmInfo));
-      console.log("SETTING FILMS TO STATE");
-      setFilmInfo(filmInfoNew);
-
-      //dispatch({type: "FETCH_SUCCESS, payload: filmInfoNew"})
-
-      setloadFilms(false);
-      console.log("LOAD FILMS SET FALSE");
+      fetchFilms();
+    } else {
       console.log(
-        "now the films are loaded and loadFilms is" +
-          loadFilms +
-          "and film Info length is " +
-          filmInfo.length
+        "can't fetch films when there is no url of films to fetch from meine freund"
       );
     }
   }, [singleShip, filmUrls]);
