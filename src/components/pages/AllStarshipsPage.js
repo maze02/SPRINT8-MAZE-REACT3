@@ -1,6 +1,5 @@
 //https://www.youtube.com/watch?v=GVDiw3lAyp0
 import { useContext } from "react";
-
 import { StarshipsContext } from "../context/StarshipsContext";
 import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 import StarshipList from "../starships/StarshipList";

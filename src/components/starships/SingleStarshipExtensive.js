@@ -17,7 +17,7 @@ const SingleStarshipExtensive = () => {
     <div>
       <h2>Here there'll be an image</h2>
       {ctx.loadShip && <p>Starship Loading....</p>}
-      {!ctx.loadShip && (
+      {!ctx.loadShip && ctx.singleShip && (
         <Fragment>
           <h1>{ctx.singleShip.name}</h1>
           <ul>
