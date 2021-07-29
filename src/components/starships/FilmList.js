@@ -1,29 +1,40 @@
-import { useContext } from "react";
-import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 import FilmItem from "./FilmItem";
+import classes from "./FilmList.module.css";
 
-const FilmList = ({ filmListArr, loadFilms }) => {
+const FilmList = ({ filmListArr, loadFilms, filmImgInfo }) => {
   if (loadFilms) {
     return <p>Films loading ...</p>;
   } else {
-    let filmListLocal = localStorage.getItem("films");
-    if (filmListLocal) {
-      filmListArr = JSON.parse(filmListLocal);
-    }
-    //filmListArr = JSON.parse(filmListLocal);
-    if (filmListArr.length === 0) {
-      return <p>No record of this starship appearing in a film</p>;
-    } else {
-      let filmListContent = filmListArr.map((e) => {
+    if (!loadFilms) {
+      let filmListLocal = localStorage.getItem("films");
+      let filmListImgs = localStorage.getItem("filmImgs");
+      if (filmListLocal) {
+        filmListArr = JSON.parse(filmListLocal);
+        let filmImgArr = JSON.parse(filmListImgs);
+        for (let i = 0; i < filmListArr.length; i++) {
+          if (filmListArr[i].img === undefined) {
+            filmListArr[i].img = filmImgArr[i];
+          }
+        }
+      }
+      //filmListArr = JSON.parse(filmListLocal);
+      if (filmListArr.length === 0) {
+        return <p>No record of this starship appearing in a film</p>;
+      } else {
+        let filmListContent = filmListArr.map((e) => {
+          return (
+            <FilmItem
+              key={e.title}
+              title={e.title}
+              filmImg={e.img}
+              release_date={e.release_date}
+            />
+          );
+        });
         return (
-          <FilmItem
-            key={e.title}
-            title={e.title}
-            release_date={e.release_date}
-          />
+          <div className={classes.filmListWrapper}>{[...filmListContent]}</div>
         );
-      });
-      return <div>{[...filmListContent]}</div>;
+      }
     }
   }
 };
@@ -38,4 +49,7 @@ export default FilmList;
             0,
             4
           )}`
+
+
+          <div>{[...filmListContent]}</div>
 */

@@ -1,0 +1,5 @@
+.filmListWrapper {
+  display: flex;
+  flex-direction: horizontal;
+  justify-content: center;
+}

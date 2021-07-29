@@ -1,0 +1,6 @@
+.pilotListWrapper {
+  display: flex;
+  flex-direction: horizontal;
+  justify-content: center;
+  margin-bottom: 2rem;
+}

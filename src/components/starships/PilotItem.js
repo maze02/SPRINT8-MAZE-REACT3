@@ -1,9 +1,19 @@
-const PilotItem = ({ pilotName, height, planet, key }) => {
+import { Fragment } from "react";
+import classes from "./PilotItem.module.css";
+const PilotItem = ({ pilotName, height, planet, pilotImg, key }) => {
   return (
-    <ul>
-      <li>{pilotName}</li>
-      <li>{height}</li>
-    </ul>
+    <div className={classes.cardPilot}>
+      <img
+        className={classes.imgPilot}
+        type="url"
+        src={pilotImg}
+        alt={pilotName}
+      />
+      <ul>
+        <li>{pilotName}</li>
+        <li>{height}</li>
+      </ul>
+    </div>
   );
 };
 

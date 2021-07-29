@@ -1,0 +1,22 @@
+.cardPilot {
+  padding: 2rem 1rem 2rem 1rem;
+  border-radius: 2px;
+  background-color: #222222;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
+  text-align: left;
+  width: 15rem;
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0rem 2rem 2rem 2rem;
+}
+
+.imgPilot {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
