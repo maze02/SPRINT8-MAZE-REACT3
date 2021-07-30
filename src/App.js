@@ -12,7 +12,7 @@ const StyledDiv = styled.div`
 */
 //CONTEXT IMPORTS
 import AuthContextMyProvider from "./components/context/auth/auth-context.js";
-import ActorsProvider from "./components/context/actors-context.js";
+import ActorsProvider from "./components/context/ActorsContext.js";
 import StarshipsProvider from "./components/context/StarshipsContext";
 import StarshipExtensiveProvider from "./components/context/StarshipsExtensiveCtx.js";
 

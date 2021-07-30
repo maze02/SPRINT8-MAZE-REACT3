@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { ActorsContext } from "../context/actors-context";
+import { ActorsContext } from "../context/ActorsContext";
 import ActorsList from "../actors/ActorsList";
 
 const AllActorsPage = () => {
