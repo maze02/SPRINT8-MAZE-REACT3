@@ -1,0 +1,11 @@
+.starshipContainer {
+  display: flex;
+  flex-direction: horizontal;
+  margin-bottom: 2rem;
+}
+
+.starshipInfo {
+  margin-left: 5rem;
+  width: 20rem;
+  line-height: 1.6;
+}

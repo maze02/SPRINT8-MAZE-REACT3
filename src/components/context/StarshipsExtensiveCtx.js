@@ -12,6 +12,7 @@ import { StarshipsContext } from "./StarshipsContext";
 
 const StarshipExtensiveProvider = (props) => {
   const [singleShip, setSingleShip] = useState();
+  const [shipId, setShipId] = useState("");
   const [pilotUrls, setPilotUrls] = useState([]);
   const [pilotInfo, setPilotInfo] = useState([]);
   const [filmUrls, setFilmUrls] = useState([]);
@@ -21,9 +22,12 @@ const StarshipExtensiveProvider = (props) => {
   const [loadFilms, setloadFilms] = useState(false);
   const [loadPilotImgs, setloadPilotImgs] = useState(true);
   const [loadFilmImgs, setloadFilmImgs] = useState(true);
+  const [loadShipImg, setloadShipImg] = useState(true);
 
   const [pilotImgInfo, setPilotImgInfo] = useState([]);
   const [filmImgInfo, setFilmImgInfo] = useState([]);
+
+  const [shipImgInfo, setShipImgInfo] = useState("");
   const ctx = useContext(StarshipsContext);
   const history = useHistory();
   //const location = useLocation();
@@ -69,10 +73,12 @@ const StarshipExtensiveProvider = (props) => {
     setFilmInfo([]);
     setPilotImgInfo([]);
     setFilmImgInfo([]);
+    setShipId("");
 
     //
     console.log("id of ship I clicked on " + x);
     setSingleShip(x);
+    setShipId(x);
     localStorage.setItem("singleShipId", JSON.stringify(x));
     console.log("id in state" + singleShip);
     console.log("1. singleStarshipInfo loading");
@@ -163,6 +169,28 @@ const StarshipExtensiveProvider = (props) => {
       setloadFilmImgs(false);
     }
   };
+
+  const fetchShipImg = () => {
+    setloadShipImg(true);
+    console.log("SHIP IMG SET 2 TRUE");
+    let shipImgUrl = "";
+    shipImgUrl = `https://starwars-visualguide.com/assets/img/starships/${shipId}.jpg`;
+    localStorage.setItem("starshipImg", shipImgInfo);
+    setShipImgInfo(shipImgUrl);
+    setloadShipImg(false);
+  };
+
+  useEffect(() => {
+    if (singleShip && shipId !== 0) {
+      console.log("FILM IMG USE EFFECT ACTIVATED");
+      fetchShipImg();
+    } else {
+      console.log(
+        "can't fetch film imgs when there is no url of film, I ain't no wizard Yoko"
+      );
+    }
+  }, [singleShip, shipId]);
+
   useEffect(() => {
     if (singleShip && filmUrls.length !== 0) {
       console.log("FILM IMG USE EFFECT ACTIVATED");
@@ -247,6 +275,15 @@ const StarshipExtensiveProvider = (props) => {
     }
   }, [pilotInfo]);
 
+  /*
+  useEffect(() => {
+    if (shipImgInfo) {
+      localStorage.setItem("starshipImg", shipImgInfo);
+    } else {
+      console.log("nothing in starshipImg info so nothing to set");
+    }
+  }, [shipImgInfo]);
+*/
   useEffect(() => {
     if (filmImgInfo) {
       localStorage.setItem("filmImgs", JSON.stringify(filmImgInfo));
@@ -262,6 +299,7 @@ const StarshipExtensiveProvider = (props) => {
       console.log("nothing in pilotImg info so nothing to set");
     }
   }, [pilotImgInfo]);
+
   return (
     <StarshipExtensiveCtx.Provider
       value={{
@@ -272,10 +310,12 @@ const StarshipExtensiveProvider = (props) => {
         loadPilots: loadPilots,
         loadFilms: loadFilms,
         loadShip: loadShip,
+        loadShipImg: loadShipImg,
         pilotUrls: pilotUrls,
         filmUrls: filmUrls,
         pilotImgInfo: pilotImgInfo,
         filmImgInfo: filmImgInfo,
+        shipImgInfo: shipImgInfo,
       }}
     >
       {props.children}

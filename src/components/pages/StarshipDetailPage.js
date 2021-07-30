@@ -9,7 +9,6 @@ const StarshipDetail = () => {
 
   return (
     <div>
-      <h1>Here's the detail of one starship</h1>
       <SingleStarshipExtensive />
       <h2>Pilots</h2>
       <PilotList

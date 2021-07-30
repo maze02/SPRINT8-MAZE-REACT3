@@ -1,37 +1,51 @@
-import { Fragment, useContext } from "react";
-//import { useParams } from "react-router-dom";
+import { Fragment, useContext, useState, useEffect } from "react";
+import classes from "./SingleStarshipExtensive.module.css";
 import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
-
+/*starwars official site:https://www.starwars.com/databank/droid-gunship*/
 const SingleStarshipExtensive = () => {
   const ctx = useContext(StarshipExtensiveCtx);
-
-  //const params = useParams();
-  //const id = Number(params.starshipId.substring(1));
-  //prints :1 so remove ':' with substring;
-  // console.log(id);
-  //console.log(typeof id);
-  // console.log("starships: " + starships[0].name);
-  //console.log(typeof starships[0]);
-
+  const [error, setError] = useState(false);
+  let shipUrl = ctx.shipImgInfo;
+  useEffect(() => {
+    shipUrl = "https://starwars-visualguide.com/assets/img/species/4.jpg";
+  }, [error]);
   return (
     <div>
-      <h2>Here there'll be an image</h2>
       {ctx.loadShip && <p>Starship Loading....</p>}
       {!ctx.loadShip && ctx.singleShip && (
         <Fragment>
           <h1>{ctx.singleShip.name}</h1>
-          <ul>
-            <li>Model:{ctx.singleShip.model}</li>
-            <li>Cost in credits:{ctx.singleShip.cost_in_credits}</li>
-            <li>Manufacturer:{ctx.singleShip.manufacturer}</li>
-            <li>Length:{ctx.singleShip["length"]}</li>
-            <li>Speed:{ctx.singleShip.max_atmosphering_speed}</li>
-            <li>Hyperdrive Rating:{ctx.singleShip.hyperdrive_rating}</li>
-            <li>MGLT:{ctx.singleShip.MGLT}</li>
-            <li>Cargo Capacity:{ctx.singleShip.cargo_capacity}</li>
-            <li>Crew:{ctx.singleShip.crew}</li>
-            <li>Passengers:{ctx.singleShip.passengers}</li>
-          </ul>
+
+          <div className={classes.starshipContainer}>
+            {!error && (
+              <img
+                type="url"
+                alt={"starship" + ctx.singleShip.name}
+                src={shipUrl}
+                onError={() => {
+                  setError(true);
+                }}
+              ></img>
+            )}
+            {error && (
+              <p>
+                Image of {ctx.singleShip.name} starship is not available at this
+                moment
+              </p>
+            )}
+            <ul className={classes.starshipInfo}>
+              <li>Model:{ctx.singleShip.model}</li>
+              <li>Cost in credits:{ctx.singleShip.cost_in_credits}</li>
+              <li>Manufacturer:{ctx.singleShip.manufacturer}</li>
+              <li>Length:{ctx.singleShip["length"]}</li>
+              <li>Speed:{ctx.singleShip.max_atmosphering_speed}</li>
+              <li>Hyperdrive Rating:{ctx.singleShip.hyperdrive_rating}</li>
+              <li>MGLT:{ctx.singleShip.MGLT}</li>
+              <li>Cargo Capacity:{ctx.singleShip.cargo_capacity}</li>
+              <li>Crew:{ctx.singleShip.crew}</li>
+              <li>Passengers:{ctx.singleShip.passengers}</li>
+            </ul>
+          </div>
         </Fragment>
       )}
     </div>
@@ -75,3 +89,13 @@ export default SingleStarshipExtensive;
 
 export default SingleStarshipExtensive;
 */
+
+/*
+  //const params = useParams();
+  //const id = Number(params.starshipId.substring(1));
+  //prints :1 so remove ':' with substring;
+  // console.log(id);
+  //console.log(typeof id);
+  // console.log("starships: " + starships[0].name);
+  //console.log(typeof starships[0]);
+  */
