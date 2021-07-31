@@ -2,8 +2,6 @@ import { createContext, useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 //import Showstate from "../../login/Showstate";
 
-export const AuthContext = createContext();
-
 const AuthContextMyProvider = (props) => {
   const history = useHistory(); //history obj.
   const [user, setUser] = useState({
@@ -165,7 +163,7 @@ const AuthContextMyProvider = (props) => {
 };
 
 export default AuthContextMyProvider;
-
+export const AuthContext = createContext();
 // setUserList: setUserList(),  => THIS CAUSED AN INFINITE LOOP _ ARRRRGHHHHHH -> DO NOT CALL FUNC IN PROPS
 
 // //error: let initialUserList = localStorage.getItem("registeredUsers");

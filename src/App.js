@@ -1,17 +1,8 @@
 import { Route, Switch } from "react-router";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 
-/*tutorial
-import styled from "styled-components";
-const StyledDiv = styled.div`
-  width: 90%;
-  max-width: 40rem;
-  border: 1px solid #ccc;
-  padding: 1rem;
-`;
-*/
 //CONTEXT IMPORTS
-import AuthContextMyProvider from "./components/context/auth/auth-context.js";
+/*import AuthContextMyProvider from "./components/context/auth/auth-context.js"; */
 import CharactersProvider from "./components/context/CharactersContext.js";
 import StarshipsProvider from "./components/context/StarshipsContext";
 import StarshipExtensiveProvider from "./components/context/StarshipsExtensiveCtx.js";
@@ -29,49 +20,59 @@ import Characters from "./components/pages/AllCharactersPage";
 import StarshipDetailPage from "./components/pages/StarshipDetailPage";
 import CharacterDetailPage from "./components/pages/CharacterDetailPage";
 import AllCharactersPage from "./components/pages/AllCharactersPage";
+import GuardedRoute from "./GuardedRoute.js";
+import { AuthContext } from "./components/context/auth/auth-context";
 
 function App() {
+  const ctx = useContext(AuthContext);
+  let loginStatus = ctx.isLoggedIn.status;
+  console.log("loginStatus from app.js" + typeof loginStatus);
+  console.log("loginStatus from app.js is  " + loginStatus);
   return (
     <Fragment>
-      <AuthContextMyProvider>
-        <StarshipsProvider>
-          <StarshipExtensiveProvider>
-            <CharactersProvider>
-              <CharacterDetailProvider>
-                <Layout>
-                  <Switch>
-                    <Route path="/" exact>
-                      <Welcome />
-                    </Route>
-                    <Route path="/home">
-                      <Home />
-                    </Route>
-                    <Route path="/login">
-                      <Login />
-                    </Route>
-                    <Route path="/registration">
-                      <Registration />
-                    </Route>
-                    <Route path="/starships">
-                      <AllStarshipsPage />
-                    </Route>
-                    <Route path="/starship-detail/:starshipId">
-                      <StarshipDetailPage />
-                    </Route>
+      <StarshipsProvider>
+        <StarshipExtensiveProvider>
+          <CharactersProvider>
+            <CharacterDetailProvider>
+              <Layout>
+                <Switch>
+                  <Route path="/" component={Welcome} exact></Route>
+                  <GuardedRoute
+                    path="/home"
+                    component={Home}
+                    auth={loginStatus}
+                  ></GuardedRoute>
 
-                    <Route path="/characters">
-                      <AllCharactersPage />
-                    </Route>
-                    <Route path="/character-detail/:charactersId">
-                      <CharacterDetailPage />
-                    </Route>
-                  </Switch>
-                </Layout>
-              </CharacterDetailProvider>
-            </CharactersProvider>
-          </StarshipExtensiveProvider>
-        </StarshipsProvider>
-      </AuthContextMyProvider>
+                  <Route path="/login" component={Login}></Route>
+                  <Route path="/registration" component={Registration}></Route>
+
+                  <GuardedRoute
+                    path="/starships"
+                    component={AllStarshipsPage}
+                    auth={loginStatus}
+                  ></GuardedRoute>
+
+                  <GuardedRoute
+                    path="/starship-detail/:starshipId"
+                    component={StarshipDetailPage}
+                    auth={loginStatus}
+                  ></GuardedRoute>
+                  <GuardedRoute
+                    path="/characters"
+                    component={AllCharactersPage}
+                    auth={loginStatus}
+                  ></GuardedRoute>
+                  <GuardedRoute
+                    path="/character-detail/:charactersId"
+                    component={CharacterDetailPage}
+                    auth={loginStatus}
+                  ></GuardedRoute>
+                </Switch>
+              </Layout>
+            </CharacterDetailProvider>
+          </CharactersProvider>
+        </StarshipExtensiveProvider>
+      </StarshipsProvider>
     </Fragment>
   );
 }
@@ -81,4 +82,21 @@ export default App;
 /*
           {!loginStatus && <Welcome />}
           {loginStatus && <Home />}
+tutorial
+import styled from "styled-components";
+const StyledDiv = styled.div`
+  width: 90%;
+  max-width: 40rem;
+  border: 1px solid #ccc;
+  padding: 1rem;
+`;
+
+               <GuardedRoute
+                      path="/home"
+                      component={Home}
+                      auth={loginStatus}
+                    ></GuardedRoute>
+
+
+                     <Route path="/home" component={Home}></Route>
 */
