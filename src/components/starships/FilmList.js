@@ -1,7 +1,7 @@
 import FilmItem from "./FilmItem";
 import classes from "./FilmList.module.css";
 
-const FilmList = ({ filmListArr, loadFilms, filmImgInfo }) => {
+const FilmList = ({ filmListArr, loadFilms, filmImgInfo, generalInfo }) => {
   if (loadFilms) {
     return <p>Films loading ...</p>;
   } else {
@@ -19,7 +19,7 @@ const FilmList = ({ filmListArr, loadFilms, filmImgInfo }) => {
       }
       //filmListArr = JSON.parse(filmListLocal);
       if (filmListArr.length === 0) {
-        return <p>No record of this starship appearing in a film</p>;
+        return <p>No record of this {generalInfo.theme} appearing in a film</p>;
       } else {
         let filmListContent = filmListArr.map((e) => {
           return (

@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-const ActorsProvider = (props) => {
+const CharactersProvider = (props) => {
   const history = useHistory();
   const [actors, setActors] = useState([]);
 
@@ -94,7 +94,7 @@ const ActorsProvider = (props) => {
   };
 
   return (
-    <ActorsContext.Provider
+    <CharactersContext.Provider
       value={{
         actors: actors,
         setActors: setActors,
@@ -108,12 +108,12 @@ const ActorsProvider = (props) => {
       }}
     >
       {props.children}
-    </ActorsContext.Provider>
+    </CharactersContext.Provider>
   );
 };
 
-export default ActorsProvider;
-export const ActorsContext = createContext();
+export default CharactersProvider;
+export const CharactersContext = createContext();
 
 //Maria's Chanel errors!!!!:
 /*

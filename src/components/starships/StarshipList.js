@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import StarshipBrief from "../starships/StarshipBrief";
 
 const StarshipList = ({ starshipsArr, handleClickShip }) => {

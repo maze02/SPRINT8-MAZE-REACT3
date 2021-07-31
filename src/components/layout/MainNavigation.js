@@ -58,8 +58,8 @@ const MainNavigation = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/actors" activeClassName={classes.active}>
-              ACTORS
+            <NavLink to="/characters" activeClassName={classes.active}>
+              CHARACTERS
             </NavLink>
           </li>
         </ul>

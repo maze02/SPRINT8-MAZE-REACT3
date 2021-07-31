@@ -1,14 +1,14 @@
 import CardItem from "../UI/CardItem";
-const ActorBrief = ({ id, name, birthyear }) => {
+const CharacterBrief = ({ id, name, birthyear, handleClickCharacter }) => {
   return (
-    <CardItem id={id}>
+    <CardItem id={id} pressed={handleClickCharacter}>
       <h4>{name.toUpperCase()}</h4>
       <h5>Date of Birth: {birthyear}</h5>
     </CardItem>
   );
 };
 
-export default ActorBrief;
+export default CharacterBrief;
 
 //onClick={handleClickShip}
 /*Maria's Dolce Gabbanna Errors

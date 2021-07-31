@@ -1,11 +1,11 @@
 import classes from "./Card.module.css";
 
-const CardItem = ({ children, id, handleClickShip }) => {
-  const clickShip = () => {
-    handleClickShip(id);
+const CardItem = ({ children, id, pressed }) => {
+  const clickItem = () => {
+    pressed(id);
   };
   return (
-    <div className={classes.card} onClick={clickShip}>
+    <div className={classes.card} onClick={clickItem}>
       {children}
     </div>
   );

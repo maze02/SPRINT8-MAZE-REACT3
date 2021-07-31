@@ -21,6 +21,7 @@ const StarshipDetail = () => {
         filmListArr={ctxE.filmInfo}
         loadFilms={ctxE.loadFilms}
         filmImgInfo={ctxE.filmImgInfo}
+        generalInfo={{ theme: "starship", name: ctxE.singleShip.name }}
       />
     </div>
   );

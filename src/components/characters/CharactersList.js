@@ -1,19 +1,19 @@
-import { Fragment } from "react";
-import ActorBrief from "../actors/ActorBrief";
+import CharacterBrief from "./CharacterBrief";
 
-const ActorsList = ({ actorsArr }) => {
+const CharactersList = ({ actorsArr, handleClickCharacter }) => {
   const list = actorsArr.map((element) => {
     return (
-      <ActorBrief
+      <CharacterBrief
         key={element.id}
         id={element.id}
         name={element.name}
         birthyear={element.birth_year}
+        handleClickCharacter={handleClickCharacter}
       />
     );
   });
   return <div>{[...list]}</div>;
 };
 
-export default ActorsList;
+export default CharactersList;
 //        handleClickActor={handleClickActor}

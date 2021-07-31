@@ -12,9 +12,10 @@ const StyledDiv = styled.div`
 */
 //CONTEXT IMPORTS
 import AuthContextMyProvider from "./components/context/auth/auth-context.js";
-import ActorsProvider from "./components/context/ActorsContext.js";
+import CharactersProvider from "./components/context/CharactersContext.js";
 import StarshipsProvider from "./components/context/StarshipsContext";
 import StarshipExtensiveProvider from "./components/context/StarshipsExtensiveCtx.js";
+import CharacterDetailProvider from "./components/context/CharactersDetailContext";
 
 //PAGE & COMPONENTS IMPORTS
 import Layout from "./components/layout/Layout";
@@ -24,10 +25,10 @@ import Login from "./components/login/LoginForm";
 import Welcome from "./components/pages/Welcome";
 import Home from "./components/pages/Home";
 import AllStarshipsPage from "./components/pages/AllStarshipsPage";
-import Actors from "./components/pages/AllActorsPage";
+import Characters from "./components/pages/AllCharactersPage";
 import StarshipDetailPage from "./components/pages/StarshipDetailPage";
-import ActorDetailPage from "./components/pages/ActorDetailPage";
-import AllActorsPage from "./components/pages/AllActorsPage";
+import CharacterDetailPage from "./components/pages/CharacterDetailPage";
+import AllCharactersPage from "./components/pages/AllCharactersPage";
 
 function App() {
   return (
@@ -35,37 +36,39 @@ function App() {
       <AuthContextMyProvider>
         <StarshipsProvider>
           <StarshipExtensiveProvider>
-            <ActorsProvider>
-              <Layout>
-                <Switch>
-                  <Route path="/" exact>
-                    <Welcome />
-                  </Route>
-                  <Route path="/home">
-                    <Home />
-                  </Route>
-                  <Route path="/login">
-                    <Login />
-                  </Route>
-                  <Route path="/registration">
-                    <Registration />
-                  </Route>
-                  <Route path="/starships">
-                    <AllStarshipsPage />
-                  </Route>
-                  <Route path="/starship-detail/:starshipId">
-                    <StarshipDetailPage />
-                  </Route>
+            <CharactersProvider>
+              <CharacterDetailProvider>
+                <Layout>
+                  <Switch>
+                    <Route path="/" exact>
+                      <Welcome />
+                    </Route>
+                    <Route path="/home">
+                      <Home />
+                    </Route>
+                    <Route path="/login">
+                      <Login />
+                    </Route>
+                    <Route path="/registration">
+                      <Registration />
+                    </Route>
+                    <Route path="/starships">
+                      <AllStarshipsPage />
+                    </Route>
+                    <Route path="/starship-detail/:starshipId">
+                      <StarshipDetailPage />
+                    </Route>
 
-                  <Route path="/actors">
-                    <AllActorsPage />
-                  </Route>
-                  <Route path="/actors-detail/:actorsId">
-                    <ActorDetailPage />
-                  </Route>
-                </Switch>
-              </Layout>
-            </ActorsProvider>
+                    <Route path="/characters">
+                      <AllCharactersPage />
+                    </Route>
+                    <Route path="/character-detail/:charactersId">
+                      <CharacterDetailPage />
+                    </Route>
+                  </Switch>
+                </Layout>
+              </CharacterDetailProvider>
+            </CharactersProvider>
           </StarshipExtensiveProvider>
         </StarshipsProvider>
       </AuthContextMyProvider>

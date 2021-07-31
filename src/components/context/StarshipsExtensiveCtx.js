@@ -1,12 +1,6 @@
 //https://blog.logrocket.com/guide-to-react-usereducer-hook/
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useReducer,
-} from "react";
-import { useHistory, useParams, useLocation } from "react-router-dom";
+import { createContext, useContext, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { StarshipsContext } from "./StarshipsContext";
 
@@ -23,10 +17,8 @@ const StarshipExtensiveProvider = (props) => {
   const [loadPilotImgs, setloadPilotImgs] = useState(true);
   const [loadFilmImgs, setloadFilmImgs] = useState(true);
   const [loadShipImg, setloadShipImg] = useState(true);
-
   const [pilotImgInfo, setPilotImgInfo] = useState([]);
   const [filmImgInfo, setFilmImgInfo] = useState([]);
-
   const [shipImgInfo, setShipImgInfo] = useState("");
   const ctx = useContext(StarshipsContext);
   const history = useHistory();
@@ -162,7 +154,6 @@ const StarshipExtensiveProvider = (props) => {
       for (let i = 0; i < filmUrls.length; i++) {
         let filmId = filmUrls[i].substring(28, filmUrls[i].length - 1);
         let filmImgUrl = `https://starwars-visualguide.com/assets/img/films/${filmId}.jpg`;
-
         filmImgsNew.push(filmImgUrl);
       }
       setFilmImgInfo(filmImgsNew);
@@ -213,20 +204,7 @@ const StarshipExtensiveProvider = (props) => {
     }
   }, [singleShip, pilotUrls]);
 
-  /*
-  const filmFetchReducer = (state, action) => {
-    switch (action.type){
-      case "FETCH_INIT":
-        return {...state,
-        filmLoad: true};
-      case "FETCH_SUCCESS":
-         return {...state,
-        filmLoad: false};
-      default:
-        throw new Error();
-    }
-  }
-*/ const fetchFilms = async () => {
+  const fetchFilms = async () => {
     setloadFilms(true);
     console.log("LOAD FILMS SET TRUE");
     let filmInfoNew = [];

@@ -1,17 +1,24 @@
 import { useContext } from "react";
 
-import { ActorsContext } from "../context/ActorsContext";
-import ActorsList from "../actors/ActorsList";
+import { CharactersContext } from "../context/CharactersContext";
+import { CharacterDetailCtx } from "../context/CharactersDetailContext";
+import CharactersList from "../characters/CharactersList";
 
-const AllActorsPage = () => {
-  const ctx = useContext(ActorsContext);
+const AllCharactersPage = () => {
+  const ctx = useContext(CharactersContext);
   const actorsArr = ctx.actors;
+  const cCtx = useContext(CharacterDetailCtx);
 
   return (
     <div className="container-wrapper">
-      <h1>Here's a list of actors</h1>
+      <h1>Click on a character to find more details</h1>
       {!actorsArr && <p>Loading actors</p>}
-      {actorsArr.length !== 0 && <ActorsList actorsArr={actorsArr} />}
+      {actorsArr.length !== 0 && (
+        <CharactersList
+          actorsArr={actorsArr}
+          handleClickCharacter={cCtx.handleClickCharacter}
+        />
+      )}
       <div>
         {ctx.currentAPage === 1 ? null : (
           <button
@@ -38,4 +45,4 @@ const AllActorsPage = () => {
 
 //        handleClickShip={actorsCtx.handleClickActor}
 
-export default AllActorsPage;
+export default AllCharactersPage;

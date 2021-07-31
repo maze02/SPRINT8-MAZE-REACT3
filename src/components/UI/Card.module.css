@@ -10,4 +10,5 @@
 
 .card:hover {
   background-color: #333333;
+  cursor: pointer;
 }

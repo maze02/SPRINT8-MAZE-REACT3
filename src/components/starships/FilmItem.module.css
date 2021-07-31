@@ -1,21 +1,35 @@
 .cardFilm {
-  padding: 1rem 0rem 1rem 0rem;
   border-radius: 2px;
-  background-color: #222222;
+  background-color: #282727;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
   text-align: left;
   width: 20rem;
   height: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 0rem 2rem 2rem 2rem;
+  display: grid;
+  grid-template-rows: 4fr 1fr;
+  margin: 0rem 1.3rem 2rem 1.3rem;
+  border-radius: 0.7rem;
 }
 
 .imgFilm {
+  width: 20rem;
+  height: auto;
+  border-radius: 0.7rem 0.7rem 0rem 0rem;
+  border-bottom: 0.3rem solid #3273c5;
+  object-fit: cover;
+  margin-bottom: 2rem;
+}
+
+.info {
+  padding: 0rem 2rem 0rem 2rem;
+  color: #dadada;
+  line-height: 2rem;
+}
+/*
+border-radius: 50%;
   width: 19rem;
   height: auto;
   border-radius: 0.1rem;
   object-fit: cover;
-  padding: 1rem;
-}
+
+*/
