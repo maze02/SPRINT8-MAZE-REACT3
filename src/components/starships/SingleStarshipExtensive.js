@@ -15,36 +15,38 @@ const SingleStarshipExtensive = () => {
       {!ctx.loadShip && ctx.singleShip && (
         <Fragment>
           <h1>{ctx.singleShip.name}</h1>
-
-          <div className={classes.starshipContainer}>
-            {!error && (
-              <img
-                type="url"
-                alt={"starship" + ctx.singleShip.name}
-                src={shipUrl}
-                onError={() => {
-                  setError(true);
-                }}
-              ></img>
-            )}
-            {error && (
-              <p>
-                Image of {ctx.singleShip.name} starship is not available at this
-                moment
-              </p>
-            )}
-            <ul className={classes.starshipInfo}>
-              <li>Model:{ctx.singleShip.model}</li>
-              <li>Cost in credits:{ctx.singleShip.cost_in_credits}</li>
-              <li>Manufacturer:{ctx.singleShip.manufacturer}</li>
-              <li>Length:{ctx.singleShip["length"]}</li>
-              <li>Speed:{ctx.singleShip.max_atmosphering_speed}</li>
-              <li>Hyperdrive Rating:{ctx.singleShip.hyperdrive_rating}</li>
-              <li>MGLT:{ctx.singleShip.MGLT}</li>
-              <li>Cargo Capacity:{ctx.singleShip.cargo_capacity}</li>
-              <li>Crew:{ctx.singleShip.crew}</li>
-              <li>Passengers:{ctx.singleShip.passengers}</li>
-            </ul>
+          <div className={classes.wrapperMain}>
+            <div className={classes.cardMain}>
+              {!error && (
+                <img
+                  className={classes.imgMain}
+                  type="url"
+                  alt={"starship" + ctx.singleShip.name}
+                  src={shipUrl}
+                  onError={() => {
+                    setError(true);
+                  }}
+                ></img>
+              )}
+              {error && (
+                <p className={classes.imgErrMain}>
+                  Image of {ctx.singleShip.name} starship is not available at
+                  this moment
+                </p>
+              )}
+              <ul className={classes.info}>
+                <li>Model:{ctx.singleShip.model}</li>
+                <li>Cost in credits:{ctx.singleShip.cost_in_credits}</li>
+                <li>Manufacturer:{ctx.singleShip.manufacturer}</li>
+                <li>Length:{ctx.singleShip["length"]}</li>
+                <li>Speed:{ctx.singleShip.max_atmosphering_speed}</li>
+                <li>Hyperdrive Rating:{ctx.singleShip.hyperdrive_rating}</li>
+                <li>MGLT:{ctx.singleShip.MGLT}</li>
+                <li>Cargo Capacity:{ctx.singleShip.cargo_capacity}</li>
+                <li>Crew:{ctx.singleShip.crew}</li>
+                <li>Passengers:{ctx.singleShip.passengers}</li>
+              </ul>
+            </div>
           </div>
         </Fragment>
       )}

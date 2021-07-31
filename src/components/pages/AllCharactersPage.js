@@ -11,7 +11,7 @@ const AllCharactersPage = () => {
 
   return (
     <div className="container-wrapper">
-      <h1>Click on a character to find more details</h1>
+      <h1>Click on a character for more information</h1>
       {!actorsArr && <p>Loading actors</p>}
       {actorsArr.length !== 0 && (
         <CharactersList

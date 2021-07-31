@@ -32,7 +32,15 @@ const FilmList = ({ filmListArr, loadFilms, filmImgInfo, generalInfo }) => {
           );
         });
         return (
-          <div className={classes.filmListWrapper}>{[...filmListContent]}</div>
+          <div
+            className={
+              filmListArr.length < 5
+                ? classes.filmListWrapper
+                : classes.filmInfiniteScroll
+            }
+          >
+            {[...filmListContent]}
+          </div>
         );
       }
     }

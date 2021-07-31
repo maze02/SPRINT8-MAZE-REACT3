@@ -1,16 +1,16 @@
 import { Fragment } from "react";
-import classes from "./PilotItem.module.css";
+import classes from "../UI/SubItemHorizontal.module.css";
 const PilotItem = ({ pilotName, height, planet, pilotImg, key }) => {
   return (
-    <div className={classes.cardPilot}>
+    <div className={classes.cardSubHor}>
       <img
-        className={classes.imgPilot}
+        className={classes.imgSubHor}
         type="url"
         src={pilotImg}
         alt={pilotName}
       />
-      <ul>
-        <li>{pilotName}</li>
+      <ul className={classes.infoSubHor}>
+        <li>{pilotName.toUpperCase()}</li>
         <li>{height}</li>
       </ul>
     </div>

@@ -1,5 +1,5 @@
 :root {
-  --white: #ffffff;
+  --white: #dcdcdc;
   --grey1: #edf2f6;
   --grey12: grey;
   --grey2: #2f3848;
@@ -25,7 +25,7 @@ body {
   font-size: 16px;
   font-size: 1.6rem;
   font-family: var(--textFont);
-  color: white;
+  color: var(--white);
 }
 
 h1,
@@ -34,7 +34,7 @@ h2 {
   font-weight: 300;
   margin: 0 0 4rem 0;
   text-align: center;
-  color: white;
+  color: var(--white);
 }
 h1 span {
   font-weight: 400;
@@ -111,7 +111,7 @@ a {
 }
 .btn-submit:hover {
   background-color: #817b69;
-  color: white;
+  color: var(--white);
 }
 .btn-blank {
   margin: 0;
@@ -131,7 +131,7 @@ a {
 
 .btn-page:hover {
   background-color: #817b69;
-  color: white;
+  color: var(--white);
 }
 .btn-logout {
   margin-right: 2rem;
@@ -139,7 +139,7 @@ a {
 
 .btn-logout:hover {
   background-color: #817b69;
-  color: white;
+  color: var(--white);
 }
 /*FORM*/
 .shadow-dark {

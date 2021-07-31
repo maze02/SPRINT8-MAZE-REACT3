@@ -1,15 +1,15 @@
 import { Fragment } from "react";
-import classes from "./ShipItem.module.css";
+import classes from "../UI/SubItemHorizontal.module.css";
 const ShipItem = ({ shipName, shipImg, crew, passengers, speed }) => {
   return (
-    <div className={classes.cardShip}>
+    <div className={classes.cardSubHor}>
       <img
-        className={classes.imgShip}
+        className={classes.imgSubHor}
         type="url"
         src={shipImg}
         alt={shipName}
       />
-      <ul className={classes.info}>
+      <ul className={classes.infoSubHor}>
         <li>{shipName.toUpperCase()}</li>
         <li>Crew: {crew} people</li>
         <li>Passengers: {passengers} people</li>

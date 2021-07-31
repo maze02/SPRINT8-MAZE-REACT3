@@ -13,7 +13,7 @@ const AllStarshipsPage = () => {
 
   return (
     <div className="container-wrapper">
-      <h1>Here's a list of starships</h1>
+      <h1>Click on a starship for more details</h1>
       {ctx.pageLoad && <p>Loading starships...</p>}
       {!ctx.pageLoad && starshipsArr.length !== 0 && (
         <StarshipList
