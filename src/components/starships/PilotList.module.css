@@ -8,11 +8,8 @@
   width: 100rem;
 }
 
-/*
- display: inline-flex;
-  flex-direction: horizontal;
-  justify-content: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-
-*/
+.spacer {
+  margin-top: -2rem;
+  margin-bottom: 5rem;
+  text-align: center;
+}

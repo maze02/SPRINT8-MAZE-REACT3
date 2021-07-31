@@ -23,3 +23,14 @@
 .infoSubHor {
   padding-top: 2rem;
 }
+
+.imgErrSubHor {
+  border-radius: 0.7rem 0rem 0rem 0.7rem;
+  border-right: 0.3rem solid #3273c5;
+  width: 12rem;
+  height: 12rem;
+  margin-right: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  object-fit: cover;
+}

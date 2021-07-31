@@ -42,11 +42,13 @@ const MainNavigation = () => {
           </div>
         </ul>
         <ul className={classes.row2}>
-          <li>
-            <NavLink to="/" activeClassName={classes.active}>
-              WELCOME
-            </NavLink>
-          </li>
+          {!ctx.isLoggedIn.status && (
+            <li>
+              <NavLink to="/" activeClassName={classes.active}>
+                WELCOME
+              </NavLink>
+            </li>
+          )}
           <li>
             <NavLink to="/home" activeClassName={classes.active}>
               HOME

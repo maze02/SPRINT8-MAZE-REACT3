@@ -3,7 +3,7 @@ import classes from "../starships/PilotList.module.css";
 
 const ShipList = ({ shipListArr, loadShips, characterName, shipImgInfo }) => {
   if (loadShips) {
-    return <p>Starships loading...</p>;
+    return <p className="textcenter">Starships loading...</p>;
   } else {
     if (!loadShips) {
       let shipsListLocal = localStorage.getItem("shipsCharacter");
@@ -18,7 +18,11 @@ const ShipList = ({ shipListArr, loadShips, characterName, shipImgInfo }) => {
         }
       }
       if (shipListArr.length === 0) {
-        return <p>No record of {characterName} flying any starships</p>;
+        return (
+          <p className="textcenter">
+            No record of {characterName} ever flying any starships.
+          </p>
+        );
       } else {
         let shipListContent = shipListArr.map((e) => {
           return (

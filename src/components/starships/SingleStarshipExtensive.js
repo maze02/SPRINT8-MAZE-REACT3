@@ -11,7 +11,7 @@ const SingleStarshipExtensive = () => {
   }, [error]);
   return (
     <div>
-      {ctx.loadShip && <p>Starship Loading....</p>}
+      {ctx.loadShip && <p className="textcenter">Starship Loading....</p>}
       {!ctx.loadShip && ctx.singleShip && (
         <Fragment>
           <h1>{ctx.singleShip.name}</h1>

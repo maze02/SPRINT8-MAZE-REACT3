@@ -2,7 +2,7 @@ import { AuthContext } from "../context/auth/auth-context";
 import { useContext } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-
+import classes from "./Registration.module.css";
 import MyCheckbox from "../forms/MyCheckbox";
 import MyTextInput from "../forms/MyTextInput";
 
@@ -12,7 +12,9 @@ const Registration = () => {
   return (
     <div>
       <h1>Sign Up</h1>
-      <h2>Sign up to view intriguing facts on Starwars movies.</h2>
+      <h3 className={classes.spacer}>
+        Sign up to view intriguing facts on Starwars movies.
+      </h3>
       <div className="form-user">
         <div className="container-form shadow-dark">
           <Formik

@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import PilotItem from "./PilotItem";
 import classes from "./PilotList.module.css";
+import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 
 const PilotList = ({ pilotListArr, loadPilots, pilotImgInfo }) => {
+  const ctx = useContext(StarshipExtensiveCtx);
   if (loadPilots) {
-    return <p>Pilots loading...</p>;
+    return <p className="textcenter">Pilots loading...</p>;
   } else {
     if (!loadPilots) {
       let pilotsListLocal = localStorage.getItem("pilots");
@@ -18,7 +21,12 @@ const PilotList = ({ pilotListArr, loadPilots, pilotImgInfo }) => {
         }
       }
       if (pilotListArr.length === 0) {
-        return <p>No record of pilots flying this starship</p>;
+        return (
+          <p className={classes.spacer}>
+            No record of any pilots ever flying the "{ctx.singleShip.name}"
+            starship.
+          </p>
+        );
       } else {
         let pilotListContent = pilotListArr.map((e) => {
           return (

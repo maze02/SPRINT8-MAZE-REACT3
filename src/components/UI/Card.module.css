@@ -6,6 +6,7 @@
   text-align: left;
   margin-bottom: 2rem;
   width: 60rem;
+  border-radius: 0.7rem;
 }
 
 .card:hover {
