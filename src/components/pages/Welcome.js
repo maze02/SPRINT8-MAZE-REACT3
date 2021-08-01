@@ -7,9 +7,10 @@ import MyTextInput from "../forms/MyTextInput";
 const Welcome = () => {
   return (
     <div>
-      <h1>Welcome to StarWars Encyclopedia!</h1>
+      <h1>Welcome to StarWars Fun Facts!</h1>
       <p className="textcenter">
-        Sign up to view intriguing facts on Starwars movies.
+        Sign up to view intriguing facts on Starwars movies.<br></br> Save your
+        favourite starships and characters.
       </p>
     </div>
   );
