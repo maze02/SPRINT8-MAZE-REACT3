@@ -1,14 +1,7 @@
-:root {
-  --white: #dcdcdc;
-  --grey1: #edf2f6;
-  --grey12: grey;
-  --grey2: #2f3848;
-  --grey3: #1a202d;
-  --black: #000000;
-  --gold: #daa520;
-  --headingFont: "Barlow", sans-serif;
-  --textFont: "Barlow", sans-serif;
-}
+@import "_variables.scss";
+//modularise code by splitting it into files and saving it into one main file
+@import "starry-background.scss";
+
 *,
 *:before,
 *:after {
@@ -21,20 +14,20 @@ html {
 }
 body {
   min-height: 100%;
-  background-color: black;
+  background-color: map-get($colors, black);
   font-size: 16px;
   font-size: 1.6rem;
-  font-family: var(--textFont);
-  color: var(--white);
+  font-family: $textFont;
+  color: map-get($colors, white);
 }
 
 h1,
 h2 {
-  font-family: var(--headingFont);
+  font-family: $headingFont;
   font-weight: 300;
   margin: 0 0 4rem 0;
   text-align: center;
-  color: var(--white);
+  color: map-get($colors, white);
 }
 h1 span {
   font-weight: 400;
@@ -68,7 +61,7 @@ p {
 }
 a {
   text-decoration: none;
-  color: var(--grey2);
+  color: map-get($colors, grey-mid-dark);
 }
 
 .textcenter {
@@ -76,7 +69,7 @@ a {
 }
 
 .text-black {
-  color: black;
+  color: map-get($colors, black);
 }
 .text-error {
   color: red;
@@ -84,7 +77,7 @@ a {
 /** BUTTONS **/
 .btn {
   margin-top: 2rem;
-  font-family: var(--headingFont);
+  font-family: $headingFont;
   padding: 1.5rem;
   font-size: 1.4;
   font-weight: 400;
@@ -96,22 +89,24 @@ a {
   cursor: pointer;
 }
 .btn-primary {
-  background-color: var(--grey2);
-  color: var(--white);
+  background-color: map-get($colors, grey-mid-dark);
+  color: map-get($colors, white);
+
+  &:hover {
+    background: map-get($colors, grey-dark);
+  }
 }
-.btn-primary:hover {
-  background: var(--grey3);
-}
+
 .btn-secondary {
-  background-color: var(--grey1);
+  background-color: map-get($colors, grey-light);
 }
 .btn-block {
   display: block;
   width: 100%;
 }
 .btn-submit:hover {
-  background-color: #817b69;
-  color: var(--white);
+  background-color: map-get($colors, grey-beige);
+  color: map-get($colors, white);
 }
 .btn-blank {
   margin: 0;
@@ -127,35 +122,37 @@ a {
 .btn-page {
   width: 15rem;
   margin-bottom: 5rem;
+
+  &:hover {
+    background-color: map-get($colors, grey-beige);
+    color: map-get($colors, white);
+  }
 }
 
-.btn-page:hover {
-  background-color: #817b69;
-  color: var(--white);
-}
 .btn-logout {
   margin-right: 2rem;
+  &:hover {
+    background-color: map-get($colors, grey-beige);
+    color: map-get($colors, white);
+  }
 }
 
-.btn-logout:hover {
-  background-color: #817b69;
-  color: var(--white);
-}
 /*FORM*/
 .shadow-dark {
-  -webkit-box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
-  -moz-box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
-  box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
+  -webkit-box-shadow: map-get($colors, shadow-dark);
+  -moz-box-shadow: map-get($colors, shadow-dark);
+  box-shadow: map-get($colors, shadow-dark);
 }
 
 .container-input {
   display: flex;
+
+  label {
+    margin-bottom: 1rem;
+    color: map-get($colors, black);
+  }
 }
 
-.container-input label {
-  margin-bottom: 1rem;
-  color: black;
-}
 .input-text {
   padding: 1rem;
   border: none;
@@ -164,60 +161,58 @@ a {
   width: 100%;
 }
 
-.form-user {
-  margin-top: 2rem;
-  height: 50vh;
-  min-height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .container-form {
   padding: 5rem 3rem;
   max-width: 500px;
   width: 95%;
-  background-color: var(--white);
+  background-color: map-get($colors, white);
   border-radius: 0.5rem;
 }
 
 .form-user {
   display: flex;
-  margin-bottom: 2rem;
   align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  height: 50vh;
+  min-height: 80px;
+  margin-bottom: 2rem;
 }
 
 .field-form {
   display: grid;
   grid-template-columns: 30% 70%;
   margin-bottom: 1rem;
+
+  label {
+    flex: 0 0 100px;
+    align-self: center;
+    font-family: $textFont;
+    color: map-get($colors, black);
+  }
+
+  input:focus {
+    outline: none;
+    border-color: map-get($colors, slate-dark);
+    background: map-get($colors, slate-mid);
+  }
+
+  input[type="password"],
+  input[type="email"],
+  input[type="text"] {
+    border: 1px solid map-get($colors, beige-super-light);
+    padding: 1rem;
+    flex: 1;
+    background-color: map-get($colors, slate-light);
+  }
+
+  &:last-of-type {
+    margin: 0;
+  }
 }
 
 .field-form-btn {
   display: flex;
-}
-.field-form:last-of-type {
-  margin: 0;
-}
-.field-form label {
-  flex: 0 0 100px;
-  align-self: center;
-  font-family: var(--textFont);
-  color: #000000;
-}
-.field-form input[type="password"],
-.field-form input[type="email"],
-.field-form input[type="text"] {
-  border: 1px solid #e1e1e1;
-  padding: 1rem;
-  flex: 1;
-  background-color: hsla(218, 21%, 80%);
-}
-
-.field-form input:focus {
-  outline: none;
-  border-color: hsla(218, 21%, 60%);
-  background: hsla(218, 21%, 70%);
 }
 
 .link-account {
@@ -227,7 +222,7 @@ a {
 }
 
 .error {
-  color: red;
+  color: map-get($colors, error);
   margin: 1rem 0rem 2rem 0rem;
   align-self: flex-end;
 }
@@ -235,11 +230,11 @@ a {
 /* CONTENT LAYOUT*/
 .container-wrapper {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
 }
 
 .checkbox-text {
-  color: #000000;
+  color: map-get($colors, black);
   margin-left: 1rem;
 }

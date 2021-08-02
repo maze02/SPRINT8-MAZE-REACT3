@@ -4,8 +4,6 @@ import { StarshipsContext } from "../context/StarshipsContext";
 import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 import StarshipList from "../starships/StarshipList";
 
-//import useInfiniteScroll from "react-infinite-scroll-hook";
-
 const AllStarshipsPage = () => {
   const ctx = useContext(StarshipsContext);
   const shipCtx = useContext(StarshipExtensiveCtx);
@@ -46,7 +44,8 @@ const AllStarshipsPage = () => {
 };
 
 export default AllStarshipsPage;
-//     {[...starshipList]}
+
+//    //import useInfiniteScroll from "react-infinite-scroll-hook";
 //Maria's most Balenciaga errors:
 /*
 1. FORGETTING TO ADD {} when IMPORTING THE CONTExT ARRRRRGH!
