@@ -1,16 +1,30 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef, useState, useCallback } from "react";
+import { useHistory } from "react-router";
 import { AuthContext } from "../context/auth/auth-context";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../forms/MyTextInput";
 
+/*here is the answer: https://stackoverflow.com/questions/59735137/handlesubmit-and-values-not-recognized-in-formik-form*/
 const Login = () => {
   const [loginFailed, setLoginFailed] = useState(false);
   let nameRef = useRef(null);
   let loginPasswordRef = useRef(null);
   //const [state, setState] = useContext(AppContext);
   const ctx = useContext(AuthContext);
-  const validateLogin = () => {};
+  //const validateLogin = () => {};
+  const history = useHistory();
+  const redirectUser = useCallback(() => {
+    if (ctx.isLoggedIn.status) {
+      localStorage.setItem("isLoggedIn", JSON.stringify(ctx.isLoggedIn));
+      console.log(
+        "Hey guys, printing isLoggedIn.status from ctx" + ctx.isLoggedIn.status
+      );
+      console.log(`${ctx.isLoggedIn.name} logged in succesfully`);
+      history.replace("/home");
+    }
+  }, [ctx.isLoggedIn.status]);
+
   return (
     <div>
       <h1>Login</h1>
@@ -41,6 +55,7 @@ const Login = () => {
                 "printing from llogin page : ctx.userLoginTry email:  " +
                   ctx.userLoginTry.email
               );
+              redirectUser();
               //ctx.handleLogin();
               //setLoginFailed(false);
               //resetForm({ values: "" });
@@ -82,6 +97,18 @@ const Login = () => {
 
 export default Login;
 //here the name is being set in the state as an object
+/*
+   useEffect(() => {
+     if (isLoggedIn.status) {
+       localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
+       console.log(
+         "Hey guys, printing isLoggedIn.status from ctx" + isLoggedIn.status
+       );
+       console.log(`${isLoggedIn.name} logged in succesfully`);
+       history.replace("/home");
+     }
+   }, [isLoggedIn]);
+   */
 
 /*
 import { Form, Input, Button, Checkbox } from "antd";

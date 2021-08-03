@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 
 const AuthContextMyProvider = (props) => {
   const history = useHistory(); //history obj.
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [user, setUser] = useState({
     name: "",
     surname: "",
@@ -34,9 +35,12 @@ const AuthContextMyProvider = (props) => {
 
   useEffect(() => {
     let initialLogin = JSON.parse(localStorage.getItem("isLoggedIn"));
+    setIsAuthLoading(true);
     if (!initialLogin) {
+      setIsAuthLoading(false);
       setIsLoggedIn({ status: false, name: "" });
     } else {
+      setIsAuthLoading(false);
       setIsLoggedIn(initialLogin);
     }
   }, []);
@@ -121,7 +125,7 @@ const AuthContextMyProvider = (props) => {
   }, [userLoginTry]);
   //isLoggedIn, userList
   //, [userLoginTry])
-
+  /*
   useEffect(() => {
     if (isLoggedIn.status) {
       localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
@@ -132,20 +136,21 @@ const AuthContextMyProvider = (props) => {
       history.replace("/home");
     }
   }, [isLoggedIn]);
-
+*/
   //LOGOUT
   const handleLogout = useCallback(() => {
     setIsLoggedIn({ status: false, name: "" });
     localStorage.removeItem("isLoggedIn");
     console.log("You logged out");
     history.replace("/");
-  }, [history]);
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         isLoggedIn: isLoggedIn,
         setIsLoggedIn: setIsLoggedIn,
+        isAuthLoading: isAuthLoading,
         setUserList: setUserList,
         userList: userList,
         userLoginTry: userLoginTry,

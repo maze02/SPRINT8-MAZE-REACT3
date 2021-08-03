@@ -25,15 +25,16 @@ import { AuthContext } from "./components/context/auth/auth-context";
 
 function App() {
   const ctx = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
   let loginStatus = ctx.isLoggedIn.status;
+  let loading = ctx.isAuthLoading;
   //console.log("APP loginStatus from app.js" + typeof loginStatus);
-  console.log("APP loginStatus from app.js is  " + loginStatus);
-  console.log("APP loading status " + loading);
-
+  console.log("APP LOGIN STATUS from app.js is  " + loginStatus);
+  console.log("APP LOADING STATUS " + loading);
+  /*
   useEffect(() => {
-    const getLoginStatus = () => {
-      setTimeout(() => {
+    const getLoginStatus = async () => {
+      await setTimeout(() => {
         loginStatus = ctx.isLoggedIn.status;
         console.log("APP login status " + loginStatus);
         setLoading(false);
@@ -42,7 +43,7 @@ function App() {
     };
     getLoginStatus();
   }, []);
-
+*/
   return (
     <Fragment>
       {loading && <p>Loading...checking authentication</p>}
@@ -77,11 +78,13 @@ function App() {
                       component={StarshipDetailPage}
                       auth={loginStatus}
                     ></GuardedRoute>
+
                     <GuardedRoute
                       path="/characters"
                       component={AllCharactersPage}
                       auth={loginStatus}
                     ></GuardedRoute>
+
                     <GuardedRoute
                       path="/character-detail/:charactersId"
                       component={CharacterDetailPage}
