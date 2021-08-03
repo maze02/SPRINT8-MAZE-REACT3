@@ -52,7 +52,20 @@ const AuthContextMyProvider = (props) => {
   //const [isLoggedIn, setIsLoggedIn] = useState(initialLogin);
   //REGISTRATION -UPDATING LIST
   const [userList, setUserList] = useState(initialRegisteredUsers);
-
+  /*
+  const handleValidatedSignUp = () => {
+    localStorage.setItem("userList", JSON.stringify(userList));
+    setSuccessReg(true);
+    setTimeout(() => {
+      setSuccessReg(false);
+    }, 2000);
+    setTimeout(() => {
+      console.log("I'M CAUSING YOU TO REDIRECTING YOU TO LOGIN");
+      // history.replace("/login");
+    }, 2000);
+  };
+  */
+  /*
   useEffect(() => {
     console.log(
       "I'm printing the uptodate userList from auth context:" + userList
@@ -75,6 +88,7 @@ const AuthContextMyProvider = (props) => {
       );
     }
   }, [userList]);
+*/
 
   //LOGGING IN
   const [failedLoginMsg, setFailedLoginMsg] = useState({

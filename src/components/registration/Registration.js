@@ -1,5 +1,6 @@
 import { AuthContext } from "../context/auth/auth-context";
 import { useContext } from "react";
+import { useHistory } from "react-router";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import classes from "./Registration.module.css";
@@ -9,6 +10,32 @@ import MyTextInput from "../forms/MyTextInput";
 const Registration = () => {
   const { setUserList, userList, isLoggedIn, setSuccessReg, successReg } =
     useContext(AuthContext);
+  const history = useHistory();
+  /*
+     onSubmit={(values, { setSubmitting }) => {
+              setTimeout(() => {
+                //alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
+              }, 400);
+              let newUser = values;
+              console.log(newUser);
+              setUserList([...userList, newUser]);
+            }}*/
+
+  const handleSubmit = (values) => {
+    let newUser = values;
+    setUserList([...userList, newUser]);
+    //let newList = JSON.stringify([...userList, newUser]);
+    localStorage.setItem("userList", JSON.stringify([...userList, newUser]));
+    setSuccessReg(true);
+    setTimeout(() => {
+      setSuccessReg(false);
+    }, 2000);
+    setTimeout(() => {
+      console.log("I'M CAUSING YOU TO REDIRECTING YOU TO LOGIN");
+      history.replace("/login");
+    }, 2000);
+  };
   return (
     <div>
       <h1>Sign Up</h1>
@@ -26,6 +53,7 @@ const Registration = () => {
               passwordConfirmation: "",
               acceptedTerms: false, // added for our checkbox
             }}
+            onSubmit={handleSubmit}
             validationSchema={Yup.object({
               firstName: Yup.string()
                 .max(15, "Must be 15 characters or less")
@@ -45,15 +73,6 @@ const Registration = () => {
                 .required("Required")
                 .oneOf([true], "You must accept the terms and conditions."),
             })}
-            onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                //alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
-              let newUser = values;
-              console.log(newUser);
-              setUserList([...userList, newUser]);
-            }}
           >
             <Form>
               <div className="field-form">
@@ -118,3 +137,13 @@ const Registration = () => {
 };
 
 export default Registration;
+
+/*onSubmit={(values, { setSubmitting }) => {
+              setTimeout(() => {
+                //alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
+              }, 400);
+              let newUser = values;
+              console.log(newUser);
+              setUserList([...userList, newUser]);
+            }} */
