@@ -31,7 +31,7 @@ const PilotList = ({ pilotListArr, loadPilots, pilotImgInfo }) => {
         let pilotListContent = pilotListArr.map((e) => {
           return (
             <PilotItem
-              key={e.id}
+              key={e.name}
               pilotName={e.name}
               pilotImg={e.img}
               height={`${Number(e.height) / 100}m`}

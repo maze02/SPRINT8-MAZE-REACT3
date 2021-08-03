@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import SingleCharacterExtensive from "../characters/SingleCharacterExtensive";
 import { CharacterDetailCtx } from "../context/CharactersDetailContext";
+import SingleCharacterExtensive from "../characters/SingleCharacterExtensive";
 import FilmList from "../starships/FilmList";
 import ShipList from "../characters/ShipList";
 

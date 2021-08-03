@@ -1,6 +1,6 @@
 import FilmItem from "./FilmItem";
 import classes from "./FilmList.module.css";
-
+//only rerenders if state, props changes
 const FilmList = ({ filmListArr, loadFilms, filmImgInfo, generalInfo }) => {
   if (loadFilms) {
     return <p>Films loading ...</p>;
@@ -60,4 +60,13 @@ export default FilmList;
 
 
           <div>{[...filmListContent]}</div>
+
+
+             <div
+            className={
+              filmListArr.length < 5
+                ? classes.filmListWrapper
+                : classes.filmInfiniteScroll
+            }
+          >
 */

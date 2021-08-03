@@ -7,7 +7,7 @@ const SingleCharacterExtensive = () => {
   const [error, setError] = useState(false);
   let characterUrl = ctx.characterImgInfo;
   useEffect(() => {
-    characterUrl = "https://starwars-visualguide.com/assets/img/species/4.jpg";
+    console.log("ERROR: unable to load image for the film");
   }, [error]);
   return (
     <div>
