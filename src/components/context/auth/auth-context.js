@@ -37,11 +37,15 @@ const AuthContextMyProvider = (props) => {
     let initialLogin = JSON.parse(localStorage.getItem("isLoggedIn"));
     setIsAuthLoading(true);
     if (!initialLogin) {
+      setIsLoggedIn((prev) => {
+        return { status: false, name: "" };
+      });
       setIsAuthLoading(false);
-      setIsLoggedIn({ status: false, name: "" });
+      console.log("FROM ctx isLoggedIn " + isLoggedIn.status);
     } else {
+      setIsLoggedIn((prev) => initialLogin);
       setIsAuthLoading(false);
-      setIsLoggedIn(initialLogin);
+      console.log("FROM ctx isLoggedIn " + isLoggedIn.status);
     }
   }, []);
 
@@ -61,7 +65,8 @@ const AuthContextMyProvider = (props) => {
         setSuccessReg(false);
       }, 2000);
       setTimeout(() => {
-        history.replace("/login");
+        console.log("I'M CAUSING YOU TO REDIRECTING YOU TO LOGIN");
+        // history.replace("/login");
       }, 2000);
     } else {
       localStorage.setItem("userList", JSON.stringify([]));
@@ -77,6 +82,7 @@ const AuthContextMyProvider = (props) => {
     msg: "",
   });
   //
+  /*
   useEffect(() => {
     console.log(
       "Hey guys! Printing from ctx userLoginTry'email : " + userLoginTry.email
@@ -100,7 +106,7 @@ const AuthContextMyProvider = (props) => {
             console.log(`${isLoggedIn.name} logged in succesfully`);
             history.replace("/home");
             //
-            */
+            
             return;
           } else {
             setFailedLoginMsg({
@@ -123,6 +129,7 @@ const AuthContextMyProvider = (props) => {
       }, 3000);
     }
   }, [userLoginTry]);
+  */
   //isLoggedIn, userList
   //, [userLoginTry])
   /*

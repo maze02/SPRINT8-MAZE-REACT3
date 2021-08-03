@@ -1,4 +1,4 @@
-import { useContext, useRef, useState, useCallback } from "react";
+import { useContext, useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { AuthContext } from "../context/auth/auth-context";
 import { Formik, Form } from "formik";
@@ -10,20 +10,70 @@ const Login = () => {
   const [loginFailed, setLoginFailed] = useState(false);
   let nameRef = useRef(null);
   let loginPasswordRef = useRef(null);
-  //const [state, setState] = useContext(AppContext);
+
   const ctx = useContext(AuthContext);
-  //const validateLogin = () => {};
   const history = useHistory();
-  const redirectUser = useCallback(() => {
+  //useeffect hook activating helper function, so that status is the latest. Explore in another branch how to use useReduce instead
+  //helper validator of existing userlist:
+  const validator2 = (userLogger) => {
+    //validating login input data against userList data
+    if (ctx.userList.length) {
+      for (let i = 0; i < ctx.userList.length; i++) {
+        if (userLogger.email === ctx.userList[i].email) {
+          if (userLogger.password === ctx.userList[i].password) {
+            //this is not up to date when it is fed below
+            ctx.setIsLoggedIn((prev) => {
+              return { status: true, name: ctx.userList[i].firstName };
+            });
+            localStorage.setItem(
+              "isLoggedIn",
+              JSON.stringify({ status: true, name: ctx.userList[i].firstName })
+            );
+            history.replace("/home");
+            return;
+          } else {
+            ctx.setFailedLoginMsg({
+              status: true,
+              msg: "Incorrect password.Try again.",
+            });
+            setTimeout(() => {
+              ctx.setFailedLoginMsg({ status: false, msg: "" });
+            }, 3000);
+          }
+        }
+      }
+      ctx.setFailedLoginMsg({
+        status: true,
+        msg: "You're not registered. Please sign up!",
+      });
+      setTimeout(() => {
+        ctx.setFailedLoginMsg({ status: false, msg: "" });
+      }, 3000);
+    }
+  };
+  /*
+  useEffect(() => {
     if (ctx.isLoggedIn.status) {
+      console.log("INSIDE LOGIN FORM COMPONENENT -> USEFECT ACTIVATED");
       localStorage.setItem("isLoggedIn", JSON.stringify(ctx.isLoggedIn));
-      console.log(
+      /* console.log(
         "Hey guys, printing isLoggedIn.status from ctx" + ctx.isLoggedIn.status
       );
       console.log(`${ctx.isLoggedIn.name} logged in succesfully`);
+      
       history.replace("/home");
+      //}
     }
   }, [ctx.isLoggedIn.status]);
+*/
+  const handleSubmit = (values) => {
+    /* setTimeout(() => {
+      //alert(JSON.stringify(values, null, 2));
+      setSubmitting(false);
+    }, 400);*/
+    let userLogger = values;
+    validator2(values);
+  };
 
   return (
     <div>
@@ -35,31 +85,13 @@ const Login = () => {
               email: "",
               password: "",
             }}
+            onSubmit={handleSubmit}
             validationSchema={Yup.object({
               email: Yup.string()
                 .email("Invalid email address")
                 .required("Required"),
               password: Yup.string().required("Password is required"),
             })}
-            onSubmit={(values, { setSubmitting, resetForm }) => {
-              setTimeout(() => {
-                //alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
-              let userLogger = values;
-              console.log("userLogger email= " + userLogger.email);
-              ctx.setUserLoginTry((prevState) => {
-                return userLogger;
-              });
-              console.log(
-                "printing from llogin page : ctx.userLoginTry email:  " +
-                  ctx.userLoginTry.email
-              );
-              redirectUser();
-              //ctx.handleLogin();
-              //setLoginFailed(false);
-              //resetForm({ values: "" });
-            }}
           >
             <Form>
               <div className="field-form">
@@ -202,4 +234,30 @@ index.js:1 Warning: Maximum update depth exceeded. This can happen when a compon
               }
             }}
           >
+*/
+
+//const validateLogin = () => {};
+//const [state, setState] = useContext(AppContext);
+
+//handle submit taken out of formik
+/*
+ onSubmit={(values, { setSubmitting, resetForm }) => {
+              setTimeout(() => {
+                //alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
+              }, 400);
+              let userLogger = values;
+              console.log("userLogger email= " + userLogger.email);
+              ctx.setUserLoginTry((prevState) => {
+                return userLogger;
+              });
+              console.log(
+                "printing from llogin page : ctx.userLoginTry email:  " +
+                  ctx.userLoginTry.email
+              );
+              redirectUser();
+              //ctx.handleLogin();
+              //setLoginFailed(false);
+              //resetForm({ values: "" });
+            }}
 */
