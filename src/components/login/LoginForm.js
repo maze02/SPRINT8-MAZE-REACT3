@@ -31,13 +31,18 @@ const Login = () => {
             history.replace("/home");
             return;
           } else {
-            ctx.setFailedLoginMsg({
-              status: true,
-              msg: "Incorrect password.Try again.",
+            ctx.setFailedLoginMsg((prev) => {
+              return {
+                status: true,
+                msg: "Incorrect password.Try again.",
+              };
             });
             setTimeout(() => {
-              ctx.setFailedLoginMsg({ status: false, msg: "" });
+              ctx.setFailedLoginMsg((prev) => {
+                return { status: false, msg: "" };
+              });
             }, 3000);
+            return;
           }
         }
       }
@@ -46,7 +51,9 @@ const Login = () => {
         msg: "You're not registered. Please sign up!",
       });
       setTimeout(() => {
-        ctx.setFailedLoginMsg({ status: false, msg: "" });
+        ctx.setFailedLoginMsg((prev) => {
+          return { status: false, msg: "" };
+        });
       }, 3000);
     }
   };
