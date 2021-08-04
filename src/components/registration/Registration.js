@@ -1,5 +1,5 @@
 import { AuthContext } from "../context/auth/auth-context";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -11,19 +11,57 @@ const Registration = () => {
   const { setUserList, userList, isLoggedIn, setSuccessReg, successReg } =
     useContext(AuthContext);
   const history = useHistory();
+  const [regFailedMsg, setFailedRegMsg] = useState({ status: false, msg: "" });
+
+  const validateReg2 = (newUser) => {
+    const successHandler = () => {};
+    if (userList.length) {
+      for (let i = 0; i < userList.length; i++) {
+        if (userList[i].email.localeCompare(newUser.email) === 0) {
+          setSuccessReg((prev) => false);
+          setFailedRegMsg((prev) => {
+            return {
+              status: true,
+              msg: "Registration failed. Please use another email address.",
+            };
+          });
+          setTimeout(() => {
+            setFailedRegMsg((prev) => {
+              return { status: false, msg: "" };
+            });
+          }, 3000);
+          return;
+        }
+      }
+      setUserList([...userList, newUser]);
+      localStorage.setItem("userList", JSON.stringify([...userList, newUser]));
+      setSuccessReg((prev) => true);
+      setTimeout(() => {
+        setSuccessReg(false);
+      }, 2000);
+      setTimeout(() => {
+        console.log("I'M REDIRECTING YOU TO LOGIN");
+        history.replace("/login");
+      }, 2000);
+      return;
+    } else {
+      setUserList([...userList, newUser]);
+      localStorage.setItem("userList", JSON.stringify([...userList, newUser]));
+      setSuccessReg((prev) => true);
+      setTimeout(() => {
+        setSuccessReg(false);
+      }, 2000);
+      setTimeout(() => {
+        console.log("I'M REDIRECTING YOU TO LOGIN");
+        history.replace("/login");
+      }, 2000);
+      return;
+    }
+  };
 
   const handleSubmit = (values) => {
-    let newUser = values;
-    setUserList([...userList, newUser]);
-    localStorage.setItem("userList", JSON.stringify([...userList, newUser]));
-    setSuccessReg(true);
-    setTimeout(() => {
-      setSuccessReg(false);
-    }, 2000);
-    setTimeout(() => {
-      console.log("I'M REDIRECTING YOU TO LOGIN");
-      history.replace("/login");
-    }, 2000);
+    console.log("in registration handler");
+    validateReg2(values);
   };
   return (
     <div>
@@ -119,6 +157,9 @@ const Registration = () => {
           {successReg && (
             <p className="text-black">You are now signed up and can login!</p>
           )}
+          {regFailedMsg.status && (
+            <p className="text-error">{regFailedMsg.msg}</p>
+          )}
         </div>
       </div>
     </div>
@@ -126,5 +167,3 @@ const Registration = () => {
 };
 
 export default Registration;
-
-

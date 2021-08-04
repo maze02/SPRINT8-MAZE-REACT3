@@ -55,10 +55,22 @@ const Login = () => {
           return { status: false, msg: "" };
         });
       }, 3000);
+    } else {
+      ctx.setFailedLoginMsg({
+        status: true,
+        msg: "You're not registered. Please sign up!",
+      });
+      setTimeout(() => {
+        ctx.setFailedLoginMsg((prev) => {
+          return { status: false, msg: "" };
+        });
+      }, 3000);
     }
   };
 
   const handleSubmit = (values) => {
+    console.log("In login, can you read me?");
+    console.log("values" + values.email + values.password);
     validator2(values);
   };
 
