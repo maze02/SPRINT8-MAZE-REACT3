@@ -21,9 +21,6 @@ const CharacterDetailProvider = (props) => {
   const [characterImgInfo, setCharacterImgInfo] = useState("");
   const ctx = useContext(CharactersContext);
   const history = useHistory();
-  //const location = useLocation();
-
-  //const dataPilotReducer = (state, action) => {};
 
   //HANDLING CLICK OF INDIVIDUAL SHIP
   const getSingleCharacter = async () => {
@@ -114,6 +111,7 @@ const CharacterDetailProvider = (props) => {
       );
     }
   };
+  
   //Call each of Pilot Apis and add info into an arr for child to map through
   useEffect(() => {
     if (singleCharacter && shipUrls.length !== 0) {

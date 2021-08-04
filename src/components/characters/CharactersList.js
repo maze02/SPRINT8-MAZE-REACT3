@@ -16,4 +16,3 @@ const CharactersList = ({ actorsArr, handleClickCharacter }) => {
 };
 
 export default CharactersList;
-//        handleClickActor={handleClickActor}

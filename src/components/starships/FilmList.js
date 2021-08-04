@@ -17,7 +17,7 @@ const FilmList = ({ filmListArr, loadFilms, filmImgInfo, generalInfo }) => {
           }
         }
       }
-      //filmListArr = JSON.parse(filmListLocal);
+
       if (filmListArr.length === 0) {
         return <p>No record of this {generalInfo.theme} appearing in a film</p>;
       } else {
@@ -49,24 +49,3 @@ const FilmList = ({ filmListArr, loadFilms, filmImgInfo, generalInfo }) => {
 
 export default FilmList;
 
-/*
-`${e.release_date.substring(
-            8,
-            9
-          )}-${e.release_date.substring(5, 7)}-${e.release_date.substring(
-            0,
-            4
-          )}`
-
-
-          <div>{[...filmListContent]}</div>
-
-
-             <div
-            className={
-              filmListArr.length < 5
-                ? classes.filmListWrapper
-                : classes.filmInfiniteScroll
-            }
-          >
-*/

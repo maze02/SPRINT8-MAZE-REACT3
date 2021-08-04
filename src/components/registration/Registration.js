@@ -11,28 +11,17 @@ const Registration = () => {
   const { setUserList, userList, isLoggedIn, setSuccessReg, successReg } =
     useContext(AuthContext);
   const history = useHistory();
-  /*
-     onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                //alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
-              let newUser = values;
-              console.log(newUser);
-              setUserList([...userList, newUser]);
-            }}*/
 
   const handleSubmit = (values) => {
     let newUser = values;
     setUserList([...userList, newUser]);
-    //let newList = JSON.stringify([...userList, newUser]);
     localStorage.setItem("userList", JSON.stringify([...userList, newUser]));
     setSuccessReg(true);
     setTimeout(() => {
       setSuccessReg(false);
     }, 2000);
     setTimeout(() => {
-      console.log("I'M CAUSING YOU TO REDIRECTING YOU TO LOGIN");
+      console.log("I'M REDIRECTING YOU TO LOGIN");
       history.replace("/login");
     }, 2000);
   };
@@ -138,12 +127,4 @@ const Registration = () => {
 
 export default Registration;
 
-/*onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                //alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
-              let newUser = values;
-              console.log(newUser);
-              setUserList([...userList, newUser]);
-            }} */
+

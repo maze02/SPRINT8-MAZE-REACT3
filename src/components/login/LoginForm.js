@@ -13,8 +13,7 @@ const Login = () => {
 
   const ctx = useContext(AuthContext);
   const history = useHistory();
-  //useeffect hook activating helper function, so that status is the latest. Explore in another branch how to use useReduce instead
-  //helper validator of existing userlist:
+
   const validator2 = (userLogger) => {
     //validating login input data against userList data
     if (ctx.userList.length) {
@@ -51,27 +50,8 @@ const Login = () => {
       }, 3000);
     }
   };
-  /*
-  useEffect(() => {
-    if (ctx.isLoggedIn.status) {
-      console.log("INSIDE LOGIN FORM COMPONENENT -> USEFECT ACTIVATED");
-      localStorage.setItem("isLoggedIn", JSON.stringify(ctx.isLoggedIn));
-      /* console.log(
-        "Hey guys, printing isLoggedIn.status from ctx" + ctx.isLoggedIn.status
-      );
-      console.log(`${ctx.isLoggedIn.name} logged in succesfully`);
-      
-      history.replace("/home");
-      //}
-    }
-  }, [ctx.isLoggedIn.status]);
-*/
+
   const handleSubmit = (values) => {
-    /* setTimeout(() => {
-      //alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 400);*/
-    let userLogger = values;
     validator2(values);
   };
 
@@ -99,7 +79,7 @@ const Login = () => {
                   label="Email Address"
                   name="email"
                   type="email"
-                  placeholder="jonah@formik.com"
+                  placeholder="Your email"
                 />
               </div>
               <div className="field-form">
@@ -128,136 +108,3 @@ const Login = () => {
 };
 
 export default Login;
-//here the name is being set in the state as an object
-/*
-   useEffect(() => {
-     if (isLoggedIn.status) {
-       localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
-       console.log(
-         "Hey guys, printing isLoggedIn.status from ctx" + isLoggedIn.status
-       );
-       console.log(`${isLoggedIn.name} logged in succesfully`);
-       history.replace("/home");
-     }
-   }, [isLoggedIn]);
-   */
-
-/*
-import { Form, Input, Button, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
-
-const NormalLoginForm = () => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
-
-  return (
-    <Form
-      name="normal_login"
-      className="login-form"
-      initialValues={{
-        remember: true,
-      }}
-      onFinish={onFinish}
-    >
-      <Form.Item
-        name="username"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Username!",
-          },
-        ]}
-      >
-        <Input
-          prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Username"
-        />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Password!",
-          },
-        ]}
-      >
-        <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Item>
-      <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-
-        <a className="login-form-forgot" href="">
-          Forgot password
-        </a>
-      </Form.Item>
-
-      <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
-          Log in
-        </Button>
-        Or <a href="">register now!</a>
-      </Form.Item>
-    </Form>
-  );
-};
-
-ReactDOM.render(<NormalLoginForm />, mountNode);
-*/
-
-/*
-index.js:1 Warning: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.
-    at AuthContextMyProvider (http://localhost:3000/static/js/main.chunk.js:374:81)
-    at App
-    at Router (http://localhost:3000/static/js/vendors~main.chunk.js:46675:30)
-    at BrowserRouter (http://localhost:3000/static/js/vendors~main.chunk.js:46295:35)
-
-
-
-    onSubmit={(values, { setSubmitting, resetForm }) => {
-              setTimeout(() => {
-                //alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
-              let userLogger = values;
-              console.log(userLogger);
-              ctx.setUserLoginTry(values);
-              if (ctx.isLoggedIn.status) {
-                resetForm({ values: "" });
-              }
-            }}
-          >
-*/
-
-//const validateLogin = () => {};
-//const [state, setState] = useContext(AppContext);
-
-//handle submit taken out of formik
-/*
- onSubmit={(values, { setSubmitting, resetForm }) => {
-              setTimeout(() => {
-                //alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
-              let userLogger = values;
-              console.log("userLogger email= " + userLogger.email);
-              ctx.setUserLoginTry((prevState) => {
-                return userLogger;
-              });
-              console.log(
-                "printing from llogin page : ctx.userLoginTry email:  " +
-                  ctx.userLoginTry.email
-              );
-              redirectUser();
-              //ctx.handleLogin();
-              //setLoginFailed(false);
-              //resetForm({ values: "" });
-            }}
-*/

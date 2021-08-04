@@ -22,9 +22,6 @@ const StarshipExtensiveProvider = (props) => {
   const [shipImgInfo, setShipImgInfo] = useState("");
   const ctx = useContext(StarshipsContext);
   const history = useHistory();
-  //const location = useLocation();
-
-  //const dataPilotReducer = (state, action) => {};
 
   //HANDLING CLICK OF INDIVIDUAL SHIP
   const getSingleShip = async () => {
@@ -84,14 +81,9 @@ const StarshipExtensiveProvider = (props) => {
     console.log("LOAD SHIP USE EFFECT ACTIVATED");
     if (loadShip) {
       getSingleShip();
-      /*
-      console.log(
-        "here's what's the location object" +
-          JSON.stringify(location.pathname.substring(17))
-      );*/
     } else {
       console.log(
-        "can't call api on a ship when we don't know what ship it is yet mate"
+        "can't call api on a ship when we don't know what ship it is yet"
       );
     }
   }, [loadShip]);
@@ -125,7 +117,7 @@ const StarshipExtensiveProvider = (props) => {
       fetchPilots();
     } else {
       console.log(
-        "can't fetch pilots when there is no url of pilots to fetch from my friend"
+        "can't fetch pilots when there is no url of pilots to fetch from "
       );
     }
   }, [singleShip, pilotUrls]);
@@ -176,9 +168,7 @@ const StarshipExtensiveProvider = (props) => {
       console.log("FILM IMG USE EFFECT ACTIVATED");
       fetchShipImg();
     } else {
-      console.log(
-        "can't fetch film imgs when there is no url of film, I ain't no wizard Yoko"
-      );
+      console.log("can't fetch film imgs when there is no url of film");
     }
   }, [singleShip, shipId]);
 
@@ -187,9 +177,7 @@ const StarshipExtensiveProvider = (props) => {
       console.log("FILM IMG USE EFFECT ACTIVATED");
       fetchFilmImgs();
     } else {
-      console.log(
-        "can't fetch film imgs when there is no url of film, I ain't no wizard Yoko"
-      );
+      console.log("can't fetch film imgs when there is no url of film");
     }
   }, [singleShip, filmUrls]);
 
@@ -198,9 +186,7 @@ const StarshipExtensiveProvider = (props) => {
       console.log("PILOT IMG USE EFFECT ACTIVATED");
       fetchPilotImgs();
     } else {
-      console.log(
-        "can't fetch pilot imgs when there is no url of pilots, I ain't a wizard Columbo"
-      );
+      console.log("can't fetch pilot imgs when there is no url of pilots");
     }
   }, [singleShip, pilotUrls]);
 
@@ -253,15 +239,6 @@ const StarshipExtensiveProvider = (props) => {
     }
   }, [pilotInfo]);
 
-  /*
-  useEffect(() => {
-    if (shipImgInfo) {
-      localStorage.setItem("starshipImg", shipImgInfo);
-    } else {
-      console.log("nothing in starshipImg info so nothing to set");
-    }
-  }, [shipImgInfo]);
-*/
   useEffect(() => {
     if (filmImgInfo) {
       localStorage.setItem("filmImgs", JSON.stringify(filmImgInfo));
@@ -303,9 +280,3 @@ const StarshipExtensiveProvider = (props) => {
 
 export default StarshipExtensiveProvider;
 export const StarshipExtensiveCtx = createContext();
-
-/*
-    //await setloadPilots(true);
-    //await setloadFilms(true);
-*/
-//str.substring(29, str.length - 1);

@@ -43,6 +43,4 @@ const AllCharactersPage = () => {
   );
 };
 
-//        handleClickShip={actorsCtx.handleClickActor}
-
 export default AllCharactersPage;

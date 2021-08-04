@@ -71,18 +71,3 @@ const MainNavigation = () => {
 };
 
 export default MainNavigation;
-
-/*
-  {!ctx.isLoggedIn.status && (
-            <li>
-              <NavLink to="/login" activeClassName={classes.active}>
-                Login
-              </NavLink>
-            </li>
-          )}
-          {ctx.isLoggedIn.status && (
-            <li>
-              <button onClick={ctx.onLogout}>Logout</button>
-            </li>
-          )}
-*/

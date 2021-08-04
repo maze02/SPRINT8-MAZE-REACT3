@@ -1,7 +1,7 @@
 import ShipItem from "../characters/ShipItem";
 import classes from "../starships/PilotList.module.css";
 
-const ShipList = ({ shipListArr, loadShips, characterName, shipImgInfo }) => {
+const ShipList = ({ shipListArr, loadShips, characterName }) => {
   if (loadShips) {
     return <p className="textcenter">Starships loading...</p>;
   } else {
@@ -45,41 +45,3 @@ const ShipList = ({ shipListArr, loadShips, characterName, shipImgInfo }) => {
 };
 
 export default ShipList;
-
-//Recurrent Armani Error
-//Keep forgetting to destructure the context I import from the path right at the top
-//comes up as undefined
-
-/*
-  if (pilotListArr.length === 0) {
-    return <p>No record of pilots flying this starship</p>;
-  } else {
-    let pilotListContent = pilotListArr.map((e) => {
-      return (
-        <PilotItem
-          pilotName={e.name}
-          height={`${Number(e.height) / 100}m`}
-          planet={e.homeworld}
-        />
-      );
-    });
-    return <div>{[...pilotListContent]}</div>;
-  }
-  */
-
-/*
-  if (pilotListArr.length === 0) {
-    return <p>No record of pilots flying this starship</p>;
-  } else {
-    let pilotListContent = pilotListArr.map((e) => {
-      return (
-        <PilotItem
-          pilotName={e.name}
-          height={`${Number(e.height) / 100}m`}
-          planet={e.homeworld}
-        />
-      );
-    });
-    return <div>{[...pilotListContent]}</div>;
-  }
-  */

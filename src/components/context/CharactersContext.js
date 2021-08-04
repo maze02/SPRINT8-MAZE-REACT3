@@ -74,13 +74,14 @@ const CharactersProvider = (props) => {
 
     getActors();
   }, [currentAPage]);
+
   //HANDLE PREVIOUS PAGE
   const previousAPage = () => {
     const newCurrentAPage = currentAPage - 1;
     if (newCurrentAPage === 0) return;
     setCurrentAPage(newCurrentAPage);
-    console.log("oi clicking back page");
-    console.log("oi new curr page =" + newCurrentAPage);
+    console.log("hey clicking back page");
+    console.log("hey new curr page =" + newCurrentAPage);
     console.log("currentpage=" + currentAPage);
   };
   //HANDLE NEXT PAGE
@@ -88,8 +89,8 @@ const CharactersProvider = (props) => {
     const newCurrentAPage = currentAPage + 1;
     if (newCurrentAPage > totalAPages) return;
     setCurrentAPage(newCurrentAPage);
-    console.log("oi clicking next page");
-    console.log("oi new curr page =" + newCurrentAPage);
+    console.log("hey clicking next page");
+    console.log("hey new curr page =" + newCurrentAPage);
     console.log("currentpage=" + currentAPage);
   };
 
@@ -114,19 +115,3 @@ const CharactersProvider = (props) => {
 
 export default CharactersProvider;
 export const CharactersContext = createContext();
-
-//Maria's Chanel errors!!!!:
-/*
-FORGETTING TO ADD A '.' between context and provider-> FOR GOODNESS SAKE!!!!
-
-//forgetting to extra the results as an array from the api results caused function error
-
-https://www.pluralsight.com/guides/typeerror-handling-in-react.js-for-map-function
-
-
-Maria's Burkin Bag Error of the century
-If you don't want to get state.map is not a function error
-DON'T SET THE INITIAL STATE AS BOOLEAN!!!! Like truly wtf were you thinking
-  const [actors, setActors] = useState(false); NOOOO
-    const [actors, setActors] = useState([]); YESS
-*/

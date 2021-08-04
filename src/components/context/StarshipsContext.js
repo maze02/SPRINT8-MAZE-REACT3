@@ -37,12 +37,12 @@ const StarshipsProvider = (props) => {
     } else {
       const getStarships = async () => {
         setPageLoad(true);
+
         const shipsPerPage = 10;
         const url = `https://swapi.dev/api/starships/?page=1`;
         const result = await axios.get(url);
-
-        //console.log("printing from starship ctx, starships:" + result);
         const resultWithId = await addIdToArr(result.data.results);
+
         setStarships(resultWithId);
         localStorage.setItem("starshipsArr", JSON.stringify(resultWithId));
 
@@ -62,7 +62,6 @@ const StarshipsProvider = (props) => {
       const shipsPerPage = 10;
       const url = `https://swapi.dev/api/starships/?page=${currentPage}`;
       const result = await axios.get(url);
-      //console.log("printing from starship ctx, starships:" + result);
       const resultWithId = addIdToArr(result.data.results);
       setStarships(resultWithId);
       localStorage.setItem("starshipsArr", JSON.stringify(resultWithId));
@@ -79,8 +78,8 @@ const StarshipsProvider = (props) => {
     const newCurrentPage = currentPage - 1;
     if (newCurrentPage === 0) return;
     setCurrentPage(newCurrentPage);
-    console.log("oi clicking back page");
-    console.log("oi new curr page =" + newCurrentPage);
+    console.log("hey clicking back page");
+    console.log("hey new curr page =" + newCurrentPage);
     console.log("currentpage=" + currentPage);
   };
   //HANDLE NEXT PAGE
@@ -88,8 +87,8 @@ const StarshipsProvider = (props) => {
     const newCurrentPage = currentPage + 1;
     if (newCurrentPage > totalPages) return;
     setCurrentPage(newCurrentPage);
-    console.log("oi clicking next page");
-    console.log("oi new curr page =" + newCurrentPage);
+    console.log("hey clicking next page");
+    console.log("hey new curr page =" + newCurrentPage);
     console.log("currentpage=" + currentPage);
   };
 
@@ -115,27 +114,3 @@ const StarshipsProvider = (props) => {
 
 export default StarshipsProvider;
 export const StarshipsContext = createContext();
-
-//Maria's Chanel errors!!!!:
-/*
-FORGETTING TO ADD A '.' between context and provider-> FOR GOODNESS SAKE!!!!
-
-//forgetting to extra the results as an array from the api results caused function error
-
-https://www.pluralsight.com/guides/typeerror-handling-in-react.js-for-map-function
-*/
-
-/*
-console.log("result.data.results =" + result.data.results);
-        console.log(
-          "result.data.results[0].url =" + result.data.results[0].url
-        );
-        console.log(
-          "result.data.results[0].url.substringphrase =" +
-            result.data.results[0].url.substring(
-              32,
-              result.data.results[0].url.length - 1
-            )
-        );
-
-*/

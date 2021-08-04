@@ -6,7 +6,6 @@ const GuardedRoute = ({ component: Component, ...rest }) => {
   const isAuthObj = !isAuthStr
     ? { status: false, name: "" }
     : JSON.parse(isAuthStr);
-  //have to retrieve directly from localStorage to get the latest version
   const isAuth = isAuthObj.status;
 
   return (
