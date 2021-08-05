@@ -26,13 +26,66 @@ const FilmList = ({ loadFilms, generalInfo }) => {
           }
         }
       }
+      let filmListContent = filmListArr.map((e) => {
+        return (
+          <FilmItem
+            key={e.title}
+            title={e.title}
+            filmImg={e.img}
+            release_date={e.release_date}
+          />
+        );
+      });
+      return (
+        <div>
+          {filmListArr.length === 0 && filmErrCount === 0 && (
+            <div className="textcenter">
+              {generalInfo.theme === "starship" && (
+                <p>
+                  No record of the {generalInfo.theme} "{generalInfo.name}" ever
+                  appearing in a film
+                </p>
+              )}
+              {generalInfo.theme === "character" && (
+                <p>
+                  No record of "{generalInfo.name}" ever appearing in a film
+                </p>
+              )}
+            </div>
+          )}
+          {filmListArr.length !== 0 && (
+            <div
+              className={
+                filmListArr.length < 5
+                  ? classes.filmListWrapper
+                  : classes.filmInfiniteScroll
+              }
+            >
+              {[...filmListContent]}
+            </div>
+          )}
+          {filmErrCount === 1 && (
+            <p>One film could not be loaded. Please try again later.</p>
+          )}
+          {filmErrCount > 1 && (
+            <p>
+              {filmErrCount} films could not be loaded. Please try again later.
+            </p>
+          )}
+        </div>
+      );
+    }
+  }
+};
 
-      if (filmListArr.length === 0 && filmErrCount === 0) {
+export default FilmList;
+
+/*
+ if (filmListArr.length === 0 && filmErrCount === 0) {
         return (
           <div className="textcenter">
             {generalInfo.theme === "starship" && (
               <p>
-                {" "}
                 No record of the {generalInfo.theme} "{generalInfo.name}" ever
                 appearing in a film
               </p>
@@ -87,10 +140,5 @@ const FilmList = ({ loadFilms, generalInfo }) => {
               </p>
             )}
           </div>
-        );
-      }
-    }
-  }
-};
 
-export default FilmList;
+*/

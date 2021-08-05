@@ -2,8 +2,10 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { CharactersContext } from "./CharactersContext";
+import { ref } from "yup";
 
 const CharacterDetailProvider = (props) => {
+  const [refreshFlag, setRefreshFlag] = useState(true);
   const [singleCharacter, setSingleCharacter] = useState();
   const [characterId, setCharacterId] = useState("");
   const [shipUrls, setShipUrls] = useState([]);
@@ -57,6 +59,7 @@ const CharacterDetailProvider = (props) => {
   const handleClickCharacter = (x) => {
     //using communicating child to parent, from card to starshipbrief
     //Clear Previous States
+    setRefreshFlag((prev) => false); //not refreshing, clicking
     setShipUrls([]);
     setFilmUrls([]);
     setShipInfo([]);
@@ -234,36 +237,37 @@ const CharacterDetailProvider = (props) => {
   }, [singleCharacter, filmUrls]);
 
   useEffect(() => {
-    if (filmInfo) {
+    if (filmInfo && refreshFlag === false) {
+      console.log("CHA CTX : WOOOOOOOOOOW I'M RESETTING LOCAL FILMS");
       localStorage.setItem("films", JSON.stringify(filmInfo));
     } else {
       console.log("nothing in film info so nothing to set");
     }
-  }, [filmInfo]);
+  }, [filmInfo, refreshFlag]);
 
   useEffect(() => {
-    if (shipInfo) {
+    if (shipInfo && refreshFlag === false) {
       localStorage.setItem("shipsCharacter", JSON.stringify(shipInfo));
     } else {
       console.log("nothing in ship info so nothing to set");
     }
-  }, [shipInfo]);
+  }, [shipInfo, refreshFlag]);
 
   useEffect(() => {
-    if (filmImgInfo) {
+    if (filmImgInfo && refreshFlag === false) {
       localStorage.setItem("filmImgs", JSON.stringify(filmImgInfo));
     } else {
       console.log("nothing in filmImg info so nothing to set");
     }
-  }, [filmImgInfo]);
+  }, [filmImgInfo, refreshFlag]);
 
   useEffect(() => {
-    if (shipImgInfo) {
+    if (shipImgInfo && refreshFlag === false) {
       localStorage.setItem("shipImgs", JSON.stringify(shipImgInfo));
     } else {
       console.log("nothing in shipImg info so nothing to set");
     }
-  }, [shipImgInfo]);
+  }, [shipImgInfo, refreshFlag]);
 
   return (
     <CharacterDetailCtx.Provider
