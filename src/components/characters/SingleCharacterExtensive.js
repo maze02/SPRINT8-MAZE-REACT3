@@ -6,9 +6,11 @@ const SingleCharacterExtensive = () => {
   const ctx = useContext(CharacterDetailCtx);
   const [error, setError] = useState(false);
   let characterUrl = ctx.characterImgInfo;
+
   useEffect(() => {
     console.log("ERROR: unable to load image for the film");
   }, [error]);
+
   return (
     <div>
       {ctx.loadCharacter && <p>Character Loading....</p>}
@@ -24,7 +26,7 @@ const SingleCharacterExtensive = () => {
                   alt={"starship" + ctx.singleCharacter.name}
                   src={characterUrl}
                   onError={() => {
-                    setError(true);
+                    setError((prev) => true);
                   }}
                 ></img>
               )}

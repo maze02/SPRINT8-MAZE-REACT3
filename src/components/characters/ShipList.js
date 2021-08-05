@@ -27,7 +27,7 @@ const ShipList = ({ shipListArr, loadShips, characterName }) => {
         let shipListContent = shipListArr.map((e) => {
           return (
             <ShipItem
-              key={e.id}
+              key={e.name}
               shipName={e.name}
               shipImg={e.img}
               crew={e.crew}

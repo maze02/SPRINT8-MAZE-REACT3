@@ -7,14 +7,22 @@ import MyTextInput from "../forms/MyTextInput";
 
 /*here is the answer: https://stackoverflow.com/questions/59735137/handlesubmit-and-values-not-recognized-in-formik-form*/
 const Login = () => {
-  const [loginFailed, setLoginFailed] = useState(false);
-  let nameRef = useRef(null);
-  let loginPasswordRef = useRef(null);
-
   const ctx = useContext(AuthContext);
   const history = useHistory();
 
   const validator2 = (userLogger) => {
+    //helper function
+    const notRegisteredHandler = () => {
+      ctx.setFailedLoginMsg({
+        status: true,
+        msg: "You're not registered. Please sign up!",
+      });
+      setTimeout(() => {
+        ctx.setFailedLoginMsg((prev) => {
+          return { status: false, msg: "" };
+        });
+      }, 3000);
+    };
     //validating login input data against userList data
     if (ctx.userList.length) {
       for (let i = 0; i < ctx.userList.length; i++) {
@@ -46,31 +54,13 @@ const Login = () => {
           }
         }
       }
-      ctx.setFailedLoginMsg({
-        status: true,
-        msg: "You're not registered. Please sign up!",
-      });
-      setTimeout(() => {
-        ctx.setFailedLoginMsg((prev) => {
-          return { status: false, msg: "" };
-        });
-      }, 3000);
+      notRegisteredHandler();
     } else {
-      ctx.setFailedLoginMsg({
-        status: true,
-        msg: "You're not registered. Please sign up!",
-      });
-      setTimeout(() => {
-        ctx.setFailedLoginMsg((prev) => {
-          return { status: false, msg: "" };
-        });
-      }, 3000);
+      notRegisteredHandler();
     }
   };
 
   const handleSubmit = (values) => {
-    console.log("In login, can you read me?");
-    console.log("values" + values.email + values.password);
     validator2(values);
   };
 

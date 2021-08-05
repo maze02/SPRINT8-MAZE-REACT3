@@ -14,7 +14,19 @@ const Registration = () => {
   const [regFailedMsg, setFailedRegMsg] = useState({ status: false, msg: "" });
 
   const validateReg2 = (newUser) => {
-    const successHandler = () => {};
+    const successHandler = () => {
+      setUserList([...userList, newUser]);
+      localStorage.setItem("userList", JSON.stringify([...userList, newUser]));
+      setSuccessReg((prev) => true);
+      setTimeout(() => {
+        setSuccessReg(false);
+      }, 2000);
+      setTimeout(() => {
+        console.log("I'M REDIRECTING YOU TO LOGIN");
+        history.replace("/login");
+      }, 2000);
+      return;
+    };
     if (userList.length) {
       for (let i = 0; i < userList.length; i++) {
         if (userList[i].email.localeCompare(newUser.email) === 0) {
@@ -33,29 +45,9 @@ const Registration = () => {
           return;
         }
       }
-      setUserList([...userList, newUser]);
-      localStorage.setItem("userList", JSON.stringify([...userList, newUser]));
-      setSuccessReg((prev) => true);
-      setTimeout(() => {
-        setSuccessReg(false);
-      }, 2000);
-      setTimeout(() => {
-        console.log("I'M REDIRECTING YOU TO LOGIN");
-        history.replace("/login");
-      }, 2000);
-      return;
+      successHandler();
     } else {
-      setUserList([...userList, newUser]);
-      localStorage.setItem("userList", JSON.stringify([...userList, newUser]));
-      setSuccessReg((prev) => true);
-      setTimeout(() => {
-        setSuccessReg(false);
-      }, 2000);
-      setTimeout(() => {
-        console.log("I'M REDIRECTING YOU TO LOGIN");
-        history.replace("/login");
-      }, 2000);
-      return;
+      successHandler();
     }
   };
 

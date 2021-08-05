@@ -36,20 +36,20 @@ const StarshipsProvider = (props) => {
       return;
     } else {
       const getStarships = async () => {
-        setPageLoad(true);
+        setPageLoad((prev) => true);
 
         const shipsPerPage = 10;
         const url = `https://swapi.dev/api/starships/?page=1`;
         const result = await axios.get(url);
         const resultWithId = await addIdToArr(result.data.results);
 
-        setStarships(resultWithId);
+        setStarships((prev) => resultWithId);
         localStorage.setItem("starshipsArr", JSON.stringify(resultWithId));
 
         const calculateTotalPages = Math.ceil(result.data.count / shipsPerPage);
         console.log("total: " + result.data.count);
-        setTotalPages(calculateTotalPages);
-        setPageLoad(false);
+        setTotalPages((prev) => calculateTotalPages);
+        setPageLoad((prev) => false);
       };
       getStarships();
     }
@@ -58,16 +58,16 @@ const StarshipsProvider = (props) => {
   //HANDLE SECOND CALL TO API
   useEffect(() => {
     const getStarships = async () => {
-      setPageLoad(true);
+      setPageLoad((prev) => true);
       const shipsPerPage = 10;
       const url = `https://swapi.dev/api/starships/?page=${currentPage}`;
       const result = await axios.get(url);
       const resultWithId = addIdToArr(result.data.results);
-      setStarships(resultWithId);
+      setStarships((prev) => resultWithId);
       localStorage.setItem("starshipsArr", JSON.stringify(resultWithId));
       const calculateTotalPages = Math.ceil(result.data.count / shipsPerPage);
-      setTotalPages(calculateTotalPages);
-      setPageLoad(false);
+      setTotalPages((prev) => calculateTotalPages);
+      setPageLoad((prev) => false);
     };
 
     getStarships();
@@ -77,7 +77,7 @@ const StarshipsProvider = (props) => {
   const previousPage = () => {
     const newCurrentPage = currentPage - 1;
     if (newCurrentPage === 0) return;
-    setCurrentPage(newCurrentPage);
+    setCurrentPage((prev) => newCurrentPage);
     console.log("hey clicking back page");
     console.log("hey new curr page =" + newCurrentPage);
     console.log("currentpage=" + currentPage);
@@ -86,7 +86,7 @@ const StarshipsProvider = (props) => {
   const nextPage = () => {
     const newCurrentPage = currentPage + 1;
     if (newCurrentPage > totalPages) return;
-    setCurrentPage(newCurrentPage);
+    setCurrentPage((prev) => newCurrentPage);
     console.log("hey clicking next page");
     console.log("hey new curr page =" + newCurrentPage);
     console.log("currentpage=" + currentPage);

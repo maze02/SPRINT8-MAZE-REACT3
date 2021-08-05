@@ -46,14 +46,14 @@ const CharactersProvider = (props) => {
         );
         const resultWithId = await addIdToArr(result.data.results);
 
-        setActors(resultWithId);
+        setActors((prev) => resultWithId);
         localStorage.setItem("actorsArr", JSON.stringify(resultWithId));
 
         const calculateTotalPages = Math.ceil(
           result.data.count / actorsPerPage
         );
         console.log("total: " + result.data.count);
-        setTotalAPages(calculateTotalPages);
+        setTotalAPages((prev) => calculateTotalPages);
       };
       getActors();
     }
@@ -66,10 +66,10 @@ const CharactersProvider = (props) => {
       const url = `https://swapi.dev/api/people/?page=${currentAPage}`;
       const result = await axios.get(url);
       const resultWithId = addIdToArr(result.data.results);
-      setActors(resultWithId);
+      setActors((prev) => resultWithId);
       localStorage.setItem("actorsArr", JSON.stringify(resultWithId));
       const calculateTotalPages = Math.ceil(result.data.count / actorsPerPage);
-      setTotalAPages(calculateTotalPages);
+      setTotalAPages((prev) => calculateTotalPages);
     };
 
     getActors();
@@ -79,7 +79,7 @@ const CharactersProvider = (props) => {
   const previousAPage = () => {
     const newCurrentAPage = currentAPage - 1;
     if (newCurrentAPage === 0) return;
-    setCurrentAPage(newCurrentAPage);
+    setCurrentAPage((prev) => newCurrentAPage);
     console.log("hey clicking back page");
     console.log("hey new curr page =" + newCurrentAPage);
     console.log("currentpage=" + currentAPage);
@@ -88,7 +88,7 @@ const CharactersProvider = (props) => {
   const nextAPage = () => {
     const newCurrentAPage = currentAPage + 1;
     if (newCurrentAPage > totalAPages) return;
-    setCurrentAPage(newCurrentAPage);
+    setCurrentAPage((prev) => newCurrentAPage);
     console.log("hey clicking next page");
     console.log("hey new curr page =" + newCurrentAPage);
     console.log("currentpage=" + currentAPage);

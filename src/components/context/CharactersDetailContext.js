@@ -30,7 +30,7 @@ const CharacterDetailProvider = (props) => {
       "singleCharacterObj",
       JSON.stringify({ ...singleCharacterObj.data, id: singleCharacter })
     );
-    await setSingleCharacter(singleCharacterObj.data);
+    await setSingleCharacter((prev) => singleCharacterObj.data);
     await console.log(
       "2. singleCharacterObj.name : " + singleCharacterObj.data.name
     );
@@ -42,11 +42,11 @@ const CharacterDetailProvider = (props) => {
       "FilmUrls",
       JSON.stringify(singleCharacterObj.data.films)
     );
-    await setShipUrls(singleCharacterObj.data.starships);
-    await setFilmUrls(singleCharacterObj.data.films);
+    await setShipUrls((prev) => singleCharacterObj.data.starships);
+    await setFilmUrls((prev) => singleCharacterObj.data.films);
     await console.log("length of character ship arr =" + shipUrls.length);
     await console.log("length of films arr =" + filmUrls.length);
-    await setloadCharacter(false);
+    await setloadCharacter((prev) => false);
     console.log("LOAD SHIP SET FALSE");
     await console.log(
       "3. singleCharacter info loading COMPLETE and url length of ships is " +
@@ -67,12 +67,12 @@ const CharacterDetailProvider = (props) => {
 
     //
     console.log("id of character I clicked on " + x);
-    setSingleCharacter(x);
-    setCharacterId(x);
+    setSingleCharacter((prev) => x);
+    setCharacterId((prev) => x);
     localStorage.setItem("singleCharacterId", JSON.stringify(x));
     console.log("id in state" + singleCharacter);
     console.log("1. singleCharacterInfo loading");
-    setloadCharacter(true);
+    setloadCharacter((prev) => true);
     console.log("LOAD SHIP SET TRUE");
     history.push(`/character-detail/${x}`);
     //for the base case of page refreshed:
@@ -90,7 +90,7 @@ const CharacterDetailProvider = (props) => {
   }, [loadCharacter]);
 
   const fetchShips = async () => {
-    setloadShips(true);
+    setloadShips((prev) => true);
     console.log("LOAD Ships SET TRUE");
 
     if (shipUrls.length > 0) {
@@ -100,8 +100,8 @@ const CharacterDetailProvider = (props) => {
         console.log("printing" + i + " " + shipObj.data.name);
         shipInfoNew.push(shipObj.data);
       }
-      await setShipInfo(shipInfoNew);
-      await setloadShips(false);
+      await setShipInfo((prev) => shipInfoNew);
+      await setloadShips((prev) => false);
       await console.log("LOADSHIPS SET FALSE");
       await console.log(
         "now the ships are loaded and loadships is" +
@@ -111,7 +111,7 @@ const CharacterDetailProvider = (props) => {
       );
     }
   };
-  
+
   //Call each of Pilot Apis and add info into an arr for child to map through
   useEffect(() => {
     if (singleCharacter && shipUrls.length !== 0) {
@@ -125,7 +125,7 @@ const CharacterDetailProvider = (props) => {
   }, [singleCharacter, shipUrls]);
 
   const fetchShipImgs = () => {
-    setloadShipImgs(true);
+    setloadShipImgs((prev) => true);
     console.log("SHIP IMGS SET 2 TRUE");
     let shipImgsNew = [];
     if (shipUrls.length > 0) {
@@ -135,13 +135,13 @@ const CharacterDetailProvider = (props) => {
         /*fix attempted*/
         shipImgsNew.push(shipImgUrl);
       }
-      setShipImgInfo(shipImgsNew);
-      setloadShipImgs(false);
+      setShipImgInfo((prev) => shipImgsNew);
+      setloadShipImgs((prev) => false);
     }
   };
 
   const fetchFilmImgs = () => {
-    setloadFilmImgs(true);
+    setloadFilmImgs((prev) => true);
     console.log("FILM IMGS SET 2 TRUE");
     let filmImgsNew = [];
     if (filmUrls.length > 0) {
@@ -151,20 +151,20 @@ const CharacterDetailProvider = (props) => {
 
         filmImgsNew.push(filmImgUrl);
       }
-      setFilmImgInfo(filmImgsNew);
-      setloadFilmImgs(false);
+      setFilmImgInfo((prev) => filmImgsNew);
+      setloadFilmImgs((prev) => false);
     }
   };
 
   const fetchCharacterImg = () => {
-    setloadCharacterImg(true);
+    setloadCharacterImg((prev) => true);
     console.log("SHIP IMG SET 2 TRUE");
     let characterImgUrl = "";
     characterImgUrl = `https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`;
     //NOT GOING TO BE THE SAME CHANGE URL
     localStorage.setItem("characterImg", shipImgInfo);
-    setCharacterImgInfo(characterImgUrl);
-    setloadCharacterImg(false);
+    setCharacterImgInfo((prev) => characterImgUrl);
+    setloadCharacterImg((prev) => false);
   };
 
   useEffect(() => {
@@ -201,7 +201,7 @@ const CharacterDetailProvider = (props) => {
   }, [singleCharacter, shipUrls]);
 
   const fetchFilms = async () => {
-    setloadFilms(true);
+    setloadFilms((prev) => true);
     console.log("LOAD FILMS SET TRUE");
     let filmInfoNew = [];
     if (filmUrls.length > 0) {
@@ -211,8 +211,8 @@ const CharacterDetailProvider = (props) => {
         filmInfoNew.push(filmObj.data);
       }
     }
-    await setFilmInfo(filmInfoNew);
-    await setloadFilms(false);
+    await setFilmInfo((prev) => filmInfoNew);
+    await setloadFilms((prev) => false);
     await console.log("LOADFILMS SET FALSE");
     await console.log(
       "now the films are loaded and loadFilms is" +
