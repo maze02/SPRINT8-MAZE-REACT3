@@ -5,11 +5,8 @@ import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 
 const PilotList = ({ loadPilots }) => {
   const ctx = useContext(StarshipExtensiveCtx);
-
   let pilotListArr = ctx.pilotInfo;
-
   let pilotImgInfo = ctx.pilotImgInfo;
-
   const [pilotErrCount, setPilotErrCount] = useState(0);
 
   if (loadPilots) {

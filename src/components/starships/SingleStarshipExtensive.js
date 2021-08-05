@@ -2,26 +2,35 @@ import { Fragment, useContext, useState, useEffect } from "react";
 import classes from "./SingleStarshipExtensive.module.css";
 import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 /*starwars official site:https://www.starwars.com/databank/droid-gunship*/
-const SingleStarshipExtensive = () => {
+const SingleStarshipExtensive = ({ loadShip }) => {
   const ctx = useContext(StarshipExtensiveCtx);
   const [error, setError] = useState(false);
-  let shipUrl = ctx.shipImgInfo;
+
   useEffect(() => {
-    shipUrl = "https://starwars-visualguide.com/assets/img/species/4.jpg";
+    console.log("ship img error");
   }, [error]);
+  let refreshFlag = ctx.refreshFlag;
+  let singleShip = ctx.singleShip;
+  let shipUrl = ctx.shipImgInfo;
+
+  if (refreshFlag) {
+    singleShip = JSON.parse(localStorage.getItem("singleShipObj"));
+    shipUrl = localStorage.getItem("starshipImg");
+  }
+
   return (
     <div>
-      {ctx.loadShip && <p className="textcenter">Starship Loading....</p>}
-      {!ctx.loadShip && ctx.singleShip && (
+      {loadShip && <p className="textcenter">Starship Loading....</p>}
+      {!loadShip && singleShip && (
         <Fragment>
-          <h1>{ctx.singleShip.name}</h1>
+          <h1>{singleShip.name}</h1>
           <div className={classes.wrapperMain}>
             <div className={classes.cardMain}>
               {!error && (
                 <img
                   className={classes.imgMain}
                   type="url"
-                  alt={"starship" + ctx.singleShip.name}
+                  alt={"starship" + singleShip.name}
                   src={shipUrl}
                   onError={() => {
                     setError(true);
@@ -30,21 +39,21 @@ const SingleStarshipExtensive = () => {
               )}
               {error && (
                 <p className={classes.imgErrMain}>
-                  Image of {ctx.singleShip.name} starship is not available at
-                  this moment
+                  Image of {singleShip.name} starship is not available at this
+                  moment
                 </p>
               )}
               <ul className={classes.info}>
-                <li>Model:{ctx.singleShip.model}</li>
-                <li>Cost in credits:{ctx.singleShip.cost_in_credits}</li>
-                <li>Manufacturer:{ctx.singleShip.manufacturer}</li>
-                <li>Length:{ctx.singleShip["length"]}</li>
-                <li>Speed:{ctx.singleShip.max_atmosphering_speed}</li>
-                <li>Hyperdrive Rating:{ctx.singleShip.hyperdrive_rating}</li>
-                <li>MGLT:{ctx.singleShip.MGLT}</li>
-                <li>Cargo Capacity:{ctx.singleShip.cargo_capacity}</li>
-                <li>Crew:{ctx.singleShip.crew}</li>
-                <li>Passengers:{ctx.singleShip.passengers}</li>
+                <li>Model:{singleShip.model}</li>
+                <li>Cost in credits:{singleShip.cost_in_credits}</li>
+                <li>Manufacturer:{singleShip.manufacturer}</li>
+                <li>Length:{singleShip["length"]}</li>
+                <li>Speed:{singleShip.max_atmosphering_speed}</li>
+                <li>Hyperdrive Rating:{singleShip.hyperdrive_rating}</li>
+                <li>MGLT:{singleShip.MGLT}</li>
+                <li>Cargo Capacity:{singleShip.cargo_capacity}</li>
+                <li>Crew:{singleShip.crew}</li>
+                <li>Passengers:{singleShip.passengers}</li>
               </ul>
             </div>
           </div>
@@ -54,6 +63,12 @@ const SingleStarshipExtensive = () => {
   );
 };
 export default SingleStarshipExtensive;
+
+/*doesnt work:
+  let singleShip = refreshFlag
+    ? JSON.parse(localStorage.getItem("singleShipObj"))
+    : ctx.singleShip;
+  */
 
 /*        <li>Length:{starships[props.id]["length"]}</li> */
 

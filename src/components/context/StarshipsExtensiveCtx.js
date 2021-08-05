@@ -100,7 +100,7 @@ const StarshipExtensiveProvider = (props) => {
   const handleClickShip = (x) => {
     //using communicating child to parent, from card to starshipbrief
     //Clear Previous States
-
+    setRefreshFlag((prev) => false);
     setPilotUrls([]);
     setFilmUrls([]);
     setPilotInfo([]);
@@ -108,7 +108,6 @@ const StarshipExtensiveProvider = (props) => {
     setPilotImgInfo([]);
     setFilmImgInfo([]);
     setShipId("");
-    setRefreshFlag((prev) => false);
 
     //
     console.log("id of ship I clicked on " + x);
@@ -325,6 +324,7 @@ const StarshipExtensiveProvider = (props) => {
   return (
     <StarshipExtensiveCtx.Provider
       value={{
+        refreshFlag: refreshFlag,
         singleShip: singleShip,
         handleClickShip: handleClickShip,
         pilotInfo: pilotInfo,
