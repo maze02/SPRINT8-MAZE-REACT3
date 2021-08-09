@@ -2,19 +2,26 @@ import { Fragment, useContext, useState, useEffect } from "react";
 import classes from "./SingleCharacterExtensive.module.css";
 import { CharacterDetailCtx } from "../context/CharactersDetailContext";
 /*starwars official site:https://www.starwars.com/databank/droid-gunship*/
-const SingleCharacterExtensive = () => {
+const SingleCharacterExtensive = ({ loadCharacter }) => {
   const ctx = useContext(CharacterDetailCtx);
   const [error, setError] = useState(false);
-  let characterUrl = ctx.characterImgInfo;
 
   useEffect(() => {
     console.log("ERROR: unable to load image for the film");
   }, [error]);
-
+  let refreshFlag = ctx.refreshFlag;
+  let singleCharacter = ctx.singleCharacter;
+  let characterUrl = ctx.characterImgInfo;
+  /*
+    if (refreshFlag) {
+      singleCharacter = JSON.parse(localStorage.getItem("singleCharacterObj"));
+      characterUrl = localStorage.getItem("characterImg");
+    }
+  */
   return (
     <div>
-      {ctx.loadCharacter && <p>Character Loading....</p>}
-      {!ctx.loadCharacter && ctx.singleCharacter && (
+      {loadCharacter && <p>Character Loading....</p>}
+      {!loadCharacter && singleCharacter && (
         <Fragment>
           <h1>CHARACTER FACT SHEET</h1>
           <div className={classes.wrapperMain}>
@@ -23,7 +30,7 @@ const SingleCharacterExtensive = () => {
                 <img
                   className={classes.imgMain}
                   type="url"
-                  alt={"starship" + ctx.singleCharacter.name}
+                  alt={"starship" + singleCharacter.name}
                   src={characterUrl}
                   onError={() => {
                     setError((prev) => true);
@@ -32,14 +39,14 @@ const SingleCharacterExtensive = () => {
               )}
               {error && (
                 <p>
-                  Image of {ctx.singleCharacter.name} is not available at this
+                  Image of {singleCharacter.name} is not available at this
                   moment
                 </p>
               )}
               <ul className={classes.info}>
-                <li>Name: {ctx.singleCharacter.name.toUpperCase()}</li>
-                <li>Height: {Number(ctx.singleCharacter.height) / 100} m</li>
-                <li>Eye color: {ctx.singleCharacter.eye_color}</li>
+                <li>Name: {singleCharacter.name}</li>
+                <li>Height: {Number(singleCharacter.height) / 100} m</li>
+                <li>Eye color: {singleCharacter.eye_color}</li>
               </ul>
             </div>
           </div>
@@ -49,3 +56,5 @@ const SingleCharacterExtensive = () => {
   );
 };
 export default SingleCharacterExtensive;
+
+/* singleCharacter.name.toUpperCase()*/

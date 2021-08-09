@@ -11,7 +11,6 @@ const StarshipDetail = () => {
   const location = useLocation();
 
   //handling refreshing browser
-
   let shipIdLocal = JSON.parse(localStorage.getItem("singleShipId"));
   let browserShipId = location.pathname.substring(17);
 

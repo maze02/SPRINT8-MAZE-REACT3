@@ -21,6 +21,7 @@ const CharacterDetailProvider = (props) => {
   const [shipImgInfo, setShipImgInfo] = useState([]);
   const [filmImgInfo, setFilmImgInfo] = useState([]);
   const [characterImgInfo, setCharacterImgInfo] = useState("");
+
   const ctx = useContext(CharactersContext);
   const history = useHistory();
 
@@ -28,9 +29,14 @@ const CharacterDetailProvider = (props) => {
   const getSingleCharacter = async () => {
     const url = `https://swapi.dev/api/people/${singleCharacter}/`;
     const singleCharacterObj = await axios.get(url);
+    await console.log("EEEEEEEH setting local CHARACTER");
     await localStorage.setItem(
       "singleCharacterObj",
       JSON.stringify({ ...singleCharacterObj.data, id: singleCharacter })
+    );
+    localStorage.setItem(
+      "singleCharacterName",
+      JSON.stringify(singleCharacterObj.data.name)
     );
     await setSingleCharacter((prev) => singleCharacterObj.data);
     await console.log(
@@ -73,6 +79,7 @@ const CharacterDetailProvider = (props) => {
     setSingleCharacter((prev) => x);
     setCharacterId((prev) => x);
     localStorage.setItem("singleCharacterId", JSON.stringify(x));
+
     console.log("id in state" + singleCharacter);
     console.log("1. singleCharacterInfo loading");
     setloadCharacter((prev) => true);
@@ -165,8 +172,8 @@ const CharacterDetailProvider = (props) => {
     let characterImgUrl = "";
     characterImgUrl = `https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`;
     //NOT GOING TO BE THE SAME CHANGE URL
-    localStorage.setItem("characterImg", shipImgInfo);
     setCharacterImgInfo((prev) => characterImgUrl);
+    localStorage.setItem("characterImg", JSON.stringify(characterImgInfo));
     setloadCharacterImg((prev) => false);
   };
 
@@ -272,6 +279,7 @@ const CharacterDetailProvider = (props) => {
   return (
     <CharacterDetailCtx.Provider
       value={{
+        refreshFlag: refreshFlag,
         singleCharacter: singleCharacter,
         handleClickCharacter: handleClickCharacter,
         shipInfo: shipInfo,

@@ -119,7 +119,6 @@ const StarshipExtensiveProvider = (props) => {
     setloadShip((prev) => true);
     console.log("LOAD SHIP SET TRUE");
     history.push(`/starship-detail/${x}`);
-    //for the base case of page refreshed:
   };
 
   useEffect(() => {
@@ -287,10 +286,6 @@ const StarshipExtensiveProvider = (props) => {
 
   useEffect(() => {
     if (filmInfo && refreshFlag === false) {
-      console.log("CTX: MODIFYING FILM LOCAL STORAGE");
-      console.log("CTX: MODIFYING FILM LOCAL STORAGE");
-      console.log("CTX: MODIFYING FILM LOCAL STORAGE");
-      console.log("REFRESH FLAG SHOULD BE FALSE" + refreshFlag);
       localStorage.setItem("films", JSON.stringify(filmInfo));
     } else {
       console.log("nothing in film info so nothing to set");

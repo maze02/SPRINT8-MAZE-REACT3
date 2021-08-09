@@ -64,12 +64,19 @@ const CharactersProvider = (props) => {
     const getActors = async () => {
       const actorsPerPage = 10;
       const url = `https://swapi.dev/api/people/?page=${currentAPage}`;
-      const result = await axios.get(url);
-      const resultWithId = addIdToArr(result.data.results);
-      setActors((prev) => resultWithId);
-      localStorage.setItem("actorsArr", JSON.stringify(resultWithId));
-      const calculateTotalPages = Math.ceil(result.data.count / actorsPerPage);
-      setTotalAPages((prev) => calculateTotalPages);
+      try {
+        const result = await axios.get(url);
+        const resultWithId = addIdToArr(result.data.results);
+        setActors((prev) => resultWithId);
+        localStorage.setItem("actorsArr", JSON.stringify(resultWithId));
+        const calculateTotalPages = Math.ceil(
+          result.data.count / actorsPerPage
+        );
+        setTotalAPages((prev) => calculateTotalPages);
+      } catch (error) {
+        // alert(error.message);
+        console.log(error.response);
+      }
     };
 
     getActors();
