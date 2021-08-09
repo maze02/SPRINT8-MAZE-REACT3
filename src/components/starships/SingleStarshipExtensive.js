@@ -33,7 +33,7 @@ const SingleStarshipExtensive = ({ loadShip }) => {
                   alt={"starship" + singleShip.name}
                   src={shipUrl}
                   onError={() => {
-                    setError(true);
+                    setError((prev) => true);
                   }}
                 ></img>
               )}

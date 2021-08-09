@@ -12,15 +12,16 @@ const SingleCharacterExtensive = ({ loadCharacter }) => {
   let refreshFlag = ctx.refreshFlag;
   let singleCharacter = ctx.singleCharacter;
   let characterUrl = ctx.characterImgInfo;
-  /*
-    if (refreshFlag) {
-      singleCharacter = JSON.parse(localStorage.getItem("singleCharacterObj"));
-      characterUrl = localStorage.getItem("characterImg");
-    }
-  */
+
+  if (refreshFlag) {
+    singleCharacter = JSON.parse(localStorage.getItem("singleCharacterObj"));
+    characterUrl = JSON.parse(localStorage.getItem("characterImg"));
+    console.log("AHHHHH in REFRESH FLAG");
+  }
+
   return (
     <div>
-      {loadCharacter && <p>Character Loading....</p>}
+      {loadCharacter && <p className="textcenter">Character Loading....</p>}
       {!loadCharacter && singleCharacter && (
         <Fragment>
           <h1>CHARACTER FACT SHEET</h1>
