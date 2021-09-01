@@ -40,10 +40,6 @@ const CharactersProvider = (props) => {
         const result = await axios.get(url);
         console.log("result.data.results =" + result.data.results);
 
-        console.log(
-          "hey typeof result.data.results for actors is " +
-            typeof result.data.results
-        );
         const resultWithId = await addIdToArr(result.data.results);
 
         setActors((prev) => resultWithId);
@@ -74,7 +70,6 @@ const CharactersProvider = (props) => {
         );
         setTotalAPages((prev) => calculateTotalPages);
       } catch (error) {
-        // alert(error.message);
         console.log(error.response);
       }
     };
@@ -87,19 +82,13 @@ const CharactersProvider = (props) => {
     const newCurrentAPage = currentAPage - 1;
     if (newCurrentAPage === 0) return;
     setCurrentAPage((prev) => newCurrentAPage);
-    console.log("hey clicking back page");
-    console.log("hey new curr page =" + newCurrentAPage);
-    console.log("currentpage=" + currentAPage);
-  };
+    };
   //HANDLE NEXT PAGE
   const nextAPage = () => {
     const newCurrentAPage = currentAPage + 1;
     if (newCurrentAPage > totalAPages) return;
     setCurrentAPage((prev) => newCurrentAPage);
-    console.log("hey clicking next page");
-    console.log("hey new curr page =" + newCurrentAPage);
-    console.log("currentpage=" + currentAPage);
-  };
+    };
 
   return (
     <CharactersContext.Provider

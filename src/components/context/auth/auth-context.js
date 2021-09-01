@@ -23,10 +23,7 @@ const AuthContextMyProvider = (props) => {
   let initialRegisteredUsers = JSON.parse(localStorage.getItem("userList"));
   if (!initialRegisteredUsers) {
     //initialise storage row with the label registeredUsers and add an empty array to begin with
-    console.log(
-      "Hey I think I'm trying to make a space to store the initial data beginning of all"
-    );
-    initialRegisteredUsers = [];
+      initialRegisteredUsers = [];
   }
 
   //CHECKING LOGGED IN STATUS

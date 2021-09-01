@@ -1,19 +1,15 @@
-//https://www.youtube.com/watch?v=GVDiw3lAyp0
 import { useContext, useState, useRef, useCallback } from "react";
 import StarshipBrief from "../starships/StarshipBrief";
 import { StarshipsContext } from "../context/StarshipsContext";
 
-//import useInfiniteScroll from "react-infinite-scroll-hook";
 import useInfiniteScrollApi from "../useInfiniteScrollApi";
 const AllStarshipsPage = () => {
   const ctx = useContext(StarshipsContext);
   const starshipsArr = ctx.starships;
-  //console.log(starshipsArr);
   const [url, setUrl] = useState("https://swapi.dev/api/starships");
   const [pageNumber, setPageNumber] = useState(1);
   const { hasMore, loading, error } = useInfiniteScrollApi(pageNumber, url);
 
-  ////
   const observer = useRef();
   const lastStarshipRef = useCallback(
     (node) => {
@@ -21,12 +17,10 @@ const AllStarshipsPage = () => {
       if (loading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
-        //console.log(entries[0]);
         if (entries[0].isIntersecting && hasMore) {
           console.log("visible");
           setPageNumber((prevPageNumber) => prevPageNumber + 1);
           console.log(pageNumber);
-          console.log("oi I can see you're the last one");
         }
       });
 
@@ -74,10 +68,3 @@ const AllStarshipsPage = () => {
 };
 
 export default AllStarshipsPage;
-//     {[...starshipList]}
-//Maria's most Balenciaga errors:
-/*
-1. FORGETTING TO ADD {} when IMPORTING THE CONTExT ARRRRRGH!
-
-2. Forgot to add () to wrap the generated list of elements after return in the list =  arr.map(e=>return(<penguin name=balba>))
-*/

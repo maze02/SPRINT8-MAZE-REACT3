@@ -9,6 +9,7 @@ const SingleCharacterExtensive = ({ loadCharacter }) => {
   useEffect(() => {
     console.log("ERROR: unable to load image for the film");
   }, [error]);
+
   let refreshFlag = ctx.refreshFlag;
   let singleCharacter = ctx.singleCharacter;
   let characterUrl = ctx.characterImgInfo;
@@ -16,7 +17,6 @@ const SingleCharacterExtensive = ({ loadCharacter }) => {
   if (refreshFlag) {
     singleCharacter = JSON.parse(localStorage.getItem("singleCharacterObj"));
     characterUrl = JSON.parse(localStorage.getItem("characterImg"));
-    console.log("AHHHHH in REFRESH FLAG");
   }
 
   return (
@@ -58,4 +58,4 @@ const SingleCharacterExtensive = ({ loadCharacter }) => {
 };
 export default SingleCharacterExtensive;
 
-/* singleCharacter.name.toUpperCase()*/
+

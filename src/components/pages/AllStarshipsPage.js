@@ -44,11 +44,3 @@ const AllStarshipsPage = () => {
 };
 
 export default AllStarshipsPage;
-
-//    //import useInfiniteScroll from "react-infinite-scroll-hook";
-//Maria's most Balenciaga errors:
-/*
-1. FORGETTING TO ADD {} when IMPORTING THE CONTExT ARRRRRGH!
-
-2. Forgot to add () to wrap the generated list of elements after return in the list =  arr.map(e=>return(<penguin name=balba>))
-*/

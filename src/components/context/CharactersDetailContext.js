@@ -2,7 +2,6 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { CharactersContext } from "./CharactersContext";
-import { ref } from "yup";
 
 const CharacterDetailProvider = (props) => {
   const [refreshFlag, setRefreshFlag] = useState(true);
@@ -29,7 +28,6 @@ const CharacterDetailProvider = (props) => {
   const getSingleCharacter = async () => {
     const url = `https://swapi.dev/api/people/${singleCharacter}/`;
     const singleCharacterObj = await axios.get(url);
-    await console.log("EEEEEEEH setting local CHARACTER");
     await localStorage.setItem(
       "singleCharacterObj",
       JSON.stringify({ ...singleCharacterObj.data, id: singleCharacter })
@@ -39,9 +37,6 @@ const CharacterDetailProvider = (props) => {
       JSON.stringify(singleCharacterObj.data.name)
     );
     await setSingleCharacter((prev) => singleCharacterObj.data);
-    await console.log(
-      "2. singleCharacterObj.name : " + singleCharacterObj.data.name
-    );
     await localStorage.setItem(
       "CharacterShipUrls",
       JSON.stringify(singleCharacterObj.data.starships)
@@ -52,14 +47,7 @@ const CharacterDetailProvider = (props) => {
     );
     await setShipUrls((prev) => singleCharacterObj.data.starships);
     await setFilmUrls((prev) => singleCharacterObj.data.films);
-    await console.log("length of character ship arr =" + shipUrls.length);
-    await console.log("length of films arr =" + filmUrls.length);
     await setloadCharacter((prev) => false);
-    console.log("LOAD SHIP SET FALSE");
-    await console.log(
-      "3. singleCharacter info loading COMPLETE and url length of ships is " +
-        shipUrls.length
-    );
   };
 
   const handleClickCharacter = (x) => {
@@ -75,68 +63,51 @@ const CharacterDetailProvider = (props) => {
     setCharacterId("");
 
     //
-    console.log("id of character I clicked on " + x);
     setSingleCharacter((prev) => x);
     setCharacterId((prev) => x);
     localStorage.setItem("singleCharacterId", JSON.stringify(x));
-
-    console.log("id in state" + singleCharacter);
-    console.log("1. singleCharacterInfo loading");
     setloadCharacter((prev) => true);
-    console.log("LOAD SHIP SET TRUE");
     history.push(`/character-detail/${x}`);
     //for the base case of page refreshed:
   };
 
   useEffect(() => {
-    console.log("LOAD Character USE EFFECT ACTIVATED");
     if (loadCharacter) {
       getSingleCharacter();
     } else {
       console.log(
-        "can't call api on a Character when we don't know what Character it is yet mate"
+        "can't call api on a Character when we don't know what Character it is yet"
       );
     }
   }, [loadCharacter]);
 
   const fetchShips = async () => {
     setloadShips((prev) => true);
-    console.log("LOAD Ships SET TRUE");
 
     if (shipUrls.length > 0) {
       let shipInfoNew = [];
       for (let i = 0; i < shipUrls.length; i++) {
         let shipObj = await axios.get(shipUrls[i]);
-        console.log("printing" + i + " " + shipObj.data.name);
         shipInfoNew.push(shipObj.data);
       }
       await setShipInfo((prev) => shipInfoNew);
       await setloadShips((prev) => false);
-      await console.log("LOADSHIPS SET FALSE");
-      await console.log(
-        "now the ships are loaded and loadships is" +
-          loadShips +
-          "and shipInfo length is " +
-          shipInfo.length
-      );
     }
   };
 
   //Call each of Pilot Apis and add info into an arr for child to map through
   useEffect(() => {
     if (singleCharacter && shipUrls.length !== 0) {
-      console.log("SHIP USE EFFECT ACTIVATED");
       fetchShips();
     } else {
       console.log(
-        "can't fetch ships when there is no url of ships to fetch from my friend"
+        "can't fetch ships when there is no url of ships to fetch from"
       );
     }
   }, [singleCharacter, shipUrls]);
 
   const fetchShipImgs = () => {
     setloadShipImgs((prev) => true);
-    console.log("SHIP IMGS SET 2 TRUE");
     let shipImgsNew = [];
     if (shipUrls.length > 0) {
       for (let i = 0; i < shipUrls.length; i++) {
@@ -152,7 +123,6 @@ const CharacterDetailProvider = (props) => {
 
   const fetchFilmImgs = () => {
     setloadFilmImgs((prev) => true);
-    console.log("FILM IMGS SET 2 TRUE");
     let filmImgsNew = [];
     if (filmUrls.length > 0) {
       for (let i = 0; i < filmUrls.length; i++) {
@@ -168,7 +138,6 @@ const CharacterDetailProvider = (props) => {
 
   const fetchCharacterImg = () => {
     setloadCharacterImg((prev) => true);
-    console.log("SHIP IMG SET 2 TRUE");
     let characterImgUrl = "";
     characterImgUrl = `https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`;
     //NOT GOING TO BE THE SAME CHANGE URL
@@ -179,73 +148,55 @@ const CharacterDetailProvider = (props) => {
 
   useEffect(() => {
     if (singleCharacter && characterId !== 0) {
-      console.log("CHARACTER IMG USE EFFECT ACTIVATED");
       fetchCharacterImg();
     } else {
       console.log(
-        "can't fetch character img when there is no url of character, I ain't no wizard Yoko"
+        "can't fetch character img when there is no url of character"
       );
     }
   }, [singleCharacter, characterId]);
 
   useEffect(() => {
     if (singleCharacter && filmUrls.length !== 0) {
-      console.log("FILM IMG USE EFFECT ACTIVATED");
       fetchFilmImgs();
     } else {
-      console.log(
-        "can't fetch film imgs when there is no url of film, I ain't no wizard Yoko"
-      );
+      console.log("can't fetch film imgs when there is no url of film");
     }
   }, [singleCharacter, filmUrls]);
 
   useEffect(() => {
     if (singleCharacter && shipUrls.length !== 0) {
-      console.log("SHIP IMG USE EFFECT ACTIVATED");
       fetchShipImgs();
     } else {
-      console.log(
-        "can't fetch ship imgs when there is no url of ships, I ain't a wizard Columbo"
-      );
+      console.log("can't fetch ship imgs when there is no url of ships");
     }
   }, [singleCharacter, shipUrls]);
 
   const fetchFilms = async () => {
     setloadFilms((prev) => true);
-    console.log("LOAD FILMS SET TRUE");
     let filmInfoNew = [];
     if (filmUrls.length > 0) {
       for (let i = 0; i < filmUrls.length; i++) {
         let filmObj = await axios.get(filmUrls[i]);
-        console.log("printing" + i + " " + filmObj.data.name);
         filmInfoNew.push(filmObj.data);
       }
     }
     await setFilmInfo((prev) => filmInfoNew);
     await setloadFilms((prev) => false);
-    await console.log("LOADFILMS SET FALSE");
-    await console.log(
-      "now the films are loaded and loadFilms is" +
-        loadFilms +
-        "and film Info length is " +
-        filmInfo.length
-    );
   };
 
   useEffect(() => {
     if (singleCharacter && filmUrls.length !== 0) {
-      console.log("FILM USE EFFECT ACTIVATED");
       fetchFilms();
     } else {
       console.log(
-        "can't fetch films when there is no url of films to fetch from meine freund"
+        "can't fetch films when there is no url of films to fetch from"
       );
     }
   }, [singleCharacter, filmUrls]);
 
   useEffect(() => {
     if (filmInfo && refreshFlag === false) {
-      console.log("CHA CTX : WOOOOOOOOOOW I'M RESETTING LOCAL FILMS");
       localStorage.setItem("films", JSON.stringify(filmInfo));
     } else {
       console.log("nothing in film info so nothing to set");

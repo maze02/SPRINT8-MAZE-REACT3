@@ -24,8 +24,6 @@ function App() {
   const ctx = useContext(AuthContext);
   let loading = ctx.isAuthLoading;
 
-  console.log("APP LOADING STATUS " + loading);
-
   return (
     <Fragment>
       {loading && <p>Loading...checking authentication</p>}

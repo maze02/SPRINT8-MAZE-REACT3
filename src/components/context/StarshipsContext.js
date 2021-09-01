@@ -78,18 +78,12 @@ const StarshipsProvider = (props) => {
     const newCurrentPage = currentPage - 1;
     if (newCurrentPage === 0) return;
     setCurrentPage((prev) => newCurrentPage);
-    console.log("hey clicking back page");
-    console.log("hey new curr page =" + newCurrentPage);
-    console.log("currentpage=" + currentPage);
   };
   //HANDLE NEXT PAGE
   const nextPage = () => {
     const newCurrentPage = currentPage + 1;
     if (newCurrentPage > totalPages) return;
     setCurrentPage((prev) => newCurrentPage);
-    console.log("hey clicking next page");
-    console.log("hey new curr page =" + newCurrentPage);
-    console.log("currentpage=" + currentPage);
   };
 
   return (
