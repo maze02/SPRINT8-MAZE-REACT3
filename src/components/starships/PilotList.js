@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import styled from "styled-components";
 import PilotItem from "./PilotItem";
 import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
+import HorizontalCardList from "../UI/HorizontalCardList";
 
 const PilotList = ({ loadPilots }) => {
   const ctx = useContext(StarshipExtensiveCtx);
@@ -33,11 +33,11 @@ const PilotList = ({ loadPilots }) => {
       }
       if (pilotListArr.length === 0 && pilotErrCount === 0) {
         return (
-          <Wrapper>
-            <p className="spacer">
+          <HorizontalCardList>
+            <p className="spacerList">
               No record of any pilots ever flying the "{shipName}" starship.
             </p>
-          </Wrapper>
+          </HorizontalCardList>
         );
       } else {
         if (pilotListArr.length !== 0) {
@@ -53,7 +53,7 @@ const PilotList = ({ loadPilots }) => {
             );
           });
           return (
-            <Wrapper>
+            <HorizontalCardList>
               <div className="pilotListWrapper">
                 {[...pilotListContent]}
                 {pilotErrCount === 1 && (
@@ -66,7 +66,7 @@ const PilotList = ({ loadPilots }) => {
                   </p>
                 )}
               </div>
-            </Wrapper>
+            </HorizontalCardList>
           );
         } else {
           return (
@@ -88,21 +88,4 @@ const PilotList = ({ loadPilots }) => {
   }
 };
 
-const Wrapper = styled.div`
-  .pilotListWrapper {
-    display: inline-flex;
-    flex-direction: horizontal;
-    justify-content: center !important;
-    margin-left: -12%;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    width: 100rem;
-  }
-
-  .spacer {
-    margin-top: -2rem;
-    margin-bottom: 5rem;
-    text-align: center;
-  }
-`;
 export default PilotList;

@@ -1,5 +1,5 @@
 import ShipItem from "../characters/ShipItem";
-import classes from "../starships/PilotList.module.css";
+import HorizontalCardList from "../UI/HorizontalCardList";
 
 const ShipList = ({ shipListArr, loadShips, characterName }) => {
   if (loadShips) {
@@ -37,7 +37,9 @@ const ShipList = ({ shipListArr, loadShips, characterName }) => {
           );
         });
         return (
-          <div className={classes.pilotListWrapper}>{[...shipListContent]}</div>
+          <HorizontalCardList>
+            <div className="pilotListWrapper">{[...shipListContent]}</div>
+          </HorizontalCardList>
         );
       }
     }
