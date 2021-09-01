@@ -1,0 +1,21 @@
+//partial -> can include it in many other files but filename preceded by _
+//maps
+$colors: (
+  white: #dcdcdc,
+  beige-super-light: #e1e1e1,
+  grey-light: #edf2f6,
+  grey-mid: grey,
+  grey-beige: #817b69,
+  grey-mid-dark: #2f3848,
+  grey-dark: #1a202d,
+  slate-light: hsl(218, 21%, 80%),
+  slate-mid: hsl(218, 21%, 70%),
+  slate-dark: hsl(218, 21%, 60%),
+  shadow-dark: 0px 6px 11px -8px rgba(0, 0, 0, 0.9),
+  black: #000000,
+  gold: #daa520,
+  error: red,
+);
+
+$headingFont: "Barlow", sans-serif;
+$textFont: "Barlow", sans-serif;

@@ -1,0 +1,12 @@
+.filmListWrapper {
+  display: flex;
+  flex-direction: horizontal;
+  justify-content: center;
+}
+
+.filmInfiniteScroll {
+  display: flex;
+  flex-direction: horizontal;
+  justify-content: center;
+  flex-wrap: wrap;
+}

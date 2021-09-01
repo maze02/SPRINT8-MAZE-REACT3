@@ -1,0 +1,240 @@
+@import "_variables.scss";
+//modularise code by splitting it into files and saving it into one main file
+@import "starry-background.scss";
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+html {
+  box-sizing: border-box;
+  height: 100%;
+  font-size: 62.5%;
+}
+body {
+  min-height: 100%;
+  background-color: map-get($colors, black);
+  font-size: 16px;
+  font-size: 1.6rem;
+  font-family: $textFont;
+  color: map-get($colors, white);
+}
+
+h1,
+h2 {
+  font-family: $headingFont;
+  font-weight: 300;
+  margin: 0 0 4rem 0;
+  text-align: center;
+  color: map-get($colors, white);
+}
+h1 span {
+  font-weight: 400;
+}
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  font-size: 2.4rem;
+  font-weight: 200;
+}
+h3,
+h4 {
+  font-size: 2.1rem;
+  font-weight: 400;
+  margin-bottom: -1.6rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+  font-weight: 100;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  font-weight: 200;
+}
+a {
+  text-decoration: none;
+  color: map-get($colors, grey-mid-dark);
+}
+
+.textcenter {
+  text-align: center;
+}
+
+.text-black {
+  color: map-get($colors, black);
+}
+.text-error {
+  color: red;
+}
+/** BUTTONS **/
+.btn {
+  margin-top: 2rem;
+  font-family: $headingFont;
+  padding: 1.5rem;
+  font-size: 1.4;
+  font-weight: 400;
+  border-radius: 0.5rem;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.btn:hover {
+  cursor: pointer;
+}
+.btn-primary {
+  background-color: map-get($colors, grey-mid-dark);
+  color: map-get($colors, white);
+
+  &:hover {
+    background: map-get($colors, grey-dark);
+  }
+}
+
+.btn-secondary {
+  background-color: map-get($colors, grey-light);
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.btn-submit:hover {
+  background-color: map-get($colors, grey-beige);
+  color: map-get($colors, white);
+}
+.btn-blank {
+  margin: 0;
+  padding: 0;
+  display: block;
+  background-color: transparent;
+}
+
+.btn-gap {
+  margin-right: 1rem;
+}
+
+.btn-page {
+  width: 15rem;
+  margin-bottom: 5rem;
+
+  &:hover {
+    background-color: map-get($colors, grey-beige);
+    color: map-get($colors, white);
+  }
+}
+
+.btn-logout {
+  margin-right: 2rem;
+  &:hover {
+    background-color: map-get($colors, grey-beige);
+    color: map-get($colors, white);
+  }
+}
+
+/*FORM*/
+.shadow-dark {
+  -webkit-box-shadow: map-get($colors, shadow-dark);
+  -moz-box-shadow: map-get($colors, shadow-dark);
+  box-shadow: map-get($colors, shadow-dark);
+}
+
+.container-input {
+  display: flex;
+
+  label {
+    margin-bottom: 1rem;
+    color: map-get($colors, black);
+  }
+}
+
+.input-text {
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  flex: 1;
+  width: 100%;
+}
+
+.container-form {
+  padding: 5rem 3rem;
+  max-width: 500px;
+  width: 95%;
+  background-color: map-get($colors, white);
+  border-radius: 0.5rem;
+}
+
+.form-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  height: 50vh;
+  min-height: 80px;
+  margin-bottom: 2rem;
+}
+
+.field-form {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  margin-bottom: 1rem;
+
+  label {
+    flex: 0 0 100px;
+    align-self: center;
+    font-family: $textFont;
+    color: map-get($colors, black);
+  }
+
+  input:focus {
+    outline: none;
+    border-color: map-get($colors, slate-dark);
+    background: map-get($colors, slate-mid);
+  }
+
+  input[type="password"],
+  input[type="email"],
+  input[type="text"] {
+    border: 1px solid map-get($colors, beige-super-light);
+    padding: 1rem;
+    flex: 1;
+    background-color: map-get($colors, slate-light);
+  }
+
+  &:last-of-type {
+    margin: 0;
+  }
+}
+
+.field-form-btn {
+  display: flex;
+}
+
+.link-account {
+  margin-top: 2rem;
+  display: block;
+  opacity: 0.7;
+}
+
+.error {
+  color: map-get($colors, error);
+  margin: 1rem 0rem 2rem 0rem;
+  align-self: flex-end;
+}
+
+/* CONTENT LAYOUT*/
+.container-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.checkbox-text {
+  color: map-get($colors, black);
+  margin-left: 1rem;
+}
