@@ -3,7 +3,6 @@ import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import classes from "./Registration.module.css";
 import MyCheckbox from "../forms/MyCheckbox";
 import MyTextInput from "../forms/MyTextInput";
 
@@ -52,13 +51,12 @@ const Registration = () => {
   };
 
   const handleSubmit = (values) => {
-    console.log("in registration handler");
     validateReg2(values);
   };
   return (
     <div>
       <h1>Sign Up</h1>
-      <h3 className={classes.spacer}>
+      <h3 className="spacer">
         Sign up to view intriguing facts on Starwars movies.
       </h3>
       <div className="form-user">
@@ -115,7 +113,7 @@ const Registration = () => {
                   label="Email Address"
                   name="email"
                   type="email"
-                  placeholder="jonah@formik.com"
+                  placeholder="Enter your email"
                 />
               </div>
               <div className="field-form">
