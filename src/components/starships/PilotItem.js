@@ -1,18 +1,15 @@
-import classes from "../UI/SubItemHorizontal.module.css";
+import HorizontalCardItem from "../UI/HorizontalCardItem";
 const PilotItem = ({ pilotName, pilotImg, height, planet }) => {
   return (
-    <div className={classes.cardSubHor}>
-      <img
-        className={classes.imgSubHor}
-        type="url"
-        src={pilotImg}
-        alt={pilotName}
-      />
-      <ul className={classes.infoSubHor}>
-        <li>{pilotName.toUpperCase()}</li>
-        <li>{height}</li>
-      </ul>
-    </div>
+    <HorizontalCardItem>
+      <div className="cardSubHor">
+        <img className="imgSubHor" type="url" src={pilotImg} alt={pilotName} />
+        <ul className="infoSubHor">
+          <li>{pilotName.toUpperCase()}</li>
+          <li>{height}</li>
+        </ul>
+      </div>
+    </HorizontalCardItem>
   );
 };
 
