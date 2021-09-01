@@ -1,6 +1,7 @@
+import styled from "styled-components";
 import { useState } from "react";
 import FilmItem from "./FilmItem";
-import classes from "./FilmList.module.css";
+
 //only rerenders if state, props changes
 const FilmList = ({ loadFilms, generalInfo }) => {
   let filmListArr = [];
@@ -10,10 +11,9 @@ const FilmList = ({ loadFilms, generalInfo }) => {
     return <p>Films loading ...</p>;
   } else {
     if (!loadFilms) {
-      console.log("FILM LISTI'm inside films have finished loading");
       let filmLocal = localStorage.getItem("films");
       let filmListImgs = localStorage.getItem("filmImgs");
-      //console.log("FILM LIST film length arr" + filmListArr.length);
+
       if (filmLocal) {
         filmListArr = JSON.parse(filmLocal);
         let filmImgArr = JSON.parse(filmListImgs);
@@ -57,15 +57,17 @@ const FilmList = ({ loadFilms, generalInfo }) => {
             </div>
           )}
           {filmListArr.length !== 0 && (
-            <div
-              className={
-                filmListArr.length < 5
-                  ? classes.filmListWrapper
-                  : classes.filmInfiniteScroll
-              }
-            >
-              {[...filmListContent]}
-            </div>
+            <Wrapper>
+              <div
+                className={
+                  filmListArr.length < 5
+                    ? "filmListWrapper"
+                    : "filmInfiniteScroll"
+                }
+              >
+                {[...filmListContent]}
+              </div>
+            </Wrapper>
           )}
           {filmErrCount === 1 && (
             <p>One film could not be loaded. Please try again later.</p>
@@ -81,4 +83,18 @@ const FilmList = ({ loadFilms, generalInfo }) => {
   }
 };
 
+const Wrapper = styled.div`
+  .filmListWrapper {
+    display: flex;
+    flex-direction: horizontal;
+    justify-content: center;
+  }
+
+  .filmInfiniteScroll {
+    display: flex;
+    flex-direction: horizontal;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+`;
 export default FilmList;
