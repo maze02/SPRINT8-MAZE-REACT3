@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
+import styled from "styled-components";
 import PilotItem from "./PilotItem";
-import classes from "./PilotList.module.css";
 import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 
 const PilotList = ({ loadPilots }) => {
@@ -33,9 +33,11 @@ const PilotList = ({ loadPilots }) => {
       }
       if (pilotListArr.length === 0 && pilotErrCount === 0) {
         return (
-          <p className={classes.spacer}>
-            No record of any pilots ever flying the "{shipName}" starship.
-          </p>
+          <Wrapper>
+            <p className="spacer">
+              No record of any pilots ever flying the "{shipName}" starship.
+            </p>
+          </Wrapper>
         );
       } else {
         if (pilotListArr.length !== 0) {
@@ -51,18 +53,20 @@ const PilotList = ({ loadPilots }) => {
             );
           });
           return (
-            <div className={classes.pilotListWrapper}>
-              {[...pilotListContent]}
-              {pilotErrCount === 1 && (
-                <p>One pilot could not be loaded. Please try again later.</p>
-              )}
-              {pilotErrCount > 1 && (
-                <p>
-                  {pilotErrCount} pilots could not be loaded. Please try again
-                  later.
-                </p>
-              )}
-            </div>
+            <Wrapper>
+              <div className="pilotListWrapper">
+                {[...pilotListContent]}
+                {pilotErrCount === 1 && (
+                  <p>One pilot could not be loaded. Please try again later.</p>
+                )}
+                {pilotErrCount > 1 && (
+                  <p>
+                    {pilotErrCount} pilots could not be loaded. Please try again
+                    later.
+                  </p>
+                )}
+              </div>
+            </Wrapper>
           );
         } else {
           return (
@@ -84,4 +88,21 @@ const PilotList = ({ loadPilots }) => {
   }
 };
 
+const Wrapper = styled.div`
+  .pilotListWrapper {
+    display: inline-flex;
+    flex-direction: horizontal;
+    justify-content: center !important;
+    margin-left: -12%;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    width: 100rem;
+  }
+
+  .spacer {
+    margin-top: -2rem;
+    margin-bottom: 5rem;
+    text-align: center;
+  }
+`;
 export default PilotList;
