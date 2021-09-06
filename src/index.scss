@@ -21,6 +21,13 @@ body {
   color: map-get($colors, white);
 }
 
+
+.spacer {
+  margin-bottom: 12rem;
+  text-align: center;
+}
+
+
 h1,
 h2 {
   font-family: $headingFont;

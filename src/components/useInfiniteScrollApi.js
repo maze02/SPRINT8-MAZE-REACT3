@@ -38,14 +38,4 @@ const useInfiniteScrollApi = (pageNumber, url) => {
 
 export default useInfiniteScrollApi;
 
-/*
-[
-            ...new Set([
-              ...prevStarshipsX,
-              ...res.data.results.map((ship) => {
-                return { name: ship.name, model: ship.model, url: url };
-              }),
-            ]),
-          ];
 
-*/
