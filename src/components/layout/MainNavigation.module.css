@@ -1,0 +1,78 @@
+.header {
+  width: 100%;
+  height: 20rem;
+}
+
+.nav {
+  display: grid;
+  width: 100%;
+  height: 20rem;
+  grid-template-rows: 70% 25%;
+}
+
+.row2 {
+  border-top: 1px seashell solid;
+  border-bottom: 1px seashell solid;
+  display: flex;
+  justify-content: center;
+}
+.logo {
+  font-size: 2rem;
+  color: white;
+}
+
+.row1 {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.row2 {
+  display: flex;
+  align-items: center;
+}
+
+.col2 {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.col3 {
+  display: flex;
+  justify-items: center;
+  justify-content: flex-end;
+  align-items: center;
+}
+.nav ul {
+  list-style: none;
+}
+
+.nav li {
+  margin-left: 5rem;
+  font-size: 1.8rem;
+}
+
+.signup {
+  margin-left: 3rem !important;
+  margin-right: 5rem !important;
+  align-self: center;
+}
+.nav a {
+  text-decoration: none;
+  color: #daa520;
+}
+
+.nav a:hover,
+.nav a:active,
+.nav a.active {
+  color: #e6fcfc;
+}
+
+.logo {
+  height: 17rem;
+  width: 17rem;
+  margin: -5rem;
+}

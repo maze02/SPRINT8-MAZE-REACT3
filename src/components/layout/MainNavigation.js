@@ -1,11 +1,14 @@
+
 import styled from "styled-components";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth/auth-context";
 import { NavLink } from "react-router-dom";
+
 import whiteLogo from "../images/whitelogo.png";
 const MainNavigation = () => {
   const ctx = useContext(AuthContext);
   return (
+
     <Header>
       <nav className="nav">
         <ul className="row1">
@@ -17,6 +20,7 @@ const MainNavigation = () => {
             {!ctx.isLoggedIn.status && (
               <li>
                 <NavLink to="/login" activeClassName="active">
+
                   LOGIN
                 </NavLink>
               </li>
@@ -33,39 +37,50 @@ const MainNavigation = () => {
               </li>
             )}
             {!ctx.isLoggedIn.status && (
+
               <li className="signup">
                 <NavLink to="/registration" activeClassName="active">
+
                   SIGN UP
                 </NavLink>
               </li>
             )}
           </div>
         </ul>
+
         <ul className="row2">
           {!ctx.isLoggedIn.status && (
             <li>
               <NavLink to="/" activeClassName="active">
+
                 WELCOME
               </NavLink>
             </li>
           )}
           <li>
+
             <NavLink to="/home" activeClassName="active">
+
               HOME
             </NavLink>
           </li>
           <li>
+
             <NavLink to="/starships" activeClassName="active">
+
               STARSHIPS
             </NavLink>
           </li>
           <li>
+
             <NavLink to="/characters" activeClassName="active">
+
               CHARACTERS
             </NavLink>
           </li>
         </ul>
       </nav>
+
     </Header>
   );
 };
@@ -148,4 +163,5 @@ const Header = styled.header`
     margin: -5rem;
   }
 `;
+
 export default MainNavigation;

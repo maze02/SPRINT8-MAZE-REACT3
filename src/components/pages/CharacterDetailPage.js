@@ -31,7 +31,9 @@ const CharacterDetailPage = () => {
   }
   return (
     <div>
+
       <SingleCharacterExtensive loadCharacter={ctxE.loadCharacter} />
+
       <h2>Starships</h2>
       <ShipList
         shipListArr={ctxE.shipInfo}

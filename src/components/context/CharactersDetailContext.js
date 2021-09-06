@@ -51,7 +51,9 @@ const CharacterDetailProvider = (props) => {
   };
 
   const handleClickCharacter = (x) => {
+
     //communicating child to parent, from card to starshipbrief
+
     //Clear Previous States
     setRefreshFlag((prev) => false); //not refreshing, clicking
     setShipUrls([]);
@@ -67,8 +69,10 @@ const CharacterDetailProvider = (props) => {
     setCharacterId((prev) => x);
     localStorage.setItem("singleCharacterId", JSON.stringify(x));
     setloadCharacter((prev) => true);
+
     setloadFilms((prev) => true);
     setloadShips((prev) => true);
+
     history.push(`/character-detail/${x}`);
     //for the base case of page refreshed:
   };
@@ -84,17 +88,21 @@ const CharacterDetailProvider = (props) => {
   }, [loadCharacter]);
 
   const fetchShips = async () => {
+
     let shipInfoNew = [];
     if (shipUrls.length > 0) {
+
       for (let i = 0; i < shipUrls.length; i++) {
         let shipObj = await axios.get(shipUrls[i]);
         shipInfoNew.push(shipObj.data);
       }
+
       setShipInfo((prev) => shipInfoNew);
       setloadShips((prev) => false);
     } else {
       setShipInfo((prev) => shipInfoNew);
       setloadShips((prev) => false);
+
     }
   };
 
@@ -107,11 +115,13 @@ const CharacterDetailProvider = (props) => {
         "can't fetch ships when there is no url of ships to fetch from"
       );
     }
+
     if (singleCharacter && !loadCharacter && shipUrls.length === 0) {
       setloadShips((prev) => false);
       setShipInfo((prev) => []);
     }
   }, [singleCharacter, loadCharacter, shipUrls]);
+
 
   const fetchShipImgs = () => {
     setloadShipImgs((prev) => true);
@@ -120,6 +130,7 @@ const CharacterDetailProvider = (props) => {
       for (let i = 0; i < shipUrls.length; i++) {
         let shipId = shipUrls[i].substring(32, shipUrls[i].length - 1);
         let shipImgUrl = `https://starwars-visualguide.com/assets/img/starships/${shipId}.jpg`;
+
         shipImgsNew.push(shipImgUrl);
       }
       setShipImgInfo((prev) => shipImgsNew);
@@ -146,6 +157,7 @@ const CharacterDetailProvider = (props) => {
     setloadCharacterImg((prev) => true);
     let characterImgUrl = "";
     characterImgUrl = `https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`;
+
     setCharacterImgInfo((prev) => characterImgUrl);
     localStorage.setItem("characterImg", JSON.stringify(characterImgInfo));
     setloadCharacterImg((prev) => false);
@@ -178,6 +190,7 @@ const CharacterDetailProvider = (props) => {
   }, [singleCharacter, shipUrls]);
 
   const fetchFilms = async () => {
+
     let filmInfoNew = [];
     if (filmUrls.length > 0) {
       for (let i = 0; i < filmUrls.length; i++) {

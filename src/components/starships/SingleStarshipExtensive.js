@@ -1,5 +1,7 @@
+
 import styled from "styled-components";
 import { Fragment, useContext, useState, useEffect } from "react";
+
 import { StarshipExtensiveCtx } from "../context/StarshipsExtensiveCtx";
 
 const SingleStarshipExtensive = ({ loadShip }) => {
@@ -24,11 +26,13 @@ const SingleStarshipExtensive = ({ loadShip }) => {
       {!loadShip && singleShip && (
         <Fragment>
           <h1>{singleShip.name}</h1>
+
           <Wrapper>
             <div className="cardMain">
               {!error && (
                 <img
                   className="imgMain"
+
                   type="url"
                   alt={"starship" + singleShip.name}
                   src={shipUrl}
@@ -38,12 +42,16 @@ const SingleStarshipExtensive = ({ loadShip }) => {
                 ></img>
               )}
               {error && (
+
                 <p className="imgErrMain">
+
                   Image of {singleShip.name} starship is not available at this
                   moment
                 </p>
               )}
+
               <ul className="info">
+
                 <li>Model:{singleShip.model}</li>
                 <li>Cost in credits:{singleShip.cost_in_credits}</li>
                 <li>Manufacturer:{singleShip.manufacturer}</li>
@@ -56,12 +64,15 @@ const SingleStarshipExtensive = ({ loadShip }) => {
                 <li>Passengers:{singleShip.passengers}</li>
               </ul>
             </div>
+
           </Wrapper>
+
         </Fragment>
       )}
     </div>
   );
 };
+
 
 const Wrapper = styled.div`
   display: flex;
@@ -107,4 +118,5 @@ const Wrapper = styled.div`
     justify-content: center;
   }
 `;
+
 export default SingleStarshipExtensive;

@@ -1,9 +1,12 @@
+
 import styled from "styled-components";
+
 
 const CardItem = ({ children, id, pressed }) => {
   const clickItem = () => {
     pressed(id);
   };
+
   return <Wrapper onClick={clickItem}>{children}</Wrapper>;
 };
 
@@ -24,3 +27,4 @@ const Wrapper = styled.div`
 `;
 
 export default CardItem;
+

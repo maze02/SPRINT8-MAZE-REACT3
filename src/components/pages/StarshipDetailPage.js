@@ -35,6 +35,7 @@ const StarshipDetail = () => {
 
   return (
     <div>
+
       <SingleStarshipExtensive loadShip={ctxE.loadShip} />
       <h2>Pilots</h2>
       <PilotList
@@ -47,6 +48,7 @@ const StarshipDetail = () => {
         filmListArr={ctxE.filmInfo}
         loadFilms={ctxE.loadFilms}
         filmImgInfo={ctxE.filmImgInfo}
+
         generalInfo={{ theme: "starship", name: shipName }}
       />
     </div>

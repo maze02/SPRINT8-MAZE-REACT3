@@ -1,3 +1,4 @@
+
 import HorizontalCardItem from "../UI/HorizontalCardItem";
 const PilotItem = ({ pilotName, pilotImg, height, planet }) => {
   return (
@@ -10,7 +11,9 @@ const PilotItem = ({ pilotName, pilotImg, height, planet }) => {
         </ul>
       </div>
     </HorizontalCardItem>
+
   );
 };
 
 export default PilotItem;
+

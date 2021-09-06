@@ -1,3 +1,4 @@
+
 import styled from "styled-components";
 
 const FilmItem = ({ title, release_date, filmImg }) => {
@@ -9,10 +10,12 @@ const FilmItem = ({ title, release_date, filmImg }) => {
         <li>{release_date}</li>
       </ul>
     </Wrapper>
+
   );
 };
 
 export default FilmItem;
+
 
 const Wrapper = styled.div`
   border-radius: 2px;
@@ -41,3 +44,4 @@ const Wrapper = styled.div`
     line-height: 2rem;
   }
 `;
+

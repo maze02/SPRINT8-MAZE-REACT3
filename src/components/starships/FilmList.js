@@ -1,3 +1,4 @@
+
 import styled from "styled-components";
 import { useState } from "react";
 import FilmItem from "./FilmItem";
@@ -82,4 +83,5 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
   }
 `;
+
 export default FilmList;

@@ -1,4 +1,5 @@
 import { Fragment, useState } from "react";
+
 import HorizontalCardItem from "../UI/HorizontalCardItem";
 const ShipItem = ({ shipName, shipImg, crew, passengers, speed }) => {
   const [error, setError] = useState(false);
@@ -29,7 +30,9 @@ const ShipItem = ({ shipName, shipImg, crew, passengers, speed }) => {
         </ul>
       </div>
     </HorizontalCardItem>
+
   );
 };
 
 export default ShipItem;
+

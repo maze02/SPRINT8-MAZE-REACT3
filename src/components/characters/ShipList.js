@@ -1,5 +1,7 @@
 import ShipItem from "../characters/ShipItem";
+
 import HorizontalCardList from "../UI/HorizontalCardList";
+
 
 const ShipList = ({ shipListArr, loadShips, characterName }) => {
   if (loadShips) {
@@ -37,9 +39,11 @@ const ShipList = ({ shipListArr, loadShips, characterName }) => {
           );
         });
         return (
+
           <HorizontalCardList>
             <div className="pilotListWrapper">{[...shipListContent]}</div>
           </HorizontalCardList>
+
         );
       }
     }
@@ -47,6 +51,7 @@ const ShipList = ({ shipListArr, loadShips, characterName }) => {
 };
 
 export default ShipList;
+
 
 /*<Fragment>
       {loadShips && <p className="textcenter">Starships loading...</p>}
@@ -59,3 +64,4 @@ export default ShipList;
       )}
     </Fragment>
 */
+

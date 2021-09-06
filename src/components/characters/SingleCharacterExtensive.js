@@ -1,5 +1,7 @@
+
 import styled from "styled-components";
 import { Fragment, useContext, useState, useEffect } from "react";
+
 import { CharacterDetailCtx } from "../context/CharactersDetailContext";
 /*starwars official site:https://www.starwars.com/databank/droid-gunship*/
 const SingleCharacterExtensive = ({ loadCharacter }) => {
@@ -25,11 +27,13 @@ const SingleCharacterExtensive = ({ loadCharacter }) => {
       {!loadCharacter && singleCharacter && (
         <Fragment>
           <h1>CHARACTER FACT SHEET</h1>
+
           <WrapperMain>
             <div className="cardMain">
               {!error && (
                 <img
                   className="imgMain"
+
                   type="url"
                   alt={"starship" + singleCharacter.name}
                   src={characterUrl}
@@ -44,18 +48,23 @@ const SingleCharacterExtensive = ({ loadCharacter }) => {
                   moment
                 </p>
               )}
+
               <ul className="info">
+
                 <li>Name: {singleCharacter.name}</li>
                 <li>Height: {Number(singleCharacter.height) / 100} m</li>
                 <li>Eye color: {singleCharacter.eye_color}</li>
               </ul>
             </div>
+
           </WrapperMain>
+
         </Fragment>
       )}
     </div>
   );
 };
+
 
 const WrapperMain = styled.div`
   display: flex;
@@ -94,3 +103,4 @@ const WrapperMain = styled.div`
   }
 `;
 export default SingleCharacterExtensive;
+
