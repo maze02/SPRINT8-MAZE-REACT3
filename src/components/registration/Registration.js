@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { AuthContext } from "../context/auth/auth-context";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";

@@ -41,7 +41,3 @@ const Wrapper = styled.div`
     line-height: 2rem;
   }
 `;
-//<li>{planet}</li>
-/* planet is a URL
-would have to do an other API call
-*/

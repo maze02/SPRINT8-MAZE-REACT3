@@ -22,7 +22,7 @@ const ShipItem = ({ shipName, shipImg, crew, passengers, speed }) => {
           </div>
         )}
         <ul className="infoSubHor">
-          <li>{shipName.toUpperCase()}</li>
+          <li className="infoName">{shipName.toUpperCase()}</li>
           <li>Crew: {crew} people</li>
           <li>Passengers: {passengers} people</li>
           <li>Speed: {speed}</li>
@@ -33,7 +33,3 @@ const ShipItem = ({ shipName, shipImg, crew, passengers, speed }) => {
 };
 
 export default ShipItem;
-//<li>{planet}</li>
-/* planet is a URL
-would have to do an other API call
-*/

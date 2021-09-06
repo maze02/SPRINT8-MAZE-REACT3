@@ -47,3 +47,15 @@ const ShipList = ({ shipListArr, loadShips, characterName }) => {
 };
 
 export default ShipList;
+
+/*<Fragment>
+      {loadShips && <p className="textcenter">Starships loading...</p>}
+      {!loadShips && shipListArr.length === 0 && (
+        <HorizontalCardList>
+          <p className="spacerList">
+            No record of {characterName} ever flying any starships.
+          </p>
+        </HorizontalCardList>
+      )}
+    </Fragment>
+*/

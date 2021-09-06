@@ -28,7 +28,13 @@ const Wrapper = styled.div`
   }
 
   .infoSubHor {
-    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: normal;
+    .infoName {
+      padding-bottom: 1rem;
+    }
   }
 
   .imgErrSubHor {

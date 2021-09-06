@@ -13,8 +13,9 @@ const StarshipExtensiveProvider = (props) => {
   const [filmUrls, setFilmUrls] = useState([]);
   const [filmInfo, setFilmInfo] = useState([]);
   const [loadShip, setloadShip] = useState(false);
+  //const [loadPilots, setloadPilots] = useState(false); //*******changed to true */
   const [loadPilots, setloadPilots] = useState(false);
-  const [loadFilms, setloadFilms] = useState(false);
+  const [loadFilms, setloadFilms] = useState(false); //*******change */
   const [loadPilotImgs, setloadPilotImgs] = useState(true);
   const [loadFilmImgs, setloadFilmImgs] = useState(true);
   const [loadShipImg, setloadShipImg] = useState(true);
@@ -54,6 +55,9 @@ const StarshipExtensiveProvider = (props) => {
     );
     await setPilotUrls((prev) => singleShipObj.data.pilots);
     await setFilmUrls((prev) => singleShipObj.data.films);
+    //HERE set setloadFilms((prev) => true);?
+    //await setloadPilots((prev) => false); removed
+    //await setloadPilots((prev) => false); removed
     await setloadShip(false);
   };
 
@@ -74,6 +78,8 @@ const StarshipExtensiveProvider = (props) => {
     setShipId((prev) => x);
     localStorage.setItem("singleShipId", JSON.stringify(x));
     setloadShip((prev) => true);
+    setloadPilots((prev) => true); //***changed it -added */
+    setloadFilms((prev) => true); //***changed it -added*/
     history.push(`/starship-detail/${x}`);
   };
 
@@ -88,10 +94,9 @@ const StarshipExtensiveProvider = (props) => {
   }, [loadShip]);
 
   const fetchPilots = async () => {
-    setloadPilots((prev) => true);
-
+    //setloadPilots((prev) => true); //******change
+    let pilotInfoNew = [];
     if (pilotUrls.length > 0) {
-      let pilotInfoNew = [];
       for (let i = 0; i < pilotUrls.length; i++) {
         try {
           let pilotObj = await axios.get(pilotUrls[i]);
@@ -101,13 +106,25 @@ const StarshipExtensiveProvider = (props) => {
             name: false,
             error: { message: error.message, response: error.response },
           });
-          console.log(error.message);
-          console.log(error.response);
         }
       }
-      await setPilotInfo((prev) => pilotInfoNew);
-      await setloadPilots((prev) => false);
+      setPilotInfo((prev) => pilotInfoNew); //removed await
+      setloadPilots((prev) => false);
+    } else {
+      setPilotInfo((prev) => pilotInfoNew); //removed await
+      setloadPilots((prev) => false);
     }
+    // await setPilotInfo((prev) => pilotInfoNew); //removed await
+    //  await setloadPilots((prev) => false);
+
+    /*
+   //} else {
+    //  setPilotInfo((prev) => pilotInfoNew); //removed await
+    //  console.log("88888-setloadpilots to false -pilotstatus" + loadPilots);
+    //  setloadPilots((prev) => false); //removed await
+    //  localStorage.setItem("loadPilots", "false");
+   // }
+  */
   };
   //Call each of Pilot Apis and add info into an arr for child to map through
   useEffect(() => {
@@ -118,7 +135,14 @@ const StarshipExtensiveProvider = (props) => {
         "can't fetch pilots when there is no url of pilots to fetch from "
       );
     }
-  }, [singleShip, pilotUrls]);
+    //i;
+    if (singleShip && !loadShip && pilotUrls.length === 0) {
+      setPilotInfo((prev) => []);
+      setloadPilots((prev) => false);
+
+      // localStorage.setItem("loadPilots", "false");
+    }
+  }, [singleShip, loadShip, pilotUrls]);
 
   const fetchPilotImgs = () => {
     setloadPilotImgs((prev) => true);
@@ -183,7 +207,7 @@ const StarshipExtensiveProvider = (props) => {
   }, [singleShip, pilotUrls]);
 
   const fetchFilms = async () => {
-    setloadFilms((prev) => true);
+    //setloadFilms((prev) => true); //*****removed
     let filmInfoNew = [];
     if (filmUrls.length > 0) {
       for (let i = 0; i < filmUrls.length; i++) {
@@ -199,7 +223,7 @@ const StarshipExtensiveProvider = (props) => {
       }
     }
     await setFilmInfo((prev) => filmInfoNew);
-    await setloadFilms((prev) => false);
+    await setloadFilms((prev) => false); //changez
   };
 
   useEffect(() => {

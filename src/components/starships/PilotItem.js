@@ -5,7 +5,7 @@ const PilotItem = ({ pilotName, pilotImg, height, planet }) => {
       <div className="cardSubHor">
         <img className="imgSubHor" type="url" src={pilotImg} alt={pilotName} />
         <ul className="infoSubHor">
-          <li>{pilotName.toUpperCase()}</li>
+          <li className="infoName">{pilotName.toUpperCase()}</li>
           <li>{height}</li>
         </ul>
       </div>
@@ -14,7 +14,3 @@ const PilotItem = ({ pilotName, pilotImg, height, planet }) => {
 };
 
 export default PilotItem;
-//<li>{planet}</li>
-/* planet is a URL
-would have to do an other API call
-*/

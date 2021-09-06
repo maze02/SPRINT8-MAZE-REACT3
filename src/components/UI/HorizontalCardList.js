@@ -7,7 +7,7 @@ const HorizontalCardList = ({ children }) => {
 const Wrapper = styled.div`
   .pilotListWrapper {
     display: inline-flex;
-    flex-direction: horizontal;
+    flex-direction: row;
     justify-content: center !important;
     margin-left: -12%;
     margin-bottom: 2rem;
