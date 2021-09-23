@@ -1,6 +1,9 @@
 # Starwars Fun Facts
 
 An information site about Starwars starships and characters with a sign up and login section to allow for registered users to have privileged access to api the information.
+
+Completed as part of Sprint 8 at IT Academy, Cibernarium. 
+
 ## Screenshots
 
 Not added yet
