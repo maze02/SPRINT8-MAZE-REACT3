@@ -32,7 +32,7 @@ npm start
 - [React](https://reactjs.org/)
 - [Styled components](https://styled-components.com/)
 - [SCSS](https://sass-lang.com/documentation/)
-- [Formik](https://formik.org/docs/tutorial#installation)/)
+- [Formik] (https://formik.org/docs/tutorial#installation)
 
 ### APIs
 
